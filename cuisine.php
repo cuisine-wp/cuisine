@@ -128,11 +128,12 @@ if (!class_exists('Cuisine')) {
 
 			//auto-loads all .php files in these directories.
         	$includes = array( 
-        		'Controllers',
-        		'Controllers/Utilities',
-                'Controllers/Facades',
+        		'Classes',
+                'Classes/Fields',
+        		'Classes/Utilities',
+                'Classes/Wrappers',
         		'Views',
-        		'Views/Fieldtypes'
+        		'Views/Fields'
 			);
 
         	$includes = apply_filters( 'cuisine_autoload_dirs', $includes );

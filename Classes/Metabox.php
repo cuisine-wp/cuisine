@@ -3,8 +3,7 @@ namespace Cuisine\Metabox;
 
 use Cuisine\Session\Session;
 use Cuisine\User\User;
-use Cuisine\Validator\Validator;
-use Cuisine\Views\Metabox;
+use Cuisine\Validator\Validator as Validator;
 
 class MetaboxBuilder {
 
@@ -58,9 +57,7 @@ class MetaboxBuilder {
 	function __construct(){
 
 		//$this->user = $user;
-		//$this->validator = $validator;
 		$this->data = array();
-		$this->view = new Metabox();
 
 		add_action( 'save_post', array( &$this, 'save' ) );
 	}
@@ -134,7 +131,7 @@ class MetaboxBuilder {
 	    $id = md5( $this->data['title']);
 
 	    // Fields are passed to the metabox $args parameter.
-	    add_meta_box( $id, $this->data['title'], array($this, 'build'), $this->data['postType'], $this->data['options']['context'], $this->data['options']['priority'], $this->data['fields'] );
+	    add_meta_box( $id, $this->data['title'], array($this, 'render'), $this->data['postType'], $this->data['options']['context'], $this->data['options']['priority'], $this->data['fields'] );
 	}
 
 
@@ -146,11 +143,18 @@ class MetaboxBuilder {
 	 * @throws MetaboxException
 	 * @return void
 	 */
-	public function build($post, array $datas) {
+	public function render( $post  ) {
 	   
 	    // Add nonce fields
-	    wp_nonce_field(Session::nonceAction, Session::nonceName);
-	    echo $this->view->render();
+	    wp_nonce_field( Session::nonceAction, Session::nonceName );
+
+	    foreach( $this->data['fields'] as $field ){
+
+	    	$field->render();
+
+	    }
+
+
 	}
 
 

@@ -1,7 +1,7 @@
 <?php
-namespace Cuisine\Facades;
+namespace Cuisine\Wrappers;
 
-class Metabox extends Facade {
+class Metabox extends Wrapper {
 
     /**
      * Return the igniter service key responsible for the Metabox class.
