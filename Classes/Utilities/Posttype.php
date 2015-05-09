@@ -1,7 +1,7 @@
 <?php
 namespace Cuisine\Utilities;
 
-class Posttype {
+class PostType {
 
 	
 

@@ -1,7 +1,7 @@
 <?php
-namespace Cuisine\Frontend;
+namespace Cuisine\View;
 
-user Cuisine\Utilities\Url;
+use Cuisine\Utilities\Url;
 
 class Image {
 
@@ -25,17 +25,17 @@ class Image {
 		if( $supports == null )
 			$supports = self::getSupported();
 
-
-		$class = self::getImageClasses( $supports, $args['class'] );
-		$extension = self::getImageExtension( $url );
-		$src = self::getDefaultSrc();
+		$args 		= self::parseArgs( $args );
+		$class 		= self::getImageClasses( $supports, $args['class'] );
+		$extension 	= self::getImageExtension( $url );
+		$src 		= self::getDefaultSrc();
 
 		$title = '';
 		$alt = '';
 		
 
-		if( isset( $args['title'] ) ) $title = ' title="'.$args['title'].'"';
-		if( isset( $args['alt'] ) ) $alt = ' alt="'.$args['alt'].'"';
+		if( $args['title'] ) $title = ' title="'.$args['title'].'"';
+		if( $args['alt'] ) $alt = ' alt="'.$args['alt'].'"';
 
 
 		$html = '<img src="'.$src.'" data-src="'.$url.'" ';
@@ -145,7 +145,7 @@ class Image {
 	 * @param  Array  $args 
 	 * @return String classes
 	 */
-	public static function getImageClasses( $supports, $args = array() ){
+	private static function getImageClasses( $supports, $args = array() ){
 
 		$classes = array( 'lazy-img', 'img' );
 
@@ -181,7 +181,7 @@ class Image {
 	 * Returns the default url for the src attribute
 	 * @return String
 	 */
-	function getDefaultSrc(){
+	private static function getDefaultSrc(){
 
 		$url = Url::theme( 'images', true ).'none.gif';
 		$url = apply_filters( 'cuisine_default_src', $url );
@@ -195,7 +195,7 @@ class Image {
 	 * @param  String $url
 	 * @return String $extension
 	 */
-	function getImageExtension( $url ){
+	private static function getImageExtension( $url ){
 
 		$ex = substr( $url, -4 );
 
@@ -212,12 +212,30 @@ class Image {
 
 	}
 
+	/**
+	 * Fill in the gaps, arguments wise
+	 * @return Array
+	 */
+	public static function parseArgs( $args ){
+
+		if( !isset( $args['class'] ) )
+			$args['class'] = array();
+
+		if( !isset( $args['title'] ) )
+			$args['title'] = false;
+
+		if( !isset( $args['alt'] ) )
+			$args['alt'] = false;
+
+		return $args;
+	}
+
 
 	/**
 	 * Return the default image-support array
 	 * @return Array
 	 */
-	public static function getSupported(){
+	private static function getSupported(){
 		return array( 'desktop', 'tablet', 'mobile' );
 	}
 

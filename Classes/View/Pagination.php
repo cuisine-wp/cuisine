@@ -1,5 +1,5 @@
 <?php
-namespace Cuisine\Frontend;
+namespace Cuisine\View;
 
 class Pagination {
 

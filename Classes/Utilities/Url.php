@@ -10,11 +10,70 @@ class Url {
 	 * @param  Bool slashit 
 	 * @return String
 	 */
-	public static function theme( $folder, $trailingslash = false ){
+	public static function theme( $folder = '', $trailingslash = false ){
 
-		
+		$url = get_stylesheet_directory_uri();
+		$url .= self::themeSubDir( $folder );
+
+		if( $trailingslash )
+			$url = self::slashit( $url );
+
+		return $url;
 
 	}
+
+
+	/**
+	 * Get the parent-theme url of a folder
+	 * @param  String $url
+	 * @param  Bool slashit
+	 * @return  String
+	 */
+	public static function parentTheme( $folder, $trailingslash = false ){
+
+		$url = get_template_directory_uri();
+		$url .= self::themeSubDir( $folder );
+
+		if( $trailingslash )
+			$url = self::slashit( $url );
+
+		return $url;
+
+	}	
+
+	/**
+	 * Returns the url of the theme directory with the custom folder
+	 * @param  String  $folder 
+	 * @param  boolean $trailingslashit 
+	 * @return String
+	 */
+	public static function themeSubDir( $folder ){
+
+		if( $folder != '' ){
+
+			switch( $folder ){
+
+				case 'sass':
+
+					return '/css/sass';
+					break;
+
+				case 'vendors':
+
+					return '/js/libs';
+					break;
+
+				default:
+
+					return '/'.$folder;
+					break;
+			}
+		}
+
+		return '';
+
+	}
+
 
 
 	/**
@@ -24,6 +83,7 @@ class Url {
 	 * @return String
 	 */
 	public static function plugin( $name, $trailingslash = false ){
+
 
 
 	}
@@ -48,7 +108,7 @@ class Url {
 	 */
 	public static function slashit( $url ){
 
-		return trailinslashit( $url );
+		return \trailingslashit( $url );
 
 	}
 

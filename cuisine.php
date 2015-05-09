@@ -131,7 +131,7 @@ if (!class_exists('Cuisine')) {
         		'Classes',
                 'Classes/Fields',
                 'Classes/Utilities',
-        		'Classes/Frontend',
+        		'Classes/View',
                 'Classes/Wrappers'
 			);
 

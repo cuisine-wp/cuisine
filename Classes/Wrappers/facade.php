@@ -59,20 +59,17 @@ abstract class Wrapper {
 
     private static function getFacadeName( $name ) {
         $aliases = array(
-            'app'               => 'Cuisine\Core\Application',
-            'asset'             => 'Cuisine\Asset\AssetFactory',
-            'asset.finder'      => 'Cuisine\Asset\AssetFinder',
             'field'             => 'Cuisine\Fields\FieldBuilder',
             'loop'              => 'Cuisine\View\Loop',
+            'image'             => 'Cuisine\View\Image',
+            'excerpt'           => 'Cuisine\View\Excerpt',
+            'pagination'        => 'Cuisine\View\Pagination',
             'metabox'           => 'Cuisine\Metabox\MetaboxBuilder',
-            'page'              => 'Cuisine\Page\PageBuilder',
-            'posttype'          => 'Cuisine\PostType\PostTypeBuilder',
-            'router'            => 'Cuisine\Route\Router',
-            'sections'          => 'Cuisine\Page\Sections\SectionBuilder',
-            'taxonomy'          => 'Cuisine\Taxonomy\TaxonomyBuilder',
-            'user'              => 'Cuisine\User\UserFactory',
-            'validation'        => 'Cuisine\Validation\ValidationBuilder',
-            'view'              => 'Cuisine\View\ViewFactory'
+            'posttype'          => 'Cuisine\Utilities\PostType',
+            'router'            => 'Cuisine\Utilities\Rewrite',
+            'taxonomy'          => 'Cuisine\Utilities\Taxonomy',
+            'user'              => 'Cuisine\Utilities\User',
+            'validation'        => 'Cuisine\Utilities\Validator',
         );
 
         return $aliases[ $name ];
