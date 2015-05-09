@@ -1,6 +1,6 @@
 <?php
     
-namespace Cuisine\Field\Fields;
+namespace Cuisine\Fields;
 
 
 class DefaultField{

@@ -1,5 +1,5 @@
 <?php
-namespace Cuisine\Validator;
+namespace Cuisine\Utilities;
 
 class Validator {
 

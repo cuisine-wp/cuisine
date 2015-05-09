@@ -1,5 +1,5 @@
 <?php
-namespace Cuisine\Utility;
+namespace Cuisine\Utilities;
 
 use WP_User;
 

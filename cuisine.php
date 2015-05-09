@@ -130,10 +130,9 @@ if (!class_exists('Cuisine')) {
         	$includes = array( 
         		'Classes',
                 'Classes/Fields',
-        		'Classes/Utilities',
-                'Classes/Wrappers',
-        		'Views',
-        		'Views/Fields'
+                'Classes/Utilities',
+        		'Classes/Frontend',
+                'Classes/Wrappers'
 			);
 
         	$includes = apply_filters( 'cuisine_autoload_dirs', $includes );

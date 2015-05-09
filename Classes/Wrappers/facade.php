@@ -62,7 +62,7 @@ abstract class Wrapper {
             'app'               => 'Cuisine\Core\Application',
             'asset'             => 'Cuisine\Asset\AssetFactory',
             'asset.finder'      => 'Cuisine\Asset\AssetFinder',
-            'field'             => 'Cuisine\Field\Fields\FieldBuilder',
+            'field'             => 'Cuisine\Fields\FieldBuilder',
             'loop'              => 'Cuisine\View\Loop',
             'metabox'           => 'Cuisine\Metabox\MetaboxBuilder',
             'page'              => 'Cuisine\Page\PageBuilder',
