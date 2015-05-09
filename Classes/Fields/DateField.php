@@ -2,7 +2,14 @@
 namespace Cuisine\Fields;
 
 
-class TextField extends DefaultField{
+class DateField extends DefaultField{
+
+    /**
+     * Custom classes
+     * 
+     * @var array
+     */
+    $classes = array( 'datepicker' );
 
 
     /**
@@ -14,6 +21,7 @@ class TextField extends DefaultField{
     protected function fieldType(){
         $this->type = 'text';
     }
+
 
 
 }

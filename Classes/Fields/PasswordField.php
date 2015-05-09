@@ -2,7 +2,7 @@
 namespace Cuisine\Fields;
 
 
-class TextField extends DefaultField{
+class PasswordField extends DefaultField{
 
 
     /**
@@ -12,8 +12,11 @@ class TextField extends DefaultField{
      * @return void
      */
     protected function fieldType(){
-        $this->type = 'text';
+        $this->type = 'password';
     }
+
+  
+
 
 
 }

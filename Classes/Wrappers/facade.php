@@ -97,16 +97,6 @@ abstract class Wrapper {
         static::$resolvedInstances = array();
     }
 
-    /**
-     * Store the application instance.
-     *
-     * @param \Cuisine\Core\Application $app
-     * @return void
-     */
-    public static function setFacadeApplication($app) {
-
-        static::$app = $app;
-    }
 
     /**
      * Magic method. Use to dynamically call the registered
@@ -126,7 +116,6 @@ abstract class Wrapper {
          * Call the instance and its method.
          */
         return call_user_func_array(array($instance, $method), $args);
-        //return $instance->$method( implode( ',', $args ) );
     }
 
 } 

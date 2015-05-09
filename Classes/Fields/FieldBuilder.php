@@ -246,17 +246,5 @@ class FieldBuilder {
         return $this->make( 'Cuisine\\Field\\Fields\\EditorField', $name, $properties );
     }
 
-    /**
-     * Define a CollectionField instance.
-     *
-     * @param string $name The name attribute.
-     * @param array $extras
-     * @return \Cuisine\Field\Fields\CollectionField
-     */
-    public function collection($name, array $properties = array()){
-        
-        return $this->make( 'Cuisine\\Field\\Fields\\CollectionField', $name, $properties );
-
-    }
 
 } 

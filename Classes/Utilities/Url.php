@@ -16,7 +16,7 @@ class Url {
 		$url .= self::themeSubDir( $folder );
 
 		if( $trailingslash )
-			$url = self::slashit( $url );
+			$url = \trailingslashit( $url );
 
 		return $url;
 
@@ -35,7 +35,7 @@ class Url {
 		$url .= self::themeSubDir( $folder );
 
 		if( $trailingslash )
-			$url = self::slashit( $url );
+			$url = \trailingslashit( $url );
 
 		return $url;
 
@@ -95,22 +95,41 @@ class Url {
 	 * @param  Bool slashit 
 	 * @return String
 	 */
-	public static function path( $type, $trailingslash = false ){
+	public static function path( $type, $folder = '', $trailingslash = false ){
 
+		$path = '';
+		switch( $type ){
+
+			case 'theme':
+
+				$path = \trailingslashit( get_template_directory() );
+				$path .= $folder;
+				break;
+
+			case 'content':
+
+				$path = \trailingslashit( WP_CONTENT_DIR );
+				$path .= $folder;
+
+				break;
+
+			default:
+
+				$path = \trailingslashit( WP_PLUGIN_DIR );
+				$path .= $folder;
+
+				break;	
+		}
+
+
+		if( $trailingslash )
+			$path = \trailingslashit( $path );
+
+
+		return $path;
 
 	}
 
-
-	/**
-	 * End an url with a trailing slash 
-	 * @param  String $url
-	 * @return String
-	 */
-	public static function slashit( $url ){
-
-		return \trailingslashit( $url );
-
-	}
 
 
 }

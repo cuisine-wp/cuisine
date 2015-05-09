@@ -5,11 +5,40 @@ namespace Cuisine\Fields;
 
 class DefaultField{
 
+    /**
+     * Id of this field
+     * 
+     * @var String
+     */
     var $id;
 
+    /**
+     * Name of this field
+     * 
+     * @var String
+     */
     var $name;
 
+    /**
+     * Type of this field
+     * 
+     * @var String
+     */
+    var $type;
+
+    /**
+     * Properties of this field
+     * 
+     * @var array
+     */
     var $properties;
+
+    /**
+     * Array of custom classes
+     * 
+     * @var array
+     */
+    var $classes = array();
 
 
     /**
@@ -26,6 +55,52 @@ class DefaultField{
         $this->setDefaults();
     }
 
+
+    /*=============================================================*/
+    /**             RENDERING                                      */
+    /*=============================================================*/
+
+    /**
+     * Handle the field HTML code for metabox output.
+     *
+     * @return string
+     */
+    public function render(){
+
+        echo $this->getLabel();
+        echo $this->build();
+
+    }
+
+
+    /**
+     * Build the html
+     *
+     * @return String;
+     */
+    public function build(){
+
+        $html = '<input type="'.$this->type.'" ';
+
+            $html .= 'id="'.$this->id.'" ';
+
+            $html .= 'class="'.$this->getClass().'" ';
+
+            $html .= $this->getDefault();
+
+            $html .= $this->getPlaceholder();
+
+            $html .= $this->getValidation();
+
+        $html .= '/>';
+
+        return $html;
+    }
+
+
+    /*=============================================================*/
+    /**             GETTERS & SETTERS                              */
+    /*=============================================================*/
 
     /**
      * Set the default values:
@@ -99,13 +174,17 @@ class DefaultField{
     }
 
 
+    /**
+     * Get the validation data-attribute
+     * 
+     * @return String
+     */
     public function getValidation(){
 
         if( $this->properties['validation'] )
             return ' data-validate="'.implode( ',', $this->properties['validation'] );
 
     }
-
 
 
     /**
@@ -116,6 +195,7 @@ class DefaultField{
     public function getClass(){
 
         $classes = $this->properties['class'];
+        $classes = array_merge( $classes, $this->classes );
         $output = implode( ' ', $classes );
 
         return $output;

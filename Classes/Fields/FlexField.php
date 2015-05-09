@@ -2,7 +2,8 @@
 namespace Cuisine\Fields;
 
 
-class RadioField extends DefaultField{
+class FlexField extends DefaultField{
+
 
 
     /**
@@ -12,10 +13,19 @@ class RadioField extends DefaultField{
      * @return void
      */
     protected function fieldType(){
-        $this->type = 'radio';
+        $this->type = 'flex';
     }
 
-  
+    /**
+     * Handle the field HTML code for metabox output.
+     *
+     * @return string
+     */
+    public function render(){
+
+
+    }
+
 
     /**
      * Build the html
@@ -24,7 +34,7 @@ class RadioField extends DefaultField{
      */
     public function build(){
 
-        $choices = $this->getChoices();
+        $html = '';
 
 
         return $html;

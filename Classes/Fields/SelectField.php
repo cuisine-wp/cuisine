@@ -2,7 +2,7 @@
 namespace Cuisine\Fields;
 
 
-class RadioField extends DefaultField{
+class SelectField extends DefaultField{
 
 
     /**
@@ -12,10 +12,10 @@ class RadioField extends DefaultField{
      * @return void
      */
     protected function fieldType(){
-        $this->type = 'radio';
+        $this->type = 'select';
     }
 
-  
+   
 
     /**
      * Build the html

@@ -2,7 +2,7 @@
 namespace Cuisine\Fields;
 
 
-class TextField extends DefaultField{
+class NumberField extends DefaultField{
 
 
     /**
@@ -12,8 +12,10 @@ class TextField extends DefaultField{
      * @return void
      */
     protected function fieldType(){
-        $this->type = 'text';
+        $this->type = 'number';
     }
+
+   
 
 
 }

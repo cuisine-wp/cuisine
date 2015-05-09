@@ -15,17 +15,6 @@ class TextareaField extends DefaultField{
         $this->type = 'textarea';
     }
 
-    /**
-     * Handle the field HTML code for metabox output.
-     *
-     * @return string
-     */
-    public function render(){
-
-        echo $this->getLabel();
-        echo $this->build();
-
-    }
 
 
     /**
