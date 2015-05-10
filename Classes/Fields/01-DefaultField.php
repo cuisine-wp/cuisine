@@ -50,9 +50,11 @@ class DefaultField{
 
         $this->id = md5( $name );
         $this->name = $name;
-        $this->properties = $props;
+        $this->properties = ( isset( $props['options'] ) ? $props['options'] : array() );
         $this->fieldType();
         $this->setDefaults();
+
+        //cuisine_dump( $this );
     }
 
 
@@ -86,6 +88,8 @@ class DefaultField{
 
             $html .= 'class="'.$this->getClass().'" ';
 
+            $html .= 'name="'.$this->name.'" ';
+
             $html .= $this->getDefault();
 
             $html .= $this->getPlaceholder();
@@ -96,6 +100,7 @@ class DefaultField{
 
         return $html;
     }
+
 
 
     /*=============================================================*/
@@ -202,31 +207,53 @@ class DefaultField{
 
     }
 
-
     /**
-     * Echo the html class
+     * Get the class of sub-inputs like radios and checkboxes
      * 
-     * @return [type] [description]
+     * @return String;
      */
-    public function echoClass(){
+    public function getSubClass(){
 
-        echo $this->getClass();
+        $classes = array(
+                            'subfield',
+                            'type-'.$this->type
+        );
 
+        $classes = apply_filters( 'cuisine_subfield_classes', $classes );
+        $output = implode( ' ', $classes );
+
+        return $output;
     }
+
 
 
     /**
-     * Get choices
-     *
-     * @return [type] [description]
+     * Get an active / selected state for this field
+     * 
+     * @return String
      */
-    public function getChoices(){
+    public function getSelectedType(){
 
-        if( $this->properties['choices'] )
-            return $this->properties['choices'];
+        switch( $this->type ){
+
+            case 'radio':
+                return 'checked';
+                break;
+            
+            case 'select':
+                return 'selected';
+                break;
+
+            case 'checkbox':
+                return 'checked';
+                break;
+
+            default:
+                return 'data-selected="true"';
+                break; 
+        }
 
     }
-
 
 
 }

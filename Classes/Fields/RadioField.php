@@ -2,7 +2,7 @@
 namespace Cuisine\Fields;
 
 
-class RadioField extends DefaultField{
+class RadioField extends ChoiceField{
 
 
     /**
@@ -24,8 +24,15 @@ class RadioField extends DefaultField{
      */
     public function build(){
 
+        $html = '';
         $choices = $this->getChoices();
+        $choices = $this->parseChoices( $choices );
 
+        foreach( $choices as $choice ){
+
+            $html .= $this->buildChoice( $choice );
+
+        }
 
         return $html;
     }

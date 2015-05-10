@@ -9,7 +9,7 @@ class DateField extends DefaultField{
      * 
      * @var array
      */
-    $classes = array( 'datepicker' );
+    var $classes = array( 'datepicker' );
 
 
     /**

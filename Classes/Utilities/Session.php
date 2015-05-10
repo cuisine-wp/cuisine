@@ -1,5 +1,5 @@
 <?php
-namespace Cuisine\Session;
+namespace Cuisine\Utilities;
 
 class Session{
 

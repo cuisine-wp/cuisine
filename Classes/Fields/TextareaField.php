@@ -36,7 +36,8 @@ class TextareaField extends DefaultField{
 
         $html .= '>';
 
-            $html .= $this->getDefault();
+            if( $this->properties['defaultValue'] )
+                $html .= $this->properties['defaultValue'];
 
         $html .= '</textarea>';
 
