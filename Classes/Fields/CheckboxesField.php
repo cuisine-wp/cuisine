@@ -24,8 +24,15 @@ class CheckboxesField extends DefaultField{
      */
     public function build(){
 
+        $html = '';
         $choices = $this->getChoices();
+        $choices = $this->parseChoices( $choices );
 
+        foreach( $choices as $choice ){
+
+            $html .= $this->buildChoice( $choice );
+
+        }
 
         return $html;
     }

@@ -108,6 +108,7 @@ abstract class Wrapper {
      */
     public static function __callStatic($method, $args) {
 
+
         $instance = static::getFacadeRoot();
         $instance = new $instance();
 

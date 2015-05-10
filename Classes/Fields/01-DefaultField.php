@@ -50,7 +50,7 @@ class DefaultField{
 
         $this->id = md5( $name );
         $this->name = $name;
-        $this->properties = ( isset( $props['options'] ) ? $props['options'] : array() );
+        $this->properties = $props;
         $this->fieldType();
         $this->setDefaults();
 
@@ -127,8 +127,8 @@ class DefaultField{
         if( !isset( $this->properties['validation'] ) )
             $this->properties['validation'] = false;
 
-        if( !isset( $this->properties['choices'] ) )
-            $this->properties['choices'] = false;
+        if( !isset( $this->properties['options'] ) )
+            $this->properties['options'] = false;
 
         if( !isset( $this->properties['class'] ) )
             $this->properties['class'] = array(

@@ -2,7 +2,7 @@
 namespace Cuisine\Fields;
 
 
-class SelectField extends DefaultField{
+class SelectField extends ChoiceField{
 
 
     /**
@@ -25,7 +25,27 @@ class SelectField extends DefaultField{
     public function build(){
 
         $choices = $this->getChoices();
+        $choices = $this->parseChoices( $choices );
 
+        $html = '<select ';
+
+            $html .= 'id="'.$this->id.'" ';
+
+            $html .= 'class="'.$this->getClass().'" ';
+
+            $html .= 'name="'.$this->name.'" ';
+
+            $html .= $this->getValidation();
+
+        $html .= '>';
+
+        foreach( $choices as $choice ){
+
+            $html .= $this->buildOption( $choice );
+
+        }
+
+        $html .= '</select>';
 
         return $html;
     }
