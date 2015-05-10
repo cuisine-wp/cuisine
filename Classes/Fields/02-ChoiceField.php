@@ -50,29 +50,6 @@ class ChoiceField extends DefaultField{
 	}
 
 
-	/**
-	 * Return html for an option
-	 * 
-	 * @param  array/string $choice
-	 * @return string HTML
-	 */
-	public function buildOption( $choice ){
-	
-		//set choice variables:
-		$value = $choice['key'];
-		$label = ( isset( $choice['label'] ) ? $choice['label'] : false );
-		$selected = $this->getSelectedType();
-
-
-		$html = '<option value="'.$value.'" ';
-
-			$html .= ( $this->properties['defaultValue'] == $value ? $selected : '' );
-
-		$html .= '>'.$label.'</option>';
-
-		return $html;
-	}
-
 
 	/**
 	 * Get choices

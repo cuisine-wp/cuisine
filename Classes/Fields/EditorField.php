@@ -16,16 +16,6 @@ class EditorField extends DefaultField{
         $this->type = 'editor';
     }
 
-    /**
-     * Handle the field HTML code for metabox output.
-     *
-     * @return string
-     */
-    public function render(){
-
-
-
-    }
 
 
     /**
@@ -34,10 +24,23 @@ class EditorField extends DefaultField{
      * @return String;
      */
     public function build(){
-
-        $html = '';
         
-        return $html;
+        $val = $this->getValue();
+        if( !$val ) $val = '';
+
+        ob_start();
+            
+            wp_editor( 
+                        $val,
+                        $this->id,
+                        array(
+
+                            'textarea_name' => $this->name
+
+                        )
+            );
+
+        return ob_get_clean();
     }
 
 

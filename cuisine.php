@@ -48,8 +48,8 @@ if (!class_exists('Cuisine')) {
          */
         private static $dirName = '';
 
-        private function __construct()
-        {
+        private function __construct(){
+
             static::$dirName = static::setDirName(__DIR__);
 
             // Load plugin.
@@ -61,8 +61,8 @@ if (!class_exists('Cuisine')) {
          *
          * @return \Cuisine
          */
-        public static function getInstance()
-        {
+        public static function getInstance(){
+
             if ( is_null( static::$instance ) ){
                 static::$instance = new static();
             }
@@ -174,13 +174,28 @@ if (!class_exists('Cuisine')) {
             $paths['plugin'] = static::getPluginPath();
 
             // Register globally the paths
-            foreach ($paths as $name => $path)
-            {
-               if ( !isset( $GLOBALS['cuisine_paths'][$name] ) )
-               {
+            foreach ($paths as $name => $path){
+
+               if ( !isset( $GLOBALS['cuisine_paths'][$name] ) ){
+
                    $GLOBALS['cuisine_paths'][$name] = realpath($path).DS;
+               
                }
             }
+
+            \add_action( 'admin_init', array( $this, 'admin_assets' ) );
+        }
+
+        /**
+         * Set all admin assets
+         * 
+         * @return void
+         */
+        function admin_assets(){
+
+            wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
+            //wp_enqueue_script( 'FieldMedia', admin_url( 'Assets/js/MediaField.js', __FILE__ ) );
+        
         }
 
 

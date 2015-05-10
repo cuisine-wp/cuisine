@@ -20,6 +20,13 @@ class DefaultField{
     var $name;
 
     /**
+     * Label of this field
+     * 
+     * @var String
+     */
+    var $label;
+
+    /**
      * Type of this field
      * 
      * @var String
@@ -46,10 +53,11 @@ class DefaultField{
      *
      * @param array $properties The text field properties.
      */
-    public function __construct( $name, $props = array() ){
+    public function __construct( $name, $label = '', $props = array() ){
 
         $this->id = md5( $name );
         $this->name = $name;
+        $this->label = $label;
         $this->properties = $props;
         $this->fieldType();
         $this->setDefaults();
@@ -69,9 +77,17 @@ class DefaultField{
      */
     public function render(){
 
-        echo $this->getLabel();
-        echo $this->build();
+        $class = 'field-wrapper';
 
+        if( $this->properties['label'] )
+            $class .= ' label-'.$this->properties['label'];
+
+        echo '<div class="'.$class.'">';
+
+            echo $this->getLabel();
+            echo $this->build();
+
+        echo '</div>';
     }
 
 
@@ -90,7 +106,7 @@ class DefaultField{
 
             $html .= 'name="'.$this->name.'" ';
 
-            $html .= $this->getDefault();
+            $html .= $this->getValueAttr();
 
             $html .= $this->getPlaceholder();
 
@@ -114,9 +130,8 @@ class DefaultField{
      */
     private function setDefaults(){
 
-
-        if( !isset( $this->properties['label'] ) )
-            $this->properties['label'] = false;
+        if( !isset( $this->properties['defaultValue'] ) )
+            $this->properties['label'] = 'top';
 
         if( !isset( $this->properties['defaultValue'] ) )
             $this->properties['defaultValue'] = false;
@@ -133,6 +148,7 @@ class DefaultField{
         if( !isset( $this->properties['class'] ) )
             $this->properties['class'] = array(
                                                 'field',
+                                                'input-field',
                                                 'field-'.$this->name,
                                                 'type-'.$this->type
             );
@@ -147,9 +163,43 @@ class DefaultField{
      */
     public function getLabel(){
 
-        if( $this->properties['label'] )
-            return '<label for="'.$this->id.'">'.$this->properties['label'].'</label>';
+        if( $this->label !== '' && $this->properties['label'] )
+            return '<label for="'.$this->id.'">'.$this->label.'</label>';
 
+    }
+
+    /**
+     * Returns the value attribute
+     * 
+     * @return String
+     */
+    public function getValueAttr(){
+
+        $val = $this->getValue();
+        if( $val )
+            return ' value="'.$val.'"';
+
+    }
+
+
+    /**
+     * Get the value of this field:
+     * 
+     * @return String
+     */
+    public function getValue(){
+
+        global $post;
+        $value = get_post_meta( $post->ID, $this->name, true );
+        $val = false;
+
+        if( $value )
+            $val = $value;
+
+        if( $this->properties['defaultValue'] )
+            $val = $this->getDefault();
+
+        return $val;
     }
 
 
@@ -161,7 +211,7 @@ class DefaultField{
     public function getDefault(){
 
         if( $this->properties['defaultValue' ] )
-            return ' value="'.$this->properties['defaultValue'].'"';
+            return $this->properties['defaultValue'];
  
     }
 

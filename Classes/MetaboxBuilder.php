@@ -226,7 +226,7 @@ class MetaboxBuilder {
 
 	       // $value = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : $this->parseValue( $field );
 	       
-	       $value = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : '';
+	       $value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
 
 	        // Apply validation if defined.
 	        // Check if the rule exists for the field in order to validate.
@@ -261,7 +261,7 @@ class MetaboxBuilder {
 	            }
 	        }
 		*/
-	        update_post_meta( $postId, $field['name'], $value );
+	        update_post_meta( $postId, $field->name, $value );
 	    }
 	}
 

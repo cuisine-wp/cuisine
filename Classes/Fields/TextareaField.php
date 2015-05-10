@@ -30,14 +30,18 @@ class TextareaField extends DefaultField{
 
             $html .= 'class="'.$this->getClass().'" ';
 
+            $html .= 'name="'.$this->name.'" ';
+
             $html .= $this->getPlaceholder();
 
             $html .= $this->getValidation();
 
         $html .= '>';
 
-            if( $this->properties['defaultValue'] )
-                $html .= $this->properties['defaultValue'];
+            $val = $this->getValue();
+
+            if( $val )
+                $html .= $val;
 
         $html .= '</textarea>';
 
