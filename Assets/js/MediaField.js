@@ -10,11 +10,17 @@
  	var MediaField = {
 	
  		var field;
+ 		var el;
+ 		var items;
 
 
- 		init: function(){
+ 		init: function( _el ){
 
  			self = this;
+
+ 			//set vars:
+ 			self.el = _el;
+ 			self.items = _el.find( '.media-item' );
 
  			self.setEvents();
 
@@ -32,4 +38,13 @@
 
 
 
- 	MediaField.init();
+ 	jQuery( document ).ready( function(){
+
+ 		$('.media-grid').each( function(){
+
+ 			MediaField.init( $( this ) );
+
+ 		});
+
+
+ 	});

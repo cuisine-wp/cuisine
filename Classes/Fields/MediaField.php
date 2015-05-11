@@ -33,18 +33,13 @@ class MediaField extends DefaultField{
 
             if( $media ){
 
-                //make a clonable item, for javascript:
-                $html .= $this->makeItem( array( 
-                    'clone' => true, 
-                    'preview' => '#', 
-                    'imgid' => '0',
-                    'position' => '0',
-                ) );
-
+                //loop through the media-items:
                 foreach( $media as $img ){
 
+                    //render 'em
                     $html .= $this->makeItem( $img );
                 }
+
 
             }else{
 
@@ -72,11 +67,8 @@ class MediaField extends DefaultField{
     public function makeItem( $item ){
 
         $prefix = $this->name.'['.$item['id'].']';
-        $class = 'media-item';
-            if( isset( $item['clone'] ) ) 
-                $class = ' hidden';
 
-        $html = '<div class="">';
+        $html = '<div class="media-item">';
 
             $html .= '<div class="img-wrapper">';
 
@@ -99,6 +91,26 @@ class MediaField extends DefaultField{
 
         return $html;
 
+    }
+
+    /**
+     * Return the template, for Javascript
+     * 
+     * @return String
+     */
+    public function renderTemplate(){
+
+        //make a clonable item, for javascript:
+        $html = '<script type="text/template" id="media_item_template">';
+            $html .= $this->makeItem( array( 
+                'id' => '{{item_id}}',
+                'preview' => '{{preview_url}}', 
+                'img-id' => '{{img_id}}',
+                'position' => '{{position}}',
+            ) );
+        $html .= '</script>';
+
+        return $html;
     }
 
 

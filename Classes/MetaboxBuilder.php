@@ -155,6 +155,20 @@ class MetaboxBuilder {
 	    }
 
 
+	    //render the javascript-templates seperate, to prevent doubles
+	    $rendered = array();
+
+	    foreach( $this->data['fields'] as $field ){
+
+
+
+	    	if( method_exists( $field, 'renderTemplate' ) && !in_array( $field->name, $rendered ) ){
+
+	    		echo $field->renderTemplate();
+	    		$rendered[] = $field->name;
+
+	    	}
+	    }
 	}
 
 
@@ -224,44 +238,10 @@ class MetaboxBuilder {
 	    
 	    foreach($fields as $field){
 
-	       // $value = isset( $_POST[ $field['name'] ] ) ? $_POST[ $field['name'] ] : $this->parseValue( $field );
 	       
-	       $value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
-
-	        // Apply validation if defined.
-	        // Check if the rule exists for the field in order to validate.
-	    /*    if ( isset( $this->data['rules'][ $field['name'] ] ) ) {
-
-	            $rules = $this->data['rules'][ $field['name'] ];
-
-	            // Check if $rules array is an associative array
-	            if ( $this->validator->isAssociative($rules) &&
-	            	 'infinite' == $field->getFieldType() ) {
-
-	                // Check Infinite fields validation.
-	                foreach ($value as $row => $rowValues) {
-
-	                    foreach ($rowValues as $name => $val) {
-	                    
-	                        if (isset($rules[$name])) {
-
-	                            $value[$row][$name] = 	$this->validator->single(
-	                            								$val,
-	                            								$rules[$name]
-	                            					 	);
-	                        }
-	                    }
-	                }
-
-	            } else {
-	                $value =	$this->validator->single(
-	                				$value,
-	                				$this->data['rules'][$field['name']]
-	                			);
-	            }
-	        }
-		*/
-	        update_post_meta( $postId, $field->name, $value );
+	       	$value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
+			update_post_meta( $postId, $field->name, $value );
+	    
 	    }
 	}
 
