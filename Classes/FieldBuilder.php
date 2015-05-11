@@ -8,7 +8,6 @@ namespace Cuisine\Fields;
 class FieldBuilder {
 
 
-
     /**
      * Call the appropriate field class.
      *
@@ -239,6 +238,20 @@ class FieldBuilder {
         $properties = array_merge( $extras, $properties );
 
         return $this->make( 'Cuisine\\Fields\\EditorField', $name, $label, $properties );
+    }
+
+
+    /**
+     * Return a HiddenField instance.
+     *
+     * @param string $name The name attribute of the text input.
+     * @param array $extras Extra field properties.
+     * @return \Cuisine\Fields\TextField
+     */
+    public function hidden( $name, array $properties = array() ){
+
+        return $this->make( 'Cuisine\\Fields\\HiddenField', $name, '', $properties );
+
     }
 
 

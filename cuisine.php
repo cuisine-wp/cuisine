@@ -153,6 +153,8 @@ if (!class_exists('Cuisine')) {
 
             // Set the framework paths and starts the framework.
             add_action('after_setup_theme', array($this, 'bootstrap'));
+            do_action( 'cuisine_loaded' );
+
         }
 
         /**

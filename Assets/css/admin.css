@@ -1,3 +1,7 @@
+.clearfix{
+	clear:both;
+}
+
 .field-wrapper{
 	width:100%;
 	margin-bottom:30px;

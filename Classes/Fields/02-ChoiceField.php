@@ -22,7 +22,7 @@ class ChoiceField extends DefaultField{
 	    $label = ( isset( $choice['label'] ) ? $choice['label'] : false );
 	    $selected = $this->getSelectedType();
 
-	    $html = '<label for="'.$id.'">';
+	    $html = '<span class="subfield-wrapper">';
 
 	        $html .= '<input type="'.$this->type.'" ';
 
@@ -32,7 +32,7 @@ class ChoiceField extends DefaultField{
 
 	        $html .= 'name="'.$name.'" ';
 
-	        $html .= $this->getDefault();
+	        $html .= $this->getValueAttr();
 
 	        $html .= $this->getValidation();
 
@@ -40,10 +40,11 @@ class ChoiceField extends DefaultField{
 
 	        $html .= '>';
 
-	        $html .= ( $label ? $label : '' );
+	        $html .= '<label for="'.$id.'">';
+	        	$html .= ( $label ? $label : '' );
+	        $html .= '</label>';
 
-
-	    $html .= '</label>';
+	    $html .= '</span>';
 
 	    return $html;
 
@@ -62,6 +63,27 @@ class ChoiceField extends DefaultField{
 	        return $this->properties['options'];
 
 	}
+
+
+	/**
+	 * Get the class of sub-inputs like radios and checkboxes
+	 * 
+	 * @return String;
+	 */
+	public function getSubClass(){
+
+	    $classes = array(
+	                        'subfield',
+	                        'type-'.$this->type,
+	                        $this->getValue()
+	    );
+
+	    $classes = apply_filters( 'cuisine_subfield_classes', $classes );
+	    $output = implode( ' ', $classes );
+
+	    return $output;
+	}
+
 
 	/**
 	 * Makes the choices array complete

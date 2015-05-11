@@ -79,6 +79,8 @@ class DefaultField{
 
         $class = 'field-wrapper';
 
+        $class .= ' '.$this->type;
+
         if( $this->properties['label'] )
             $class .= ' label-'.$this->properties['label'];
 
@@ -130,7 +132,7 @@ class DefaultField{
      */
     private function setDefaults(){
 
-        if( !isset( $this->properties['defaultValue'] ) )
+        if( !isset( $this->properties['label'] ) )
             $this->properties['label'] = 'top';
 
         if( !isset( $this->properties['defaultValue'] ) )
@@ -255,24 +257,6 @@ class DefaultField{
 
         return $output;
 
-    }
-
-    /**
-     * Get the class of sub-inputs like radios and checkboxes
-     * 
-     * @return String;
-     */
-    public function getSubClass(){
-
-        $classes = array(
-                            'subfield',
-                            'type-'.$this->type
-        );
-
-        $classes = apply_filters( 'cuisine_subfield_classes', $classes );
-        $output = implode( ' ', $classes );
-
-        return $output;
     }
 
 

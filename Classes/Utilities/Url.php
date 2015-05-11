@@ -84,7 +84,13 @@ class Url {
 	 */
 	public static function plugin( $name, $trailingslash = false ){
 
+		$path = \trailingslashit( WP_PLUGIN_URL );
+		$path .=  $name;
 
+		if( $trailingslash )
+			$path = \trailingslashit( $path );
+
+		return $path;
 
 	}
 
