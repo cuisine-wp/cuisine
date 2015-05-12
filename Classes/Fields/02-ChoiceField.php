@@ -18,11 +18,11 @@ class ChoiceField extends DefaultField{
 
 	    //set choice variables:
 	    $id = 'subfield-'.$this->id.'-'.$choice['id'];
-	    $name = $choice['key'];
+	    $value = $choice['key'];
 	    $label = ( isset( $choice['label'] ) ? $choice['label'] : false );
 	    $selected = $this->getSelectedType();
 
-	    $html = '<span class="subfield-wrapper">';
+	    $html = '<span class="subfield-wrapper '.$value.'">';
 
 	        $html .= '<input type="'.$this->type.'" ';
 
@@ -30,13 +30,13 @@ class ChoiceField extends DefaultField{
 
 	        $html .= 'class="'.$this->getSubClass().'" ';
 
-	        $html .= 'name="'.$name.'" ';
+	        $html .= $this->getNameAttr( $value );
 
-	        $html .= $this->getValueAttr();
+	        $html .= 'value="'.$value.'" ';
 
 	        $html .= $this->getValidation();
 
-	        $html .= ( $this->properties['defaultValue'] == $name ? ' '.$selected : '' );
+	        $html .= ( $this->properties['defaultValue'] == $value ? ' '.$selected : '' );
 
 	        $html .= '>';
 
@@ -47,6 +47,27 @@ class ChoiceField extends DefaultField{
 	    $html .= '</span>';
 
 	    return $html;
+
+	}
+
+
+	/**
+	 * Get the name attribute, based on type
+	 * 
+	 * @return String
+	 */
+	private function getNameAttr( $val ){
+
+		switch( $this->type ){
+
+			case 'checkbox' :
+				return 'name="'.$this->name.'['.$val.']" ';
+				break;
+
+			case 'radio' :
+				return 'name="'.$this->name.'" ';
+
+		}
 
 	}
 
