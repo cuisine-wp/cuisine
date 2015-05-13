@@ -1,0 +1,23 @@
+{
+  "name": "chefduweb/cuisine",
+  "description": "A modern WordPress framework by Chef du Web",
+  "keywords": ["wordpress", "plugin", "framework"],
+  "homepage": "http://www.chefduweb.nl/cuisine",
+  "license": "GPLv3",
+  "authors": [
+    {
+      "name": "Luc Princen",
+      "email": "luc@chefduweb.nl",
+      "homepage": "http://www.chefduweb.nl"
+    },
+    {
+      "name": "Remy Bakker",
+      "email": "remy@chefduweb.nl",
+      "homepage": "http://www.chefduweb.nl"
+    },
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.3.2"
+  }
+}
