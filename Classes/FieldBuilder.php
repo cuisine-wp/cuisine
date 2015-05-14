@@ -229,7 +229,7 @@ class FieldBuilder {
      * @param array $extras
      * @return \Cuisine\Fields\EditorField
      */
-    public function editor($name, $label = '', array $settings = array(), array $properties = array()){
+    public function editor($name, $label = '', array $properties = array(), array $settings = array() ){
 
         // $name may only contain lower-case characters.
         $name = strtolower($name);

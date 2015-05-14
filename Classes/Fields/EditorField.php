@@ -27,6 +27,7 @@ class EditorField extends DefaultField{
         
         $val = $this->getValue();
         if( !$val ) $val = '';
+        
 
         ob_start();
             
@@ -41,6 +42,8 @@ class EditorField extends DefaultField{
             );
 
         return ob_get_clean();
+
+        return $val;
     }
 
 

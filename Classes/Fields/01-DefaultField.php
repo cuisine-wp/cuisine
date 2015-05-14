@@ -135,8 +135,13 @@ class DefaultField{
         if( !isset( $this->properties['label'] ) )
             $this->properties['label'] = 'top';
 
+        //default value
         if( !isset( $this->properties['defaultValue'] ) )
             $this->properties['defaultValue'] = false;
+
+        //actual value
+        if( !isset( $this->properties['value'] ) )
+            $this->properties['value'] = false;
 
         if( !isset( $this->properties['placeholder'] ) )
             $this->properties['placeholder'] = false;
@@ -192,13 +197,16 @@ class DefaultField{
     public function getValue(){
 
         global $post;
-        $value = get_post_meta( $post->ID, $this->name, true );
-        $val = false;
+        $value = $val = false;
 
-        if( $value )
+        if( isset( $post ) )
+            $value = get_post_meta( $post->ID, $this->name, true );
+
+
+        if( $value && !$val )
             $val = $value;
 
-        if( $this->properties['defaultValue'] )
+        if( $this->properties['defaultValue'] && !$val )
             $val = $this->getDefault();
 
         return $val;
