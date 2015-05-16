@@ -16,6 +16,27 @@ class CheckboxField extends DefaultField{
     }
 
 
+    /**
+     * Handle the field HTML code for metabox output.
+     *
+     * @return string
+     */
+    public function render(){
+
+        $class = 'field-wrapper';
+
+        $class .= ' '.$this->type;
+
+        if( $this->properties['label'] )
+            $class .= ' label-'.$this->properties['label'];
+
+        echo '<div class="'.$class.'">';
+
+            echo $this->build();
+
+        echo '</div>';
+    }
+
 
     /**
      * Build the html
@@ -24,7 +45,21 @@ class CheckboxField extends DefaultField{
      */
     public function build(){
 
-        $choices = $this->getChoices();
+
+        $html = '<input type="'.$this->type.'" ';
+
+            $html .= 'id="'.$this->id.'" ';
+
+            $html .= 'class="'.$this->getClass().'" ';
+
+            $html .= 'name="'.$this->name.'" ';
+
+            if( $this->getValue() === true )
+                $html .= ' checked';
+
+        $html .= '/>';
+
+        $html .= '<label for="'.$this->id.'">'.$this->label.'</label>';
 
 
         return $html;

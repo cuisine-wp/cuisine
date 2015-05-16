@@ -6,7 +6,7 @@
  * @since Cuisine 1.4
  */
 
-
+/*8
  	var MediaField = {
 	
  		var field;
@@ -48,3 +48,5 @@
 
 
  	});
+
+ 	*/

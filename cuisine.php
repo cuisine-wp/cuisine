@@ -129,6 +129,7 @@ if (!class_exists('Cuisine')) {
 			//auto-loads all .php files in these directories.
         	$includes = array( 
         		'Classes',
+                'Classes/Admin',
                 'Classes/Fields',
                 'Classes/Utilities',
         		'Classes/View',
