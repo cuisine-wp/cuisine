@@ -2,7 +2,7 @@
 namespace Cuisine\Fields;
 
 
-class CheckboxesField extends DefaultField{
+class CheckboxesField extends ChoiceField{
 
 
     /**

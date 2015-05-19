@@ -255,4 +255,128 @@ class FieldBuilder {
     }
 
 
+
+
+    /**
+     * If a field doesn't exist, try to locate it.
+     *
+     * @param string $name Name of the method
+     * @param  array $attr
+     * @return self::$name(), if it exists.
+     */
+    public function __call( $name, $attr ){
+
+        $types = $this->getAvailableTypes();
+        $names = array_keys( $types );
+
+        //if method can be found:
+        if( in_array( $name, $names ) ){
+
+            $method = $types[ $name ];
+            $props = ( isset( $attr[1] ) ? $attr[1] : array() );
+            return $this->make( $method['class'], $attr[0], $props );
+        }
+
+        return false;
+    }
+
+
+    /*=============================================================*/
+    /**             GETTERS & SETTERS                              */
+    /*=============================================================*/
+
+
+    /**
+     * Returns a filterable array of field types
+     *
+     * @filter cuisine_field_types
+     * @return array
+     */
+    public function getAvailableTypes(){
+
+        $arr = array(
+
+            'text'       => array(
+
+                'name'      => __( 'Tekst', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\TextField'
+            ),
+
+            'password'      => array(
+                'name'      => __( 'Wachtwoord', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\PasswordField'
+            ),
+
+            'number'        => array(
+                'name'      => __( 'Nummer', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\NumberField',            
+            ),
+
+            'date'          => array(
+
+                'name'      => __( 'Datum', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\DateField',
+            ),
+
+            'textarea'      => array(
+
+                'name'      => __( 'Tekstvlak', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\TextareaField'
+            ),
+
+            'checkbox'      => array( 
+
+                'name'      => __( 'Checkbox', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\CheckboxField'
+            ),
+
+            'checkboxes'    => array( 
+
+                'name'      => __( 'Checkboxes', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\CheckboxesField'
+            ),
+            'radio'         => array( 
+
+                'name'      => __( 'Radio buttons', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\RadioField'
+            ),
+            'select'        => array( 
+
+                'name'      => __( 'Select', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\SelectField'
+            ),
+            'media'         => array( 
+
+                'name'      => __( 'Media', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\MediaField'
+            ),
+            'repeater'      => array( 
+
+                'name'      => __( 'Repeater', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\RepeaterField'
+            ),
+            'flex'          => array( 
+
+                'name'      => __( 'Flex', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\FlexField'
+            ),
+            'editor'        => array( 
+
+                'name'      => __( 'Wysiwyg Editor', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\EditorField'
+            ),
+            'hidden'      => array( 
+
+                'name'      => __( 'Verborgen', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\HiddenField'
+            ),
+        );
+
+
+        $arr = apply_filters( 'cuisine_field_types', $arr );
+        return $arr;
+    }
+
+
+
 } 
