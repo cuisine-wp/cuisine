@@ -26,6 +26,32 @@ class Sort{
 
 
 	/**
+	 * Prepend all values in an array
+	 * 
+	 * @param  array $array
+	 * @param  string $prepend
+	 * @return array
+	 */
+	public static function prependValues( $array, $prepend = '' ){
+
+		return preg_filter('/^/', $prepend, $array );
+	}
+
+
+	/**
+	 * Append all values in an array
+	 * 
+	 * @param  array $array
+	 * @param  string $append
+	 * @return array
+	 */
+	public static function appendValues( $array, $append = '' ){
+
+		return preg_filter('/$/', $append, $array );
+	}
+
+
+	/**
 	 * Get the first item in an array
 	 * 
 	 * @param  array $array

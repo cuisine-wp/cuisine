@@ -28,7 +28,8 @@
         *   Init the uploader ( returns a JSON object with attachment(s) ):
         */
         this.uploader = function( options, callback ){
-  
+            
+            console.log( options );
 
             //if the file modal already exists:
             if( file_frame ){
@@ -175,49 +176,12 @@
             var options = [];
         
 
-            if( !obj.attr('data-title') ){
                 options.title = 'Uploaden';
-
-            }else{
-                options.title = obj.data('title');
-
-            }
-
-            if( !obj.attr('data-button') ){
                 options.button = 'Opslaan';
-
-            }else{
-                options.button = obj.data('button');
-
-            }
-
-
-            if( !obj.attr('data-media-type') ){
                 options.media_type = 'image';
-            
-            }else{
-                options.media_type = obj.data('media-type');
-
-            }
-        
-            
-            if( !obj.attr( 'data-multiple' ) ){
-                options.multiple = 'true';
-        
-            }else{
-                options.multiple = obj.data('multiple');
-        
-            }
-
-
-            if( !obj.attr( 'data-postid' ) ){
+                options.multiple = false;
                 options.post_id = null
-            
-            }else{
-                options.post_id = obj.data('postid');
-            
-            }
-        
+
             return options;
          
         }
