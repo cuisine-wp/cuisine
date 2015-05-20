@@ -28,13 +28,13 @@ class MediaField extends DefaultField{
     public function build(){
 
         $media = $this->getValue();
-        $media = Sort::byField( $media, 'position', 'ASC' );
 
         $html = '<div class="media-grid" data-highest-id="'.$this->getHighestItemId().'">';
 
             $html .= '<div class="media-inner">';
             
             if( $media ){
+                $media = Sort::byField( $media, 'position', 'ASC' );
 
                 //loop through the media-items:
                 foreach( $media as $key => $img ){

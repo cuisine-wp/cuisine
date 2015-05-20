@@ -1,5 +1,5 @@
 /**
- * Main MediaField JS Class
+ * Media + Image field classes
  *
  * Takes care of the javascripts functions in the Field engine.
  *
@@ -192,6 +192,73 @@
  	});
 
 
+	var ImageField = Backbone.View.extend({
+
+		items: {},
+		id: '',
+		highestId: '',
+		container: '',
+
+
+		events: {
+
+			'click #select-img' : 'launchMediaLibrary',
+		
+		},
+		 	
+		initialize: function(){
+
+		 	var self = this;
+		 	self.id = self.$el.data('id');
+
+		},	
+
+		/**
+		 * Show a media lightbox
+		 * 
+		 * @return void
+		 */
+		launchMediaLibrary: function( evt ){
+
+			evt.preventDefault();
+				
+
+			var self = this;
+
+			var options = {
+				title:'Uploaden',
+				button:'Opslaan',
+				//media_type:'image',
+				multiple:false,
+				self: self,	
+			}
+
+
+			Media.uploader( options, function( attachment, options ){
+						
+				var _full = ( attachment.sizes.full !== undefined ? attachment.sizes.full.url : '' );
+				var _large = ( attachment.sizes.large !== undefined ? attachment.sizes.large.url : '' );
+				var _medium = ( attachment.sizes.medium !== undefined ? attachment.sizes.medium.url : '' );
+				var _thumbnail = ( attachment.sizes.thumbnail !== undefined ? attachment.sizes.thumbnail.url : '' );
+
+				self.$el.find( '#img-id' ).val( attachment.id );
+				self.$el.find( '#thumb').val( _thumbnail );
+				self.$el.find( '#medium').val( _medium );
+				self.$el.find( '#large').val( _large );
+				self.$el.find( '#full').val( _full );
+				self.$el.find( '#orientation' ).val( attachment.sizes.full.orientation );
+
+				self.$el.find( '#preview' ).attr( 'src', _thumbnail );
+
+			});
+		
+		}
+
+	});
+
+
+
+
 
  	jQuery( document ).ready( function(){
 
@@ -203,4 +270,8 @@
  		jQuery('.media-grid' ).each( function( index, obj ){
  			var mf = new MediaField( { el: obj } );
  		});
+
+ 		jQuery( '.image-field').each( function( index, obj ){
+ 			var imgf = new ImageField({ el: obj });
+ 		})
  	}

@@ -173,13 +173,28 @@ class FieldBuilder {
     /**
      * Return a MediaField instance.
      *
-     * @param string $name The name attribute of the hidden input.
+     * @param string $name The name attribute of the media input.
      * @param array $extras Extra field properties.
      * @return \Cuisine\Fields\MediaField
      */
     public function media($name, $label = '', array $properties = array()){
 
         return $this->make( 'Cuisine\\Fields\\MediaField', $name, $label, $properties );
+    }
+
+
+    /**
+     * Return a ImageField instance.
+     *
+     * @param string $name The name attribute of the image input.
+     * @param string $label The Labelof the image input.
+     * @param array $extras Extra field properties.
+     * @return \Cuisine\Fields\ImageField
+     */
+    public function image( $name, $label = '', array $properties = array() ){
+
+        return $this->make( 'Cuisine\\Fields\\ImageField', $name, $label, $properties );
+
     }
 
     /**

@@ -96,6 +96,34 @@
 	pointer-events:none;
 }
 
+.image-field{
+	text-align:center;
+}
+
+.image-field .img-wrapper{
+	width:150px;
+	height:150px;
+	display:inline-block;
+	border:2px solid #fff;
+	box-shadow:0 0 10px rgba(0,0,0,.3);
+	margin:0 0 15px 0;
+}
+
+.image-field button{
+	background: #2ea2cc;
+	box-shadow: inset 0 1px 0 rgba( 120, 200, 230, 0.5 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+	color: #fff;
+	text-decoration: none;
+	border-radius:3px;
+	padding:7px 14px;
+	border:1px solid #0074a2;
+	cursor:pointer;
+}
+
+.image-field button:hover{
+	background:#1e8cbe;
+}
+
 .media-inner .media-item .hover .remove-btn:hover{
 	background:#444;
 }
