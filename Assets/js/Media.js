@@ -29,7 +29,6 @@
         */
         this.uploader = function( options, callback ){
             
-            console.log( options );
 
             //if the file modal already exists:
             if( file_frame ){

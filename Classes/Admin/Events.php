@@ -62,7 +62,7 @@
 				wp_enqueue_script( 
 					'cuisine_media', 
 					$url.'/js/Media.js', 
-					array( 'backbone', 'media-editor' ) 
+					array( 'backbone', 'media-editor' )
 				);
 
 				wp_enqueue_script( 

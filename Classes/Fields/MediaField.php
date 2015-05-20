@@ -2,6 +2,8 @@
 namespace Cuisine\Fields;
 
 
+use Cuisine\Utilities\Sort;
+
 class MediaField extends DefaultField{
 
  
@@ -26,28 +28,29 @@ class MediaField extends DefaultField{
     public function build(){
 
         $media = $this->getValue();
+        $media = Sort::byField( $media, 'position', 'ASC' );
 
-        $html = '<div class="media-grid">';
+        $html = '<div class="media-grid" data-highest-id="'.$this->getHighestItemId().'">';
 
             $html .= '<div class="media-inner">';
-
+            
             if( $media ){
 
                 //loop through the media-items:
-                foreach( $media as $img ){
+                foreach( $media as $key => $img ){
 
                     //render 'em
+                    $img['id'] = $key;
                     $html .= $this->makeItem( $img );
                 }
-
-
-            }else{
-
-                $html .= '<p class="no-media">Geen media gevonden.</p>';
-
             }
 
             $html .= '</div>';
+            $html .= '<div class="clearfix"></div>';
+
+
+            $html .= '<p class="no-media">Geen media gevonden.</p>';
+
 
             $html .= $this->makeControls();
 
@@ -68,24 +71,27 @@ class MediaField extends DefaultField{
 
         $prefix = $this->name.'['.$item['id'].']';
 
-        $html = '<div class="media-item">';
+        $html = '<div class="media-item ui-state-default">';
 
             $html .= '<div class="img-wrapper">';
 
                 $html .= '<img src="'.$item['preview'].'"/>';
 
-                $html .= '<div class="hover">';
+            $html .= '</div>';
 
-                    $html .= '<div class="edit-btn" data-id="'.$item['img-id'].'"></div>';
-                    $html .= '<div class="remove-btn" data-id="'.$item['img-id'].'"></div>';
+            $html .= '<div class="hover">';
 
-                $html .= '</div>';
+            // $html .= '<div class="edit-btn" data-id="'.$item['img-id'].'"></div>';
+                $html .= '<div class="remove-btn" data-id="'.$item['img-id'].'">';
+                $html .= '<span class="dashicons dashicons-trash"></span></div>';
 
             $html .= '</div>';
+
 
             $html .= '<input type="hidden" name="'.$prefix.'[img-id]" value="'.$item['img-id'].'" id="img-id"/>';
             $html .= '<input type="hidden" name="'.$prefix.'[preview]" value='.$item['preview'].' id="preview"/>';
             $html .= '<input type="hidden" name="'.$prefix.'[position]" value="'.$item['position'].'" id="position"/>';
+
 
         $html .= '</div>';
 
@@ -103,10 +109,10 @@ class MediaField extends DefaultField{
         //make a clonable item, for javascript:
         $html = '<script type="text/template" id="media_item_template">';
             $html .= $this->makeItem( array( 
-                'id' => '{{item_id}}',
-                'preview' => '{{preview_url}}', 
-                'img-id' => '{{img_id}}',
-                'position' => '{{position}}',
+                'id' => '<%= item_id %>',
+                'preview' => '<%= preview_url %>', 
+                'img-id' => '<%= img_id %>',
+                'position' => '<%= position %>',
             ) );
         $html .= '</script>';
 
@@ -129,6 +135,18 @@ class MediaField extends DefaultField{
         $html .= '</div>';
 
         return $html;
+
+    }
+
+    /**
+     * Get the highest item ID available
+     * 
+     * @return int
+     */
+    private function getHighestItemId(){
+
+        $media = $this->getValue();
+        return count( $media );
 
     }
 
