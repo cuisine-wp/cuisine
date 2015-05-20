@@ -288,8 +288,8 @@ class FieldBuilder {
         if( in_array( $name, $names ) ){
 
             $method = $types[ $name ];
-            $props = ( isset( $attr[1] ) ? $attr[1] : array() );
-            return $this->make( $method['class'], $attr[0], $props );
+            $props = ( isset( $attr[2] ) ? $attr[2] : array() );
+            return $this->make( $method['class'], $attr[0], $attr[1], $props );
         }
 
         return false;
