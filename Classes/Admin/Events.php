@@ -72,9 +72,6 @@
 				
 			});
 
-			$url = Url::plugin( 'cuisine', true ).'assets';
-			wp_enqueue_style( 'cuisine', $url.'/css/admin.css' );
-
 		}
 
 

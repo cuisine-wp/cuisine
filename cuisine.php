@@ -185,7 +185,21 @@ if (!class_exists('Cuisine')) {
             add_action('after_setup_theme', array($this, 'bootstrap'));
             do_action( 'cuisine_loaded' );
 
+            \add_action( 'admin_init', array( $this, 'admin_assets' ) );
         }
+
+
+        /**
+        * Set the admin css-files.
+        * 
+        * @return void
+        */
+        function admin_assets(){
+        
+           wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
+
+        }
+
 
         /**
          * Define paths and bootstrap the framework.
