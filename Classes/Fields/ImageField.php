@@ -48,13 +48,12 @@ class ImageField extends DefaultField{
 
         	$html .= '</div>';
 
-        	$html .= '<input type="hidden" class="media-field" name="'.$pre.'[img-id]" id="img-id" value="'.$img['img-id'].'"/>';
-        	$html .= '<input type="hidden" class="media-field" name="'.$pre.'[thumb]" id="thumb" value="'.$img['thumb'].'"/>';
-        	$html .= '<input type="hidden" class="media-field" name="'.$pre.'[medium]" id="medium" value="'.$img['medium'].'"/>';
-        	$html .= '<input type="hidden" class="media-field" name="'.$pre.'[large]" id="large" value="'.$img['large'].'"/>';
-        	$html .= '<input type="hidden" class="media-field" name="'.$pre.'[full]" id="full" value="'.$img['full'].'"/>';
-        	$html .= '<input type="hidden" class="media-field" name="'.$pre.'[orientation]" id="orientation" value="'.$img['orientation'].'"/>';
-
+        	$html .= '<input type="hidden" class="multi" name="'.$pre.'[img-id]" id="img-id" value="'.$img['img-id'].'"/>';
+        	$html .= '<input type="hidden" class="multi" name="'.$pre.'[thumb]" id="thumb" value="'.$img['thumb'].'"/>';
+        	$html .= '<input type="hidden" class="multi" name="'.$pre.'[medium]" id="medium" value="'.$img['medium'].'"/>';
+        	$html .= '<input type="hidden" class="multi" name="'.$pre.'[large]" id="large" value="'.$img['large'].'"/>';
+        	$html .= '<input type="hidden" class="multi" name="'.$pre.'[full]" id="full" value="'.$img['full'].'"/>';
+        	$html .= '<input type="hidden" class="multi" name="'.$pre.'[orientation]" id="orientation" value="'.$img['orientation'].'"/>';
 
         $html .= '</div>';
 
@@ -84,7 +83,10 @@ class ImageField extends DefaultField{
     		'preview' => Url::plugin( 'cuisine/Assets/images/img-placeholder.png' )
     	);
 
-    	
+        if( !is_array( $original ) )
+            $original = array();
+
+
     	return array_merge( $defaults, $original );
     }
 

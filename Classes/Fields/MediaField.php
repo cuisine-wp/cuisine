@@ -88,9 +88,9 @@ class MediaField extends DefaultField{
             $html .= '</div>';
 
 
-            $html .= '<input type="hidden" class="media-field" name="'.$prefix.'[img-id]" value="'.$item['img-id'].'" id="img-id"/>';
-            $html .= '<input type="hidden" class="media-field" name="'.$prefix.'[preview]" value='.$item['preview'].' id="preview"/>';
-            $html .= '<input type="hidden" class="media-field"name="'.$prefix.'[position]" value="'.$item['position'].'" id="position"/>';
+            $html .= '<input type="hidden" class="multi" name="'.$prefix.'[img-id]" value="'.$item['img-id'].'" id="img-id"/>';
+            $html .= '<input type="hidden" class="multi" name="'.$prefix.'[preview]" value='.$item['preview'].' id="preview"/>';
+            $html .= '<input type="hidden" class="multi" name="'.$prefix.'[position]" value="'.$item['position'].'" id="position"/>';
 
 
         $html .= '</div>';
