@@ -54,7 +54,9 @@ class CheckboxField extends DefaultField{
 
             $html .= 'name="'.$this->name.'" ';
 
-            if( $this->getValue() === true )
+            $html .= 'value="true" '; 
+
+            if( $this->getValue() == true )
                 $html .= ' checked';
 
         $html .= '/>';

@@ -107,11 +107,7 @@ class FieldBuilder {
      * @param array $extras Extra field properties.
      * @return \Cuisine\Fields\CheckboxField
      */
-    public function checkbox($name, $label = '', $options, array $properties = array()){
-
-        $extras = compact( 'options' );
-
-        $properties = array_merge( $extras, $properties );
+    public function checkbox($name, $label = '', $properties = array()){
 
         return $this->make('Cuisine\\Fields\\CheckboxField', $name, $label, $properties );
 
