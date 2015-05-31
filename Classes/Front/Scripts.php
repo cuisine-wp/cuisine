@@ -160,7 +160,7 @@ class Scripts {
 	 */
 	public function analytics( $code ){
 
-		echo "<script>
+		$string = "\n<script>
     			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
     			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
     			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
@@ -168,6 +168,8 @@ class Scripts {
     			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
     			ga('create','".$code."','auto');ga('send','pageview');
 			</script>";
+
+		echo preg_replace('/[ \t]+/', ' ', preg_replace('/[\r\n]+/', "\n", $string));
 	}
 
 }
