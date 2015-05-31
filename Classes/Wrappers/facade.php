@@ -66,10 +66,11 @@ abstract class Wrapper {
             'pagination'        => 'Cuisine\View\Pagination',
             'metabox'           => 'Cuisine\Metabox\MetaboxBuilder',
             'posttype'          => 'Cuisine\Utilities\PostType',
-            'router'            => 'Cuisine\Utilities\Rewrite',
             'taxonomy'          => 'Cuisine\Utilities\Taxonomy',
             'user'              => 'Cuisine\Utilities\User',
             'validation'        => 'Cuisine\Utilities\Validator',
+            'route'             => 'Cuisine\Front\Route',
+            'scripts'           => 'Cuisine\Front\Scripts',
         );
 
         return $aliases[ $name ];

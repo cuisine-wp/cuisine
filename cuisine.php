@@ -33,6 +33,7 @@ if (!class_exists('Cuisine')) {
          */
         private static $instance = null;
 
+
         /**
          * Framework version.
          *
@@ -47,6 +48,33 @@ if (!class_exists('Cuisine')) {
          * @var string
          */
         private static $dirName = '';
+
+
+        /**
+         * All registered routes
+         *
+         * @var array
+         */
+        public $routes = array();
+
+
+        /**
+         * All registered templates
+         *
+         * @var array
+         */
+        public $templates = array();
+
+
+        /**
+         * All registered scripts
+         * 
+         * @var array
+         */
+        public $scripts = array();
+
+
+
 
         private function __construct(){
 
@@ -129,9 +157,10 @@ if (!class_exists('Cuisine')) {
 			//auto-loads all .php files in these directories.
         	$includes = array( 
         		'Classes',
-                'Classes/Admin',
-                'Classes/Fields',
                 'Classes/Utilities',
+                'Classes/Admin',
+                'Classes/Front',
+                'Classes/Fields',
         		'Classes/View',
                 'Classes/Wrappers'
 			);
@@ -185,20 +214,6 @@ if (!class_exists('Cuisine')) {
                
                }
             }
-
-            \add_action( 'admin_init', array( $this, 'admin_assets' ) );
-        }
-
-        /**
-         * Set all admin assets
-         * 
-         * @return void
-         */
-        function admin_assets(){
-
-            wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
-            //wp_enqueue_script( 'FieldMedia', admin_url( 'Assets/js/MediaField.js', __FILE__ ) );
-        
         }
 
 
