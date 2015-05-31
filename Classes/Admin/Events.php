@@ -44,8 +44,7 @@
 		 */
 		private function adminEnqueues(){
 
-			
-			
+				
 			add_action( 'admin_init', function(){
 				
 				global $pagenow;
@@ -72,6 +71,10 @@
 				);
 				
 			});
+
+			$url = Url::plugin( 'cuisine', true ).'assets';
+			wp_enqueue_style( 'cuisine', $url.'/css/admin.css' );
+
 		}
 
 
