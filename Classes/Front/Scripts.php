@@ -85,6 +85,7 @@ class Scripts {
 
 		$jsVars = array(
 			'baseUrl'	=> $url,
+			'ajax'		=> admin_url('admin-ajax.php'),
 			'scripts' 	=> $scripts,
 			'load'		=> $autoload
 		);
