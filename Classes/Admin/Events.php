@@ -49,7 +49,7 @@
 				
 				global $pagenow;
 
-				if( $pagenow == 'post.php' || $pagenow == 'post-new.php' || $pagenow == 'page.php' || $pagenow == 'page-new.php' ){
+				if( $pagenow == 'page.php' || $pagenow == 'page-new.php' ){
 					wp_enqueue_media();
 				}
 

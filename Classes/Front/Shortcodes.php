@@ -101,5 +101,5 @@ class Shortcodes {
 
 }
 
-if( !is_admin() )
+if( !is_admin() || ( is_admin() && defined( 'DOING_AJAX' ) ) )
 	\Cuisine\Front\Shortcodes::getInstance();

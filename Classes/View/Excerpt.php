@@ -53,12 +53,18 @@ class Excerpt {
 	 * @param  string  $string
 	 * @return string/bool
 	 */
-	public static function beforeMore( $content ){
+	public static function beforeMore( $content, $format = true ){
 	                
-		$string = explode( 'id="more-', $content );
+		$string = explode( '<!--more-->', $content );
 
-		if( count( $string ) > 1 )
-			return $string[0];
+		if( count( $string ) > 1 ){
+			$string = $string[0];
+
+			if( $format )
+				$string = apply_filters( 'the_content', $string );
+
+			return $string;
+		}
 
 		
 		return false;
@@ -71,11 +77,18 @@ class Excerpt {
 	 * @param  string  $string
 	 * @return string/bool
 	 */
-	public static function afterMore( $content ){
+	public static function afterMore( $content, $format = true ){
 
 		$string = explode( '<!--more-->', $content );
-		if( count( $string ) > 1 )
+
+		if( count( $string ) > 1 ){
 	    	return $string[1];
+
+	    	if( $format )
+	    		$string = apply_filters( 'the_content', $string );
+
+	    	return $string;
+	    }
 
 	    return false;
 
