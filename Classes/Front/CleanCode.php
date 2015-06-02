@@ -176,10 +176,10 @@ class CleanCode {
 
 		// Remove unnecessary classes
 		$home_id_class = 'page-id-' . get_option('page_on_front');
-		$remove_classes = [
+		$remove_classes = array(
 		    'page-template-default',
 		    $home_id_class
-		];
+		);
 		
 		$classes = array_diff($classes, $remove_classes);
 
