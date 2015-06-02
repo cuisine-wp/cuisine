@@ -57,7 +57,7 @@
 
 			add_action( 'admin_menu', function(){
 
-				$url = Url::plugin( 'cuisine', true ).'assets';
+				$url = Url::plugin( 'cuisine', true ).'Assets';
 				wp_enqueue_script( 
 					'cuisine_media', 
 					$url.'/js/Media.js', 

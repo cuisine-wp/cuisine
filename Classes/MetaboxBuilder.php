@@ -93,13 +93,25 @@ class MetaboxBuilder {
 	 * @param array $fields A list of fields to display.
 	 * @return \Cuisine\Metabox\MetaboxBuilder
 	 */
-	public function set(array $fields = array()){
+	public function set( $contents = array() ){
 
-	    // Check if sections are defined.
-	    $this->sections = $this->getSections( $fields );
+		//if it's an array, contents contains fields
+	    if( is_array( $contents ) ){
 
-	    $this->data['fields'] = $fields;
+	    	// Check if sections are defined.
+	    	$this->sections = $this->getSections( $contents );
 
+		    $this->data['fields'] = $contents;
+		    $this->data['render'] = array( &$this, 'render' );
+		
+		//else it contains a view:
+		}else{
+		
+			$this->data['fields'] = array();
+			$this->data['render'] = $contents;
+
+		}
+	   	
 	   	add_action( 'add_meta_boxes', array( &$this, 'display' ) );
 
 	    return $this;
@@ -131,7 +143,7 @@ class MetaboxBuilder {
 	    $id = md5( $this->data['title']);
 
 	    // Fields are passed to the metabox $args parameter.
-	    add_meta_box( $id, $this->data['title'], array($this, 'render'), $this->data['postType'], $this->data['options']['context'], $this->data['options']['priority'], $this->data['fields'] );
+	    add_meta_box( $id, $this->data['title'], $this->data['render'], $this->data['postType'], $this->data['options']['context'], $this->data['options']['priority'], $this->data['fields'] );
 	}
 
 
