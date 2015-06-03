@@ -14,9 +14,9 @@
     
     
         /**
-         * Init the Assets Class
+         * Init this Class
          *
-         * @return \Cuisine\Admin\Assets
+         * @return \Cuisine\Wrappers\StaticInstance
          */
         public static function getInstance(){
     

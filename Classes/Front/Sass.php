@@ -40,7 +40,6 @@ class Sass {
 		//this gets autoloaded and cached, so we don't query it constantly
 		$this->registered = get_option( 'registered_sass_files', array() );
 
-		//cuisine_dump( $this->registered );
 	}
 
 	/**
@@ -56,7 +55,7 @@ class Sass {
 		if( !isset( $this->registered[ $script ] ) || $force ){
 
 			$this->script = $script;
-			$this->path = $rel_path;
+			$this->path = $this->sanitizePath( $rel_path );
 
 			if( $this->copy() ){
 
@@ -64,6 +63,11 @@ class Sass {
 				update_option( 'registered_sass_files', $this->registered, true );
 
 				return true;
+
+			}else{
+
+				//something went wrong...
+				return false;
 
 			}
 	
@@ -84,16 +88,16 @@ class Sass {
 
 		$fullPath = Url::path( 'plugin', $this->path );
 
+		//get the file
 		$file = file_get_contents( $fullPath );
 
+		//if the file is found:
 		if( $file ){
 
 			//move to the default sass folder
 			$folder = apply_filters( 'cuisine_sass_folder', 'css/sass/plugins/' );
 			$newPath = Url::path( 'theme', $folder, $this->script );
 			$newPath .= '_'.$this->script.'.scss';
-
-			//cuisine_dump( $newPath )
 
 			return file_put_contents( $newPath, $file );
 
@@ -114,6 +118,21 @@ class Sass {
 
 	}
 
+
+	/**
+	 * Make the path of a sass file load-ready.
+	 * 
+	 * @param  string $path
+	 * @return string
+	 */
+	private function sanitizePath( $path ){
+
+		//add .scss extension if it's not there
+		if( substr( $path, -5 ) !== '.scss' )
+			$path .= '.scss';
+
+		return $path;
+	}
 }
 
 

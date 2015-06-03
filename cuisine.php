@@ -160,7 +160,7 @@ if (!class_exists('Cuisine')) {
                 'Classes/Utilities',
                 'Classes/Admin',
                 'Classes/Front',
-                'Classes/Builder',
+                'Classes/Builders',
                 'Classes/Fields',
         		'Classes/View'
 			);
@@ -183,6 +183,8 @@ if (!class_exists('Cuisine')) {
 
             // Set the framework paths and starts the framework.
             add_action('after_setup_theme', array($this, 'bootstrap'));
+           
+            //cuisine is fully loaded
             do_action( 'cuisine_loaded' );
 
             \add_action( 'admin_init', array( $this, 'admin_assets' ) );
@@ -228,6 +230,8 @@ if (!class_exists('Cuisine')) {
                
                }
             }
+
+            do_action( 'cuisine_bootstrapped' );
         }
 
 
@@ -243,7 +247,6 @@ if (!class_exists('Cuisine')) {
         public static function getDirName(){
             return static::$dirName;
         }
-
     }
 }
 

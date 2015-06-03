@@ -124,4 +124,18 @@ class PostType {
         return $defaults;
     }
 
+
+    /**
+     * Return the default template name for this post-type
+     * 
+     * @param  string $post_type
+     * @return string Plural version of this Post Type, sanitized for file-usage.
+     */
+    public function template( $post_type ){
+
+    	$post_type = get_post_type_object( $post_type );
+    	$name = sanitize_title( $post_type->labels->name ); 
+
+    	return $name;
+    }
 }
