@@ -141,6 +141,7 @@ class Image {
 
 	/**
 	 * Get the classes for an image, based on supported screens and 
+	 * 
 	 * @param  Array $supports
 	 * @param  Array  $args 
 	 * @return String classes
@@ -179,6 +180,7 @@ class Image {
 
 	/**
 	 * Returns the default url for the src attribute
+	 * 
 	 * @return String
 	 */
 	private static function getDefaultSrc(){
@@ -192,6 +194,7 @@ class Image {
 
 	/**
 	 * Get the extension of an image
+	 * 
 	 * @param  String $url
 	 * @return String $extension
 	 */
@@ -214,6 +217,7 @@ class Image {
 
 	/**
 	 * Fill in the gaps, arguments wise
+	 * 
 	 * @return Array
 	 */
 	public static function parseArgs( $args ){
@@ -233,10 +237,42 @@ class Image {
 
 	/**
 	 * Return the default image-support array
+	 * 
 	 * @return Array
 	 */
 	private static function getSupported(){
+
 		return array( 'desktop', 'tablet', 'mobile' );
+	
+	}
+
+	/*=============================================================*/
+	/**             SIZE FUNCTIONS                                 */
+	/*=============================================================*/
+
+
+	/**
+	 * Add an image size
+	 * 
+	 * @param string   $name   
+	 * @param integer  $width  
+	 * @param integer  $height 
+	 * @param boolean  $crop   (optional)
+	 */
+	public static function addSize( $name, $width, $height, $crop = true ){
+
+		add_image_size( $name, $width, $height, $crop );
+
+	}
+
+		
+	/**
+	 * Add thumbnail support
+	 *
+	 * @return void
+	 */
+	public static function addSupport(){
+		add_theme_support( 'post-thumbnails' );
 	}
 
 }
