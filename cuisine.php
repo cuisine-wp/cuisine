@@ -156,13 +156,13 @@ if (!class_exists('Cuisine')) {
 
 			//auto-loads all .php files in these directories.
         	$includes = array( 
-        		'Classes',
+                'Classes/Wrappers',
                 'Classes/Utilities',
                 'Classes/Admin',
                 'Classes/Front',
+                'Classes/Builder',
                 'Classes/Fields',
-        		'Classes/View',
-                'Classes/Wrappers'
+        		'Classes/View'
 			);
 
         	$includes = apply_filters( 'cuisine_autoload_dirs', $includes );

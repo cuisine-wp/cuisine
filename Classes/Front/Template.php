@@ -134,10 +134,12 @@ class Template {
 
 				//default: templates/page-{postname}.php
 				//second: templates/page.php
+				//third: templates/detail.php
 
 				$templates = array(
 								$this->folder.$post_type.'-'.$post->post_name.'.php',
-								$this->folder.$post_type.'.php'
+								$this->folder.$post_type.'.php',
+								$this->folder.'detail.php'
 				);
 
 			}else{
@@ -146,8 +148,9 @@ class Template {
 				$post_type = get_post_type_object( $post_type );
 				$name = sanitize_title( $post_type->labels->name ); 
 
-				//default: templates/portfolio-{postname}.php
-				//second: templates/portfolio.php
+				//default: templates/portfolio.php
+				//second: templates/overview.php
+
 				$templates = array(
 								$this->folder.$name.'.php',
 								$this->folder.'overview.php'

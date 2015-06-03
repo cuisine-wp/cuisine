@@ -38,8 +38,9 @@ class Sass {
 
 		//all registered scripts are stored a wp option,
 		//this gets autoloaded and cached, so we don't query it constantly
-		$this->registered = get_option( 'registered_sass', array() );
+		$this->registered = get_option( 'registered_sass_files', array() );
 
+		//cuisine_dump( $this->registered );
 	}
 
 	/**
@@ -59,7 +60,7 @@ class Sass {
 
 			if( $this->copy() ){
 
-				$this->registered[] = $script;
+				$this->registered[ $script ] = $script;
 				update_option( 'registered_sass_files', $this->registered, true );
 
 				return true;

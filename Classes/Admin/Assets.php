@@ -2,47 +2,27 @@
 
 	namespace Cuisine\Admin;
 
+	use \Cuisine\Wrappers\StaticInstance;
 	use \Cuisine\Utilities\Url;
 
-	class Events{
 
-		/**
-		 * Sections bootstrap instance.
-		 *
-		 * @var \Cuisine
-		 */
-		private static $instance = null;
-
+	class Assets extends StaticInstance{
 
 		/**
 		 * Init admin events & vars
 		 */
 		function __construct(){
 
-			$this->adminEnqueues();
+			$this->enqueues();
 
 		}
-
-		/**gatherSections
-		 * Init the framework classes
-		 *
-		 * @return \Cuisine
-		 */
-		public static function getInstance(){
-
-		    if ( is_null( static::$instance ) ){
-		        static::$instance = new static();
-		    }
-		    return static::$instance;
-		}
-
 
 		/**
 		 * Enqueue scripts & Styles
 		 * 
 		 * @return void
 		 */
-		private function adminEnqueues(){
+		private function enqueues(){
 
 				
 			add_action( 'admin_init', function(){
@@ -71,12 +51,9 @@
 				);
 				
 			});
-
 		}
-
-
-
 	}
 
+
 	if( is_admin() )
-		\Cuisine\Admin\Events::getInstance();
+		\Cuisine\Admin\Assets::getInstance();
