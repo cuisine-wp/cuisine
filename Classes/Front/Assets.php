@@ -4,7 +4,7 @@
 
 	use Cuisine\Wrappers\StaticInstance;
 	use Cuisine\Utilities\Url;
-	use Cuisine\Wrappers\Scripts;
+	use Cuisine\Wrappers\Script;
 
 
 	class Assets extends StaticInstance{
@@ -31,7 +31,7 @@
 
 				//scripts:
 				$url = Url::plugin( 'cuisine', true ).'Assets/js/';
-				Scripts::register( 'social-share', $url.'Share', false );
+				Script::register( 'social-share', $url.'Share', false );
 				
 			});
 		}

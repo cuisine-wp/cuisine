@@ -70,7 +70,7 @@ abstract class Wrapper {
             'user'              => 'Cuisine\Utilities\User',
             'validation'        => 'Cuisine\Utilities\Validator',
             'route'             => 'Cuisine\Front\Route',
-            'scripts'           => 'Cuisine\Front\Scripts',
+            'script'            => 'Cuisine\Front\Scripts',
             'sass'              => 'Cuisine\Front\Sass'
         );
 

@@ -2,17 +2,17 @@
 
 namespace Cuisine\Wrappers;
 
-class Scripts extends Wrapper {
+class Script extends Wrapper {
 
     /**
-     * Return the igniter service key responsible for the Scripts class.
+     * Return the igniter service key responsible for the Script class.
      * The key must be the same as the one used in the assigned
      * igniter service.
      *
      * @return string
      */
     protected static function getFacadeAccessor(){
-        return 'scripts';
+        return 'script';
     }
 
 }
