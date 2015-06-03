@@ -84,6 +84,102 @@ if (!class_exists('Cuisine')) {
             $this->load();
         }
 
+
+        /**
+         * Load the framework classes.
+         *
+         * @return void
+         */
+        private function load(){
+
+            //auto-loads all .php files in these directories.
+            $includes = array( 
+                'Classes/Wrappers',
+                'Classes/Utilities',
+                'Classes/Admin',
+                'Classes/Front',
+                'Classes/Builders',
+                'Classes/Fields',
+                'Classes/View'
+            );
+
+            $includes = apply_filters( 'cuisine_autoload_dirs', $includes );
+
+            foreach( $includes as $inc ){
+                
+                $root = static::getPluginPath();
+                $files = glob( $root.$inc.'/*.php' );
+
+                foreach ( $files as $file ){
+
+                    require_once( $file );
+
+                }
+            }
+
+
+
+            // Set the framework paths and starts the framework.
+            add_action('after_setup_theme', array($this, 'bootstrap'));
+           
+            //cuisine is fully loaded
+            do_action( 'cuisine_loaded' );
+
+            \add_action( 'admin_init', array( $this, 'admin_assets' ) );
+        }
+
+
+        /**
+        * Set the admin css-files.
+        * 
+        * @return void
+        */
+        public function admin_assets(){
+        
+           wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
+
+        }
+
+
+        /**
+         * Define paths and bootstrap the framework.
+         *
+         * @return void
+         */
+        public function bootstrap(){
+            /**
+             * Define all framework paths
+             * These are real paths, not URLs to the framework files.
+             * These paths are extensible with the help of WordPress
+             * filters.
+             */
+            // Framework paths.
+            $paths = apply_filters('cuisine_framework_paths', array());
+
+            // Plugin base path.
+            $paths['plugin'] = static::getPluginPath();
+
+            // Register globally the paths
+            foreach ($paths as $name => $path){
+
+               if ( !isset( $GLOBALS['cuisine_paths'][$name] ) ){
+
+                   $GLOBALS['cuisine_paths'][$name] = realpath($path).DS;
+               
+               }
+            }
+
+            do_action( 'cuisine_bootstrapped' );
+        }
+
+
+
+
+        /*=============================================================*/
+        /**             Getters & Setters                              */
+        /*=============================================================*/
+
+
         /**
          * Init the framework classes
          *
@@ -132,106 +228,6 @@ if (!class_exists('Cuisine')) {
 
             // Install as a classic plugin.
             return 'plugins';
-        }
-
-        /**
-         * Display a notice in the administration.
-         *
-         * @return void
-         */
-        public function displayMessage() {
-        ?>
-            <div id="message" class="error">
-                <p></p>
-            </div>
-        <?php
-        }
-
-        /**
-         * Load the framework classes.
-         *
-         * @return void
-         */
-        private function load(){
-
-			//auto-loads all .php files in these directories.
-        	$includes = array( 
-                'Classes/Wrappers',
-                'Classes/Utilities',
-                'Classes/Admin',
-                'Classes/Front',
-                'Classes/Builders',
-                'Classes/Fields',
-        		'Classes/View'
-			);
-
-        	$includes = apply_filters( 'cuisine_autoload_dirs', $includes );
-
-			foreach( $includes as $inc ){
-				
-				$root = static::getPluginPath();
-				$files = glob( $root.$inc.'/*.php' );
-
-				foreach ( $files as $file ){
-
-					require_once( $file );
-
-        	    }
-        	}
-
-
-
-            // Set the framework paths and starts the framework.
-            add_action('after_setup_theme', array($this, 'bootstrap'));
-           
-            //cuisine is fully loaded
-            do_action( 'cuisine_loaded' );
-
-            \add_action( 'admin_init', array( $this, 'admin_assets' ) );
-        }
-
-
-        /**
-        * Set the admin css-files.
-        * 
-        * @return void
-        */
-        function admin_assets(){
-        
-           wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
-
-        }
-
-
-        /**
-         * Define paths and bootstrap the framework.
-         *
-         * @return void
-         */
-        public function bootstrap(){
-            /**
-             * Define all framework paths
-             * These are real paths, not URLs to the framework files.
-             * These paths are extensible with the help of WordPress
-             * filters.
-             */
-            // Framework paths.
-            $paths = apply_filters('cuisine_framework_paths', array());
-
-            // Plugin base path.
-            $paths['plugin'] = static::getPluginPath();
-
-            // Register globally the paths
-            foreach ($paths as $name => $path){
-
-               if ( !isset( $GLOBALS['cuisine_paths'][$name] ) ){
-
-                   $GLOBALS['cuisine_paths'][$name] = realpath($path).DS;
-               
-               }
-            }
-
-            do_action( 'cuisine_bootstrapped' );
         }
 
 
