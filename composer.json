@@ -14,7 +14,7 @@
       "name": "Remy Bakker",
       "email": "remy@chefduweb.nl",
       "homepage": "http://www.chefduweb.nl"
-    },
+    }
   ],
   "type": "wordpress-plugin",
   "require": {
