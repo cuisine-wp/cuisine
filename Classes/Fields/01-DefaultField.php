@@ -164,6 +164,19 @@ class DefaultField{
 
 
     /**
+     * Allow it that this field's name will be changed retroactively
+     * 
+     * @param string $name
+     * @return void
+     */
+    public function setName( $name ){
+
+        $this->name = $name;
+
+    }
+
+
+    /**
      * Get Label
      * 
      * @return String

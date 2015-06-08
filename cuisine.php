@@ -7,6 +7,8 @@
  * Author: Luc Princen
  * Author URI: http://www.chefduweb.nl/
  * License: GPLv2
+ * Bitbucket Plugin URI: https://bitbucket.org/chefduweb/new-cuisine
+ * Bitbucket Branch:     master
  * 
  * @package Cuisine
  * @category Core

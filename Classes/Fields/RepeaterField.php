@@ -4,7 +4,12 @@ namespace Cuisine\Fields;
 
 class RepeaterField extends DefaultField{
 
-
+    /**
+     * Array that holds all fields
+     * 
+     * @var array
+     */
+    var $fields = array();
 
     /**
      * Method to override to define the input type
@@ -23,6 +28,17 @@ class RepeaterField extends DefaultField{
      */
     public function render(){
 
+        $this->fields = $this->properties['fields'];
+        $prefix = $this->name.'[0]';
+
+        foreach( $this->fields as $field ){
+
+            $newName = $prefix.'['.$field->name.']';
+            $field->setName( $newName );
+
+            $field->render();
+
+        }
       
     }
 

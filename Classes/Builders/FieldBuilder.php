@@ -199,7 +199,7 @@ class FieldBuilder {
      * @param string $name The name attribute of the infinite inner inputs.
      * @param array $fields The fields to repeat.
      * @param array $extras
-     * @return \Cuisine\Fields\InfiniteField
+     * @return \Cuisine\Fields\RepeaterField
      */
     public function repeater($name, $label = '', array $fields, array $properties = array()){
 
@@ -207,7 +207,7 @@ class FieldBuilder {
 
         $properties = array_merge( $extras, $properties );
 
-        return $this->make( 'Cuisine\\Fields\\InfiniteField', $name, $label, $properties );
+        return $this->make( 'Cuisine\\Fields\\RepeaterField', $name, $label, $properties );
     }
 
 
