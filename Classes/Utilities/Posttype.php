@@ -138,4 +138,26 @@ class PostType {
 
     	return $name;
     }
+
+
+    /**
+     * Get the public post types
+     * 
+     * @return array
+     */
+    public static function get(){
+
+    	$post_types = get_post_types();
+
+    	$array = array();
+    	$hidden = array( 'revision', 'nav_menu_item' );
+    	foreach( $post_types as $pt ){
+    		if( !in_array( $pt, $hidden ) )
+    			$array[] = $pt;
+    	}
+
+    	return $array;
+
+    }
+
 }

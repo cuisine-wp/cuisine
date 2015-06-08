@@ -212,7 +212,7 @@ class MetaboxBuilder {
 	        
 	        foreach ($this->data['fields'] as $fs){
 
-	            $fields = $fs;
+	            $fields = apply_filters( 'cuisine_before_field_save', $fs );
 	        
 	        }
 
@@ -246,11 +246,10 @@ class MetaboxBuilder {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function register( $postId, array $fields ) {
+	private function register( $postId, $fields ) {
 	    
-	    foreach($fields as $field){
+	    foreach( $fields as $field ){
 
-	       
 	       	$value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
 			update_post_meta( $postId, $field->name, $value );
 	    
