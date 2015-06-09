@@ -99,7 +99,8 @@ class Sass {
 			$newPath = Url::path( 'theme', $folder, $this->script );
 			$newPath .= '_'.$this->script.'.scss';
 
-			return file_put_contents( $newPath, $file );
+			if( is_writable( $newPath ) )
+				return file_put_contents( $newPath, $file );
 
 		}
 		
