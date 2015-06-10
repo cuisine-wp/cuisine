@@ -51,6 +51,7 @@ class Sass {
 	 */
 	public function register( $script, $rel_path, $force = false ){
 
+
 		//check to see if it exists:
 		if( !isset( $this->registered[ $script ] ) || $force ){
 
@@ -89,7 +90,7 @@ class Sass {
 		$fullPath = Url::path( 'plugin', $this->path );
 
 		//get the file
-		$file = file_get_contents( $fullPath );
+		$file = @file_get_contents( $fullPath );
 
 		//if the file is found:
 		if( $file ){
@@ -99,9 +100,7 @@ class Sass {
 			$newPath = Url::path( 'theme', $folder, $this->script );
 			$newPath .= '_'.$this->script.'.scss';
 
-			if( is_writable( $newPath ) )
-				return file_put_contents( $newPath, $file );
-
+			return @file_put_contents( $newPath, $file );
 		}
 		
 		return false;

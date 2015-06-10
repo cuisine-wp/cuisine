@@ -73,6 +73,20 @@ class FieldBuilder {
 
     }
 
+
+    /**
+     * Return a EmailField instance.
+     *
+     * @param string $name The name attribute of the number input.
+     * @param array $extras Extra field properties.
+     * @return \Cuisine\Fields\EmailField
+     */
+    public function email($name, $label = '', array $properties = array()){
+
+        return $this->make( 'Cuisine\\Fields\\EmailField', $name, $label, $properties );
+
+    }
+
     /**
      * Return a DateField instance.
      *

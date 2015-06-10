@@ -49,6 +49,12 @@
 					$url.'/js/MediaField.js',
 					array( 'backbone', 'media-editor' )
 				);
+
+				wp_enqueue_script( 
+					'cuisine_repeater_field', 
+					$url.'/js/RepeaterField.js',
+					array( 'backbone' )
+				);
 				
 			});
 		}

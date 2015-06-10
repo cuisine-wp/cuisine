@@ -25,6 +25,99 @@
 	font-size:16px;
 }
 
+.field-wrapper.checkbox label{
+	width:auto !important;
+	display:inline-block;
+}
+
+.field-wrapper .input-field.type-checkbox{
+	width:16px;
+	padding:0;
+	display:inline-block;
+}
+
+.repeater-field{
+	background:#fff;
+	padding:15px;
+	border:1px solid #ccc;
+	box-shadow:0 1px 1px rgba(0,0,0,0.04);
+	background:#fff;
+	border-radius:3px;
+	margin-bottom:15px;
+}
+
+.repeater-field .repeatable{
+	box-sizing:border-box;
+	background:#f9f9f9;
+	box-shadow:inset 0 0 10px rgba(0,0,0,.2);
+	border-radius:3px;
+	border:1px solid #ccc;
+	padding:15px;
+	position:relative;
+	margin-bottom:15px;
+}
+
+.repeater-field .repeatable .field-wrapper{
+	width:47.5%;
+	float:left;
+}
+
+.repeater-field .repeatable .field-wrapper:nth-child( odd ){
+	margin-right:5%;
+}
+
+.repeater-field .repeatable .field-wrapper.editor{
+	width:100%;
+	clear:both;
+	margin-right:0;
+}
+
+.repeater-field .repeat-controls{
+	width:82px;
+	position:absolute;
+	left:50%;
+	margin-left:-41px;
+	bottom:-35px;
+	background:#fff;
+	border:1px solid #ccc;
+	border-radius:50px;
+	padding:10px;
+	box-shadow:0 0 10px rgba(0,0,0,.06);
+	z-index:999;
+}
+
+.repeater-field .repeat-controls .btn{
+	box-sizing:border-box;
+	width:36px;
+	height:36px;
+	border-radius:18px;
+	background:#00a1d5;
+	border:1px solid #0071ad;
+	color:#fff;
+	text-align:center;
+	padding-top:7px;
+	display:inline-block;
+	cursor:pointer;
+}
+
+.repeater-field .repeat-controls .btn.plus{
+	margin-right:10px;
+}
+
+.repeater-field .repeat-controls .btn:hover{
+	background:#0091cd;
+	border-color:#0071ad;
+}
+
+.repeater-field .repeat-controls .btn span{
+	font-size:22px;
+	padding-left:0;
+	margin-left:0;
+	display:inline;
+	pointer-events:none;
+}
+
+
 
 .media-grid{
 	box-sizing:border-box;
