@@ -13,6 +13,8 @@ class NumberField extends DefaultField{
      */
     protected function fieldType(){
         $this->type = 'number';
+        $this->addValidation( 'number' );
+
     }
 
    

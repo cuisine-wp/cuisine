@@ -118,19 +118,21 @@ class ChoiceField extends DefaultField{
 	    $choices = array();
 
 	    //check to see if it's an associative array
-	    $isIndexed = ( array_values( $inputs ) === $inputs );
-
-	    foreach( $inputs as $key => $input ){
-
-	        $choice = array();
-
-	        $choice['id'] = $i;
-	        $choice['key'] = ( $isIndexed ? $input : $key );
-	        $choice['label'] = $input;
-	      
-	        $choices[] = $choice;
-
-	        $i++;
+	    if( is_array( $inputs ) ){
+	    	$isIndexed = ( array_values( $inputs ) === $inputs );
+	
+	    	foreach( $inputs as $key => $input ){
+	
+	    	    $choice = array();
+	
+	    	    $choice['id'] = $i;
+	    	    $choice['key'] = ( $isIndexed ? $input : $key );
+	    	    $choice['label'] = $input;
+	    	  
+	    	    $choices[] = $choice;
+	
+	    	    $i++;
+	    	}
 	    }
 
 	    return $choices;

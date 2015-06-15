@@ -101,6 +101,18 @@
 		}
 
 
+		/**
+		 * Return a loader template
+		 * 
+		 * @return php field
+		 */
+		public static function loader(){
+
+			return static::part( 'elements/loader' );
+
+		}
+
+
 		/*=============================================================*/
 		/**             Header & Footer functions                      */
 		/*=============================================================*/

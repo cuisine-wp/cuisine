@@ -146,8 +146,11 @@ class DefaultField{
         if( !isset( $this->properties['placeholder'] ) )
             $this->properties['placeholder'] = false;
 
+        if( !isset( $this->properties['required'] ) )
+            $this->properties['required'] = false;
+
         if( !isset( $this->properties['validation'] ) )
-            $this->properties['validation'] = false;
+            $this->properties['validation'] = array();
 
         if( !isset( $this->properties['options'] ) )
             $this->properties['options'] = false;
@@ -253,14 +256,34 @@ class DefaultField{
 
 
     /**
+     * Add a validation requirement:
+     * 
+     * @param string $name
+     * @return void
+     */
+    public function addValidation( $name ){
+
+        if( !isset( $this->properties[ 'validation' ] ) || !is_array( $this->properties[ 'validation' ]  ) )
+            $this->properties['validation'] = array();
+
+        if( !in_array( $name, $this->properties[ 'validation' ] ) )
+            $this->properties['validation'][] = $name;
+
+    }
+
+
+    /**
      * Get the validation data-attribute
      * 
      * @return String
      */
     public function getValidation(){
 
-        if( $this->properties['validation'] )
-            return ' data-validate="'.implode( ',', $this->properties['validation'] );
+        if( $this->properties['required'] )
+            $this->addValidation( 'required' );
+
+        if( !empty( $this->properties['validation'] ) )
+            return ' data-validate="'.implode( ',', $this->properties['validation'] ).'"';
 
     }
 

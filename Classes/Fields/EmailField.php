@@ -13,6 +13,8 @@ class EmailField extends DefaultField{
      */
     protected function fieldType(){
         $this->type = 'email';
+        $this->addValidation( 'email' );
+    
     }
 
 
