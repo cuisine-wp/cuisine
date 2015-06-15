@@ -49,6 +49,8 @@ class Shortcodes {
 		add_shortcode( 'break', array( &$this, 'makeBreak' ) );
 		add_shortcode( 'line', array( &$this, 'makeLine' ) );
 
+		add_shortcode( 'button', array( &$this, 'makeButton' ) );
+		add_shortcode( 'link', array( &$this, 'makeLink' ) );
 	}
 
 
@@ -97,6 +99,71 @@ class Shortcodes {
 		return '<hr class="break line">';
 
 	}
+
+
+	/**
+	 * Link shortcode 
+	 * 
+	 * @param  array $atts    [description]
+	 * @param  string $content [description]
+	 * @return [type]          [description]
+	 */
+	public function makeLink( $atts, $content = null ){
+
+
+		$html = '<a href="'.$atts['link'].'"';
+
+			if( isset( $atts['target'] ) )
+				$html .= ' target="'.$atts['target'].'"';
+
+			if( isset( $atts['event'] ) )
+				$html .= ' onclick="_gaq.push([\'_trackEvent\', \'Clicks\', \''.$atts['event'].'\']);"';
+
+			$html .= '">';
+
+				$html .= do_shortcode( $content );
+
+		$html .= '</a>';
+
+		return $html;
+	}
+
+
+	/**
+	 * Button shortcode 
+	 * 
+	 * @param  array $atts    [description]
+	 * @param  string $content [description]
+	 * @return [type]          [description]
+	 */
+	public function makeButton( $atts, $content = null ){
+
+
+		$html = '<a href="'.$atts['link'].'"';
+
+			if( isset( $atts['target'] ) )
+				$html .= ' target="'.$atts['target'].'"';
+
+			if( isset( $atts['event'] ) )
+				$html .= ' onclick="_gaq.push([\'_trackEvent\', \'Clicks\', \''.$atts['event'].'\']);"';
+
+
+			$html .= ' class="button';
+
+			$html .= '">';
+
+			if( isset( $atts['icon'] ) )
+				$html .= '<span class="icon fa fa-'.$atts['icon'].'"></span>';
+
+				$html .= do_shortcode( $content );
+
+		$html .= '</a>';
+
+		return $html;
+	}
+
+
+
 
 
 }
