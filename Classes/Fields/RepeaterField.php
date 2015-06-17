@@ -71,13 +71,12 @@ class RepeaterField extends DefaultField{
      */
     public function makeItem( $value, $i ){
 
-        $prefix = $this->name;
         
         echo '<div class="repeatable">';
         
             foreach( $this->fields as $field ){
         
-                $prefix .= '['.$i.']';
+                $prefix = $this->name.'['.$i.']';
                 $name = $prefix.'['.$field->name.']';
                 $val = ( isset( $value[$field->name] ) ? $value[$field->name] : false );
                 $field->properties['defaultValue'] = $val;

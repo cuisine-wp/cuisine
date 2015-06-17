@@ -146,9 +146,12 @@
 		 * @param  string $field Field name
 		 * @return mixed, returns false if not available.
 		 */
-		public static function field( $field ){
+		public static function field( $field, $id = false ){
 
-			$meta = get_post_meta( static::id(), $field );
+			if( !$id )
+				$id = static::id();
+
+			$meta = get_post_meta( $id, $field );
 
 			if( $meta ){
 

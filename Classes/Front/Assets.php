@@ -32,7 +32,8 @@
 				//scripts:
 				$url = Url::plugin( 'cuisine', true ).'Assets/js/';
 				Script::register( 'social-share', $url.'Share', false );
-				
+				Script::register( 'cuisine-validate', $url.'Validate', false );	
+
 			});
 		}
 
