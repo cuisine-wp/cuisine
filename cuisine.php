@@ -119,20 +119,12 @@ if (!class_exists('Cuisine')) {
             //cuisine is fully loaded
             do_action( 'cuisine_loaded' );
 
-            \add_action( 'admin_init', array( $this, 'admin_assets' ) );
+            //include the css
+            add_action( 'admin_init', function(){
+                wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
+            });
         }
 
-
-        /**
-        * Set the admin css-files.
-        * 
-        * @return void
-        */
-        public function admin_assets(){
-        
-           wp_enqueue_style( 'cuisine', plugins_url( 'Assets/css/admin.css', __FILE__ ) );
-
-        }
 
 
         /**
