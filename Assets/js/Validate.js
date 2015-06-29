@@ -6,15 +6,8 @@
  * @since Cuisine 1.4
  */
 
+
     var Validate = {
-
-
-    	fields: function( fields ){
-
-    		
-
-
-    	},
 
 
     	empty: function( _string ){
