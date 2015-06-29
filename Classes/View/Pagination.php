@@ -34,12 +34,12 @@
 			
 			}
 
+
 			$this->query = $_query;
 
-
-			$this->amount $query->query_vars['posts_per_page'];
-			$this->max = $query->found_posts;
-			$this->current = $query->query_vars['paged'];
+			$this->amount = $_query->query_vars['posts_per_page'];
+			$this->max = $_query->found_posts;
+			$this->current = $_query->query_vars['paged'];
 
 			if( $this->current == 0 )
 				$this->current = 1;
@@ -87,8 +87,7 @@
 
 						}
 
-					$html .= '</li>';
-
+					}
 
 				$html .= '</nav>';
 
