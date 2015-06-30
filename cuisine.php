@@ -6,7 +6,7 @@
  * Version: 1.4.2
  * Author: Luc Princen
  * Author URI: http://www.chefduweb.nl/
- * License: GPLv2
+ * License: GPLv3
  * Bitbucket Plugin URI: https://bitbucket.org/chefduweb/new-cuisine
  * Bitbucket Branch:     master
  * 
