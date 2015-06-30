@@ -16,12 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-	NOTICE OF LICENSE
-	This source file is subject to the Jigoshop Commercial Edition License that is available at: http://jigoshop.com/license/commercial-edition If you did not receive a copy of the license and are unable to obtain it through the world-wide-web, please send an email to info@jigoshop.com so we can send you a copy immediately.
-
-	DISCLAIMER
-	Do not edit or add directly to this file if you wish to upgrade Jigoshop to newer versions in the future. If you wish to customise Jigoshop core for your needs, please use our GitHub repository to publish essential changes for consideration.
-
 
   Cuisine is released under the GPL
 
