@@ -55,7 +55,8 @@ class DefaultField{
      */
     public function __construct( $name, $label = '', $props = array() ){
 
-        $this->id = md5( $name );
+        $this->id = $this->createId( $name, $label, $props );
+
         $this->name = $name;
         $this->label = $label;
         $this->properties = $props;
@@ -330,6 +331,27 @@ class DefaultField{
                 return 'data-selected="true"';
                 break; 
         }
+
+    }
+
+
+    /**
+     * Create a unique ID for this field:
+     * 
+     * @param  string $name  
+     * @param  string $label 
+     * @param  Array $array 
+     * @return
+     */
+    private function createId( $name, $label, $array ){
+
+        unset( $array['value'] );
+        unset( $array['defaultValue'] );
+        unset( $array['placeholder'] );
+
+
+        $string = $name . $label . serialize( $array );
+        return md5( $string );
 
     }
 
