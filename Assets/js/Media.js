@@ -31,7 +31,7 @@
             
 
             //if the file modal already exists:
-            if( file_frame ){
+         /*   if( file_frame ){
                 
                 //just re-open it... don't init it:
                 file_frame.open();
@@ -47,14 +47,14 @@
                 return;
             
             }else{
-
+*/
                 //the file modal doesn't exist yet, first set the corret post_id if set in the options:
                 if( options.post_id !== null ){
                     wp.media.model.settings.post.id = options.post_id;
                 }
-            }
+  //          }
 
-            console.log( options.multiple );
+            console.log( wp.media.model );
 
   
             // Create the media frame.
@@ -97,6 +97,8 @@
                     wp.media.model.settings.post.id = wp_media_post_id;
 
                 }
+
+                file_frame.close();
 
                 //do the callback with the attachments:
                 callback( attachments, options );
