@@ -5,7 +5,6 @@ namespace Cuisine\Fields;
 class EditorField extends DefaultField{
 
 
-
     /**
      * Method to override to define the input type
      * that handles the value.
@@ -30,6 +29,7 @@ class EditorField extends DefaultField{
 
         ob_start();
             
+        echo '<div class="editor-wrapper" data-id="'.$this->id.'" data-name="'.$this->name.'">';
             wp_editor( 
                         $val,
                         $this->id,
@@ -39,6 +39,7 @@ class EditorField extends DefaultField{
 
                         )
             );
+        echo '</div>';
 
         return ob_get_clean();
 

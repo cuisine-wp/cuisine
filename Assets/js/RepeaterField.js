@@ -40,12 +40,16 @@
 
  			target.after( template );
 
+ 			refreshFields();
+
  		},
 
  		removeItem: function( e ){
 
  			var target = jQuery( e.target ).parent().parent();
  			target.remove();
+
+ 			refreshFields();
 
  		}
 	

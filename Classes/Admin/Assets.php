@@ -55,6 +55,12 @@
 					$url.'/js/RepeaterField.js',
 					array( 'backbone' )
 				);
+
+				wp_enqueue_script( 
+					'cuisine_field_control', 
+					$url.'/js/FieldControl.js',
+					array( 'backbone' )
+				);
 				
 			});
 		}

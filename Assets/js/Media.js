@@ -41,6 +41,9 @@
                     file_frame.uploader.uploader.param( 'post_id', options.post_id );
                 }
 
+                file_frame.uploader.uploader.param( 'multiple', options.multiple );
+
+
                 return;
             
             }else{
@@ -50,6 +53,8 @@
                     wp.media.model.settings.post.id = options.post_id;
                 }
             }
+
+            console.log( options.multiple );
 
   
             // Create the media frame.
