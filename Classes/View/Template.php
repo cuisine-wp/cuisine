@@ -154,6 +154,20 @@
 			return '<link rel="stylesheet" href="'.$url.'">';
 
 		}
+		
+		
+		/**
+		 * Return the fontawesome stylesheet
+		 *
+		 * @return string
+		 */
+		public static function fontawesome(){
+
+			$url = 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+			return '<link rel="stylesheet" href="'.$url.'">';
+
+		}
+		
 
 		/**
 		 * Return the logo with link
