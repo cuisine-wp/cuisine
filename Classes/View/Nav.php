@@ -59,20 +59,39 @@
 
 			if( has_nav_menu( $name ) ){
 
+				$class = ( $class ? $class.' ' : '' ) . $name;
+
 				$args = array( 
 					'theme_location' => $name,
 					'items_wrap' => '<nav id="%1$s" class="%2$s"><ul>%3$s</ul></nav>',
-					'depth' => $depth
+					'depth' => $depth,
+					'menu_class' => $class
 				);
-
-				if( $class )
-					$args['menu_class'] = $class;
 
 				wp_nav_menu( $args );	
 			}
 
 		}
-							
+			
+
+		/**
+		 * Displays a default menu-toggle button
+		 * 
+		 * @return String (html)
+		 */
+		public static function mobileToggle( $echo = true ){
+
+			$toggle = apply_filters( 
+				'cuisine_menu_toggle', 
+				'<div class="menu-switch"><i class="fa fa-bars"></i></div>'
+			);
+
+			if( $echo )
+				echo $toggle;
+
+			return $toggle;
+
+		}				
 
 
 
