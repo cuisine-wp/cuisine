@@ -48,5 +48,20 @@
     		var reg = /^[1-9][0-9]{3} ?[a-z]{2}$/i;
     		return reg.test( _string );
 
-    	}
+    	},
+
+
+        json: function( _string ){
+
+            try {
+                JSON.parse( _string );
+
+            } catch (e) {
+                return false;
+            
+            }
+            
+            return true;
+
+        }
     };
