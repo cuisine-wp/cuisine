@@ -178,6 +178,21 @@
 			return false;
 		}
 
+		/**
+		 * Return a single section
+		 * 
+		 * @param  int $post_id 
+		 * @param  int $section_id 
+		 * @return mixed, returns false if not available
+		 */
+		public static function section( $post_id, $section_id ){
+
+			if( function_exists( 'get_section' ) )
+				return get_section( $post_id, $section_id );
+
+			return false;
+		}
+
 
 		/**
 		 * Get the categories of the current post.

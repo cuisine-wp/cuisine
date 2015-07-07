@@ -100,7 +100,7 @@ class Sort{
 	/**
 	 * Accepts an array, and returns an array of values from that array as
 	 * specified by $field. For example, if the array is full of objects
-	 * and you call util::array_pluck($array, 'name'), the function will
+	 * and you call Sort::array_pluck($array, 'name'), the function will
 	 * return an array of values from $array[]->name.
 	 *
 	 * @param  array   $array            An array
