@@ -146,11 +146,15 @@
 
  					var attachment = attachments[ i ];
 
+ 					var _preview = attachment.sizes.full.url
+
+ 					if( attachment.sizes.thumbnail !== undefined )
+ 						_preview = attachment.sizes.thumbnail.url;
 
  					var htmlTemplate = _.template( jQuery( '#media_item_template').html() );
  					var output = htmlTemplate({
  						item_id: self.getHighestId(),
- 						preview_url: attachment.sizes.thumbnail.url,
+ 						preview_url: _preview,
  						img_id: attachment.id,
  						position: _position,
  					});
