@@ -68,6 +68,14 @@ if (!class_exists('Cuisine')) {
         public $scripts = array();
 
 
+        /**
+         * All registered JS vars
+         *
+         * @var array
+         */
+        public $jsVars = array();
+
+
 
 
         private function __construct(){

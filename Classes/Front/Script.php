@@ -13,6 +13,13 @@ class Scripts {
 	 */
 	var $registered = array();
 
+	/**
+	 * Array of registered JS vars
+	 * 
+	 * @var array
+	 */
+	var $jsVars = array();
+
 
 
 	/**
@@ -24,6 +31,8 @@ class Scripts {
 
 		//all registered scripts are stored in the Cuisine global
 		$this->registered = $Cuisine->scripts;
+
+		$this->jsVars = $Cuisine->jsVars;
 
 	}
 
@@ -51,6 +60,24 @@ class Scripts {
 
 		$Cuisine->scripts = $this->registered;
 	}
+
+
+
+	/**
+	 * Add a variable to the JS Cuisine global
+	 * 
+	 * @param string
+	 * @param array
+	 */
+	public function variable( $id, $array ){
+
+		global $Cuisine;
+
+		$this->jsVars[ $id ] = $array;
+
+		$Cuisine->jsVars = $this->jsVars;
+	}
+
 
 
 	/**
@@ -90,12 +117,21 @@ class Scripts {
 			'load'		=> $autoload
 		);
 
+		//add the added vars:
+		$jsVars = array_merge( $jsVars, $this->jsVars );
+
 		//make it filterable
 		$jsVars = apply_filters( 'cuisine_js_vars', $jsVars );
 
 		echo '<script>';
 			//setup the Cuisine JS Object
-			echo 'var Cuisine = '.json_encode( $jsVars );
+			echo 'var Cuisine = '.json_encode( $jsVars ).';';
+
+			//setup the vars:
+			foreach( $this->jsVars as $id => $val ){
+				echo 'var '.ucwords( $id ).' = '.json_encode( $val ).';';
+			}
+
 		echo '</script>';
 	}
 
@@ -175,6 +211,8 @@ class Scripts {
 		echo preg_replace('/[ \t]+/', ' ', preg_replace('/[\r\n]+/', "\n", $string));
 	}
 
+
+	
 }
 
 
