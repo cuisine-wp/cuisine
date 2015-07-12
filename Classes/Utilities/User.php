@@ -10,8 +10,11 @@ class User extends WP_User {
      * @param string $role
      * @return bool
      */
-    public function hasRole($role) {
-        return in_array($role, $this->roles);
+    public function hasRole( $role ) {
+
+        $user = wp_get_current_user();
+
+        return in_array( $role, $user->roles );
     }
 
     /**
@@ -20,9 +23,9 @@ class User extends WP_User {
      * @param string $role
      * @return \Cuisine\User\User
      */
-    public function setRole($role) {
-        $this->set_role($role);
-
+    public function setRole( $role ) {
+        $user = wp_get_current_user();
+        $user->set_role($role);
         return $this;
     }
 
@@ -32,8 +35,11 @@ class User extends WP_User {
      * @param string $cap
      * @return bool
      */
-    public function can($cap) {
-        return user_can($this, $cap);
+    public function can( $cap ) {
+
+        $user = wp_get_current_user();
+        return current_user_can( $cap );
+    
     }
 
     /**
@@ -43,8 +49,8 @@ class User extends WP_User {
      * @return \Cuisine\User\User|\WP_Error
      */
     public function update(array $userdata) {
-        
-        $userdata = array_merge($userdata, array('ID' => $this->ID));
+        $user = wp_get_current_user();    
+        $userdata = array_merge( $userdata, array( 'ID' => $user->ID ) );
 
         $user = wp_update_user($userdata);
 
