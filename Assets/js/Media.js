@@ -54,8 +54,6 @@
                 }
   //          }
 
-            console.log( wp.media.model );
-
   
             // Create the media frame.
             file_frame = wp.media.frames.file_frame = wp.media({

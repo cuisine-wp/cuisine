@@ -25,6 +25,10 @@
 	font-size:16px;
 }
 
+.field-wrapper iframe{
+	min-height:275px !important;
+}
+
 .field-wrapper.checkbox label{
 	width:auto !important;
 	display:inline-block;
