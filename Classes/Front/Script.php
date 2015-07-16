@@ -111,6 +111,7 @@ class Scripts {
 		$autoload = $this->getAutoload();
 
 		$jsVars = array(
+			'siteUrl'	=> esc_url_raw( get_site_url() ),
 			'baseUrl'	=> $url,
 			'ajax'		=> admin_url('admin-ajax.php'),
 			'scripts' 	=> $scripts,
