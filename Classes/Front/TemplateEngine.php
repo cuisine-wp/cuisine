@@ -6,7 +6,7 @@
 	use Cuisine\Wrappers\PostType;
 	use Cuisine\Utilities\Sort;	
 	
-	class Template extends StaticInstance{
+	class TemplateEngine extends StaticInstance{
 	
 		/**
 		 * Default folder 
@@ -153,4 +153,4 @@
 	
 	
 	if( !is_admin() )
-		\Cuisine\Front\Template::getInstance();	
+		\Cuisine\Front\TemplateEngine::getInstance();	

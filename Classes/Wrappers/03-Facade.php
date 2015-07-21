@@ -71,7 +71,8 @@ abstract class Wrapper {
             'validation'        => 'Cuisine\Utilities\Validator',
             'route'             => 'Cuisine\Front\Route',
             'script'            => 'Cuisine\Front\Scripts',
-            'sass'              => 'Cuisine\Front\Sass'
+            'sass'              => 'Cuisine\Front\Sass',
+            'template'          => 'Cuisine\Front\TemplateFinder'
         );
 
         return $aliases[ $name ];
