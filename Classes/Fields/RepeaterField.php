@@ -79,6 +79,7 @@ class RepeaterField extends DefaultField{
                 $prefix = $this->name.'['.$i.']';
                 $name = $prefix.'['.$field->name.']';
                 $val = ( isset( $value[$field->name] ) ? $value[$field->name] : false );
+
                 $field->properties['defaultValue'] = $val;
                 $field->setName( $name );
                
