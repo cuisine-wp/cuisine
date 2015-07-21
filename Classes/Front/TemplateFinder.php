@@ -122,7 +122,7 @@ class TemplateFinder {
 	 * 
 	 * @return void
 	 */
-	public function display(){
+	public function display( $params = false ){
 
 		//check if the theme contains overwrites:
 		$located = $this->checkTheme();
@@ -130,6 +130,10 @@ class TemplateFinder {
 		//fall back on own templates:
 		if( !$located )
 			$located = $this->default;
+
+
+		if( $params != false )
+			$datas = $params;
 
 		include( $located );
 
