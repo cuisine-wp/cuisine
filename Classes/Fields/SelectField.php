@@ -66,7 +66,7 @@ class SelectField extends ChoiceField{
 
         $html = '<option value="'.$value.'"';
 
-            $html .= ( $this->properties['defaultValue'] == $value ? ' selected' : '' );
+            $html .= ( $this->getValue() == $value ? ' selected' : '' );
 
         $html .= '>'.$label.'</option>';
 

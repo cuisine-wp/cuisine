@@ -126,6 +126,18 @@ class PostType {
 
 
     /**
+     * Return the post-type's name (not slug)
+     * 
+     * @param  string $post_type
+     * @return string Plural label of this Post Type
+     */
+    public function name( $post_type ){
+
+    	$post_type = get_post_type_object( $post_type );
+    	return $post_type->labels->name ;
+    }
+
+    /**
      * Return the default template name for this post-type
      * 
      * @param  string $post_type
@@ -133,10 +145,8 @@ class PostType {
      */
     public function template( $post_type ){
 
-    	$post_type = get_post_type_object( $post_type );
-    	$name = sanitize_title( $post_type->labels->name ); 
-
-    	return $name;
+    	return sanitize_title( self::name( $post_type ) );
+    	
     }
 
 
