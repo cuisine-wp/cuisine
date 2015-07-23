@@ -46,7 +46,7 @@ class CheckboxField extends DefaultField{
     public function build(){
 
         //add a hidden field before the checkbox, if not checked:
-        $html = '<input type="hidden" name="'.$this->name.'" value="0"/>';
+        $html = '<input type="hidden" name="'.$this->name.'" value="false"/>';
         $html .= '<input type="'.$this->type.'" ';
 
             $html .= 'id="'.$this->id.'" ';
@@ -55,9 +55,9 @@ class CheckboxField extends DefaultField{
 
             $html .= 'name="'.$this->name.'" ';
 
-            $html .= 'value="1" '; 
+            $html .= 'value="true" '; 
 
-            if( $this->getValue() == true )
+            if( $this->getValue() == 'true' || $this->getValue() == '1' )
                 $html .= ' checked';
 
         $html .= '/>';
