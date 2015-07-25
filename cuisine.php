@@ -3,11 +3,11 @@
  * Plugin Name: Cuisine
  * Plugin URI: http://chefduweb.nl/cuisine
  * Description: A framework for WordPress developers.
- * Version: 1.4.3
+ * Version: 1.4.4
  * Author: Luc Princen
  * Author URI: http://www.chefduweb.nl/
  * License: GPLv3
- * Bitbucket Plugin URI: https://bitbucket.org/chefduweb/new-cuisine
+ * Bitbucket Plugin URI: https://bitbucket.org/chefduweb/cuisine
  * Bitbucket Branch:     master
  * 
  * @package Cuisine
