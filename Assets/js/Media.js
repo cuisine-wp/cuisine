@@ -53,7 +53,6 @@
                     wp.media.model.settings.post.id = options.post_id;
                 }
   //          }
-
   
             // Create the media frame.
             file_frame = wp.media.frames.file_frame = wp.media({

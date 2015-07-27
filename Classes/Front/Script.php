@@ -106,6 +106,9 @@ class Scripts {
 	 */
 	private function setVars(){
 
+		//allow registers to be overwritten:
+		do_action( 'cuisine_js_override' );
+
 		$url = esc_url_raw( Url::theme( 'js' ) );
 		$scripts = $this->get();
 		$autoload = $this->getAutoload();
