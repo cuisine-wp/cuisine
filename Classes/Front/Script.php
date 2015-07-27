@@ -166,7 +166,7 @@ class Scripts {
 	 */
 	public function get(){
 
-		$scripts = $this->registered;
+		$scripts = apply_filters( 'cuisine_scripts', $this->registered );
 		return Sort::pluck( $scripts, 'url', true );
 
 	}
@@ -180,7 +180,7 @@ class Scripts {
 	public function getAutoload(){
 
 		$array = array();
-		$scripts = $this->registered;
+		$scripts = apply_filters( 'cuisine_scripts', $this->registered );
 
 		foreach( $scripts as $key => $script ){
 
