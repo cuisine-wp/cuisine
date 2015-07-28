@@ -28,31 +28,12 @@
         *   Init the uploader ( returns a JSON object with attachment(s) ):
         */
         this.uploader = function( options, callback ){
+
+            //the file modal doesn't exist yet, first set the corret post_id if set in the options:
+            if( options.post_id !== null ){
+                wp.media.model.settings.post.id = options.post_id;
+            }
             
-
-            //if the file modal already exists:
-         /*   if( file_frame ){
-                
-                //just re-open it... don't init it:
-                file_frame.open();
-
-                //change the post id if set in the options, though;
-                if( options.post_id !== null ){
-                    file_frame.uploader.uploader.param( 'post_id', options.post_id );
-                }
-
-                file_frame.uploader.uploader.param( 'multiple', options.multiple );
-
-
-                return;
-            
-            }else{
-*/
-                //the file modal doesn't exist yet, first set the corret post_id if set in the options:
-                if( options.post_id !== null ){
-                    wp.media.model.settings.post.id = options.post_id;
-                }
-  //          }
   
             // Create the media frame.
             file_frame = wp.media.frames.file_frame = wp.media({

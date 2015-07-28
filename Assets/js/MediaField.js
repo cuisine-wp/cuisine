@@ -87,7 +87,7 @@
 
  				//set the position:
  				item.find( '#position' ).val( i );
- 				console.log( 'position: '+item.find('#img-id').val()+' -> '+ i );
+
  			}
 
  		},
@@ -192,6 +192,11 @@
 
  		},
 
+
+ 		destroy : function() {
+   			this.undelegateEvents();
+  		}
+
 	
  	});
 
@@ -255,13 +260,17 @@
 				self.$el.find( '#preview' ).attr( 'src', _thumbnail );
 
 			});
-		
-		}
+		},
+
+		destroy : function() {
+   			this.undelegateEvents();
+  		}
 
 	});
 
 
-
+	var _mediaFields = [];
+	var _imgFields = [];
 
 
  	jQuery( document ).ready( function(){
@@ -271,11 +280,32 @@
  	});
 
  	function cuisineInitMediaFields(){
+
+ 		//remove event references:
+ 		if( _mediaFields.length > 0 ){
+ 			for( var i = 0; _mediaFields.length > i; i++ ){
+ 				_mediaFields[ i ].destroy();
+ 			}
+
+ 		}
+		
+		if( _imgFields.length > 0 ){
+ 			for( var i = 0; _imgFields.length > i; i++ ){
+ 				_imgFields[ i ].destroy();
+ 			}
+ 		}
+
+
+ 		_mediaFields = [];
+ 		_imgFields = [];
  		jQuery('.media-grid' ).each( function( index, obj ){
+
  			var mf = new MediaField( { el: obj } );
+ 			_mediaFields.push( mf );
  		});
 
  		jQuery( '.image-field').each( function( index, obj ){
  			var imgf = new ImageField({ el: obj });
+ 			_imgFields.push( imgf );
  		})
  	}
