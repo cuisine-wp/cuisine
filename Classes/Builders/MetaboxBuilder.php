@@ -99,7 +99,8 @@ class MetaboxBuilder {
 	    if( is_array( $contents ) ){
 
 	    	// Check if sections are defined.
-	    	$this->sections = $this->getSections( $contents );
+//	    	$this->sections = $this->getSections( $contents );
+	    	$this->sections = array();
 
 		    $this->data['fields'] = $contents;
 		    $this->data['render'] = array( &$this, 'render' );

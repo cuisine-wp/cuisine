@@ -63,7 +63,6 @@ class DefaultField{
         $this->fieldType();
         $this->setDefaults();
 
-        //cuisine_dump( $this );
     }
 
 

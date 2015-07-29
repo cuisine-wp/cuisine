@@ -24,9 +24,9 @@ class EditorField extends DefaultField{
      */
     public function build(){
         
-        $val = $this->getValue();
-        if( !$val ) $val = '';
-
+        //$val = $this->getValue();
+        //if( !$val ) $val = '';
+        $val = '';
         ob_start();
             
         echo '<div class="editor-wrapper" data-id="'.$this->id.'" data-name="'.$this->name.'">';

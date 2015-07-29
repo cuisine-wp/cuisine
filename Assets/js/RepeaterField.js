@@ -40,6 +40,9 @@
 
  			target.after( template );
 
+ 			self.highestId += 1;
+ 			self.$el.attr( 'data-highest-id', self.highestId );
+
  			refreshFields();
 
  		},

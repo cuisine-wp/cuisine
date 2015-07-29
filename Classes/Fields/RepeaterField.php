@@ -30,6 +30,7 @@ class RepeaterField extends DefaultField{
     public function render(){
 
         $this->fields = $this->properties['fields'];
+
         $datas = $this->buildDatas();
 
         echo '<div class="repeater-field" '.$datas.'>';
@@ -55,12 +56,18 @@ class RepeaterField extends DefaultField{
         $i = 0;
         if( !empty( $values ) ){
 
-            foreach( $values as $value ){
+            foreach( $values as $id => $value ){
 
-                $this->makeItem( $value, $i );
+                $this->makeItem( $value, $id );
                 $i++;
             }
-        }        
+
+        }else{
+
+            $prefix = $this->name.'[0]';
+            $this->makeItem( $this->fields, '0' );
+
+        }       
     }
 
 
@@ -69,21 +76,28 @@ class RepeaterField extends DefaultField{
      * 
      * @return String
      */
-    public function makeItem( $value, $i ){
+    public function makeItem( $value, $id ){
 
-        
+        $prefix = $this->name.'['.$id.']';
+
         echo '<div class="repeatable">';
         
             foreach( $this->fields as $field ){
-        
-                $prefix = $this->name.'['.$i.']';
+            
+                $oldName = $field->name;
                 $name = $prefix.'['.$field->name.']';
-                $val = ( isset( $value[$field->name] ) ? $value[$field->name] : false );
+
+                    
+                $val = ( isset( $value[$field->name] ) ? $value[$field->name] : '' );
 
                 $field->properties['defaultValue'] = $val;
+
                 $field->setName( $name );
                
                 $field->render();
+
+                //change the name right back:
+                $field->setName( $oldName );
         
             }
         
@@ -104,7 +118,7 @@ class RepeaterField extends DefaultField{
         //make a clonable item, for javascript:
         echo '<script type="text/template" id="'.$this->getTemplateName().'">';
 
-            $this->makeItem( $this->properties['defaultValue'], '<%= highest_id %>' );
+            $this->makeItem( $this->properties['fields'], '<%= highest_id %>' );
 
         echo '</script>';
 
@@ -119,7 +133,8 @@ class RepeaterField extends DefaultField{
      */
     private function buildDatas(){
 
-        $highestId = count( $this->getValues() ) + 1;
+        $highestId = count( $this->getValues() );
+        if( $highestId == 0 ) $highestId = 1;
 
         $datas = 'data-highest-id="'.$highestId.'" ';
         $datas .= 'data-template="'.$this->getTemplateName().'" ';
@@ -179,6 +194,21 @@ class RepeaterField extends DefaultField{
 
         return $val;
 
+
+    }
+
+
+    /**
+     * Get the default value html
+     * 
+     * @return String
+     */
+    public function getDefault(){
+
+        if( $this->properties['defaultValue' ] )
+            return $this->properties['defaultValue'];
+    
+        return false;
 
     }
 

@@ -21,4 +21,26 @@ class Session{
 
 	}
 
+	/**
+	 * Get the current POST ID, no matter where you at.
+	 * 
+	 * @return mixed
+	 */
+	public static function postId(){
+
+		global $post;
+
+		if( isset( $_GET['post'] ) )
+			return $_GET['post'];
+
+		if( isset( $_POST['post_ID'] ) )
+			return $_POST['post_ID'];
+
+		if( isset( $post ) && isset( $post->ID ) )
+			return $post->ID;
+
+		return false;
+
+	}
+
 }
