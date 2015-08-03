@@ -34,6 +34,7 @@ class MediaField extends DefaultField{
             $html .= '<div class="media-inner">';
             
             if( $media ){
+
                 $media = Sort::byField( $media, 'position', 'ASC' );
 
                 //loop through the media-items:
@@ -146,7 +147,16 @@ class MediaField extends DefaultField{
     private function getHighestItemId(){
 
         $media = $this->getValue();
-        return count( $media );
+        $id = 0;
+
+        foreach( $media as $key => $val ){
+
+            if( $key > $id )
+                $id = $key;
+
+        }
+
+        return $id + 1;
 
     }
 
