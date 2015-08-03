@@ -135,6 +135,24 @@ class Sass {
 	}
 
 
+	/**
+	 * Reset Sass files
+	 * 
+	 * @return void
+	 */
+	public function resetFiles(){
+
+		foreach( $this->registered as $script => $file ){
+
+			$this->script = $script;
+			$this->path = $this->sanitizePath( $file );
+
+			$this->copy();
+		}
+
+	}
+
+
 }
 
 
