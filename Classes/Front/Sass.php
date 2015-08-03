@@ -60,7 +60,7 @@ class Sass {
 
 			if( $this->copy() ){
 
-				$this->registered[ $script ] = $script;
+				$this->registered[ $script ] = $rel_path;
 				update_option( 'registered_sass_files', $this->registered, true );
 
 				return true;
@@ -133,6 +133,8 @@ class Sass {
 
 		return $path;
 	}
+
+
 }
 
 

@@ -105,6 +105,11 @@ if (!class_exists('Cuisine')) {
                 'Classes/View'
             );
 
+            if ( defined('WP_CLI') && WP_CLI ) {
+                $includes[] = 'Classes/Utilities/Cli';
+            }
+
+
             $includes = apply_filters( 'cuisine_autoload_dirs', $includes );
 
             foreach( $includes as $inc ){
