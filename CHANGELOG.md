@@ -1,3 +1,9 @@
+### 1.4.8: 2015-08-06
+* Added Nav active-state setting
+* Added SVG upload support
+* Minor bugfixes
+
+
 ### 1.4.7: 2015-08-05
 * Editor hotfix; the value remained empty
 * Added WP CLI support for Sass-refreshing
