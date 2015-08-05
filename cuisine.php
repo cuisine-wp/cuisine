@@ -76,6 +76,14 @@ if (!class_exists('Cuisine')) {
         public $jsVars = array();
 
 
+        /**
+         * All registered Nav Items
+         *
+         * @var array
+         */
+        public $navItems = array();
+
+
 
 
         private function __construct(){

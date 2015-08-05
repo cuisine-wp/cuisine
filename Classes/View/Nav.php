@@ -94,5 +94,38 @@
 		}				
 
 
+		/**
+		 * Set a menu-item as active on different pages
+		 * 
+		 * @param array $args
+		 */
+		public static function setActive( $name, $args ){
+
+			global $Cuisine;
+
+			$args = self::getActiveArgs( $args );
+			$Cuisine->navItems[ $name ] = $args;
+
+		}
+
+
+		/**
+		 * Get the default arguments
+		 * 
+		 * @param  array $args
+		 * @return array
+		 */
+		public static function getActiveArgs( $args ){
+
+			if( !isset( $args['type'] ) )
+				$args['type'] = 'single';
+
+			if( !isset( $args['query'] ) )
+				$args['query'] = 'post';
+
+			return $args;
+
+		}
+
 
 	}
