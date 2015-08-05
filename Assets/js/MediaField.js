@@ -148,9 +148,12 @@
                     
                     var _preview = "";
 
-                    //check if image is an SVG, if so the attachment does not have an sizes array (offcourse)
+                    //check if image is an SVG, 
+                    //if so the attachment does not have a sizes array (ofcourse)
                     if(attachment.subtype && attachment.subtype.indexOf("svg") > -1) {
+                    
                         _preview = attachment.url;
+                    
                     } else {
                          _preview = attachment.sizes.full.url;
 
@@ -167,10 +170,10 @@
                     });
 
 
-                    //jQuery( self.container ).append( output );
                     self.$el.find('.media-inner').append( output );
 
                     _position++;
+
                 }
 
  				//set the new items object
