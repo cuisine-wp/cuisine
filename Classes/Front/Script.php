@@ -121,9 +121,6 @@ class Scripts {
 			'load'		=> $autoload
 		);
 
-		//add the added vars:
-		$jsVars = array_merge( $jsVars, $this->jsVars );
-
 		//make it filterable
 		$jsVars = apply_filters( 'cuisine_js_vars', $jsVars );
 
