@@ -149,11 +149,13 @@ class MediaField extends DefaultField{
         $media = $this->getValue();
         $id = 0;
 
-        foreach( $media as $key => $val ){
-
-            if( $key > $id )
-                $id = $key;
-
+        if( !empty( $media ) ){
+            foreach( $media as $key => $val ){
+    
+                if( $key > $id )
+                    $id = $key;
+    
+            }
         }
 
         return $id + 1;
