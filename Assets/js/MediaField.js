@@ -144,27 +144,34 @@
  				
  				for( var i = 0; i < attachments.length; i++ ){
 
- 					var attachment = attachments[ i ];
+                    var attachment = attachments[ i ];
+                    
+                    var _preview = "";
 
- 					var _preview = attachment.sizes.full.url
+                    //check if image is an SVG, if so the attachment does not have an sizes array (offcourse)
+                    if(attachment.subtype && attachment.subtype.indexOf("svg") > -1) {
+                        _preview = attachment.url;
+                    } else {
+                         _preview = attachment.sizes.full.url;
 
- 					if( attachment.sizes.thumbnail !== undefined )
- 						_preview = attachment.sizes.thumbnail.url;
+                        if( attachment.sizes.thumbnail !== undefined )
+                            _preview = attachment.sizes.thumbnail.url;
+                    }
 
- 					var htmlTemplate = _.template( jQuery( '#media_item_template').html() );
- 					var output = htmlTemplate({
- 						item_id: self.getHighestId(),
- 						preview_url: _preview,
- 						img_id: attachment.id,
- 						position: _position,
- 					});
+                    var htmlTemplate = _.template( jQuery( '#media_item_template').html() );
+                    var output = htmlTemplate({
+                        item_id: self.getHighestId(),
+                        preview_url: _preview,
+                        img_id: attachment.id,
+                        position: _position,
+                    });
 
 
- 					//jQuery( self.container ).append( output );
- 					self.$el.find('.media-inner').append( output );
+                    //jQuery( self.container ).append( output );
+                    self.$el.find('.media-inner').append( output );
 
- 					_position++;
- 				}
+                    _position++;
+                }
 
  				//set the new items object
  				self.setItems();
