@@ -56,6 +56,32 @@
 	
 
 		/**
+		 * Show the content before the more tag
+		 * 
+		 * @return string ( html )
+		 */
+		public static function beforeMore(){
+	
+			global $post;
+			return Excerpt::beforeMore( $post->post_content );
+	
+		}
+	
+	
+		/**
+		 * Show the content before the more tag
+		 * 
+		 * @return string ( html )
+		 */
+		public static function afterMore(){
+	
+			global $post;
+			return Excerpt::afterMore( $post->post_content );
+	
+		}
+
+
+		/**
 		 * Get the post thumbnail of the current post.
 		 *
 		 * @param string|array The size of the current post thumbnail.
