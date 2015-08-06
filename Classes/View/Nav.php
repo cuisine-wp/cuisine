@@ -65,7 +65,8 @@
 					'theme_location' => $name,
 					'items_wrap' => '<nav id="%1$s" class="%2$s"><ul>%3$s</ul></nav>',
 					'depth' => $depth,
-					'menu_class' => $class
+					'menu_class' => $class,
+					'container' => false
 				);
 
 				wp_nav_menu( $args );	
@@ -93,39 +94,6 @@
 
 		}				
 
-
-		/**
-		 * Set a menu-item as active on different pages
-		 * 
-		 * @param array $args
-		 */
-		public static function setActive( $name, $args ){
-
-			global $Cuisine;
-
-			$args = self::getActiveArgs( $args );
-			$Cuisine->navItems[ $name ] = $args;
-
-		}
-
-
-		/**
-		 * Get the default arguments
-		 * 
-		 * @param  array $args
-		 * @return array
-		 */
-		public static function getActiveArgs( $args ){
-
-			if( !isset( $args['type'] ) )
-				$args['type'] = 'single';
-
-			if( !isset( $args['query'] ) )
-				$args['query'] = 'post';
-
-			return $args;
-
-		}
 
 
 	}
