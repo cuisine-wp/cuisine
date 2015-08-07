@@ -112,6 +112,19 @@
 
 		}
 
+		/**
+		 * Return a templated-section
+		 * 
+		 * @param  string $name
+		 * @return  string (html, echoed)
+		 */
+		public static function section( $name ){
+
+			if( function_exists( 'get_section_template' ) )
+				echo get_section_template( $name );
+
+		}
+
 
 		/*=============================================================*/
 		/**             Header & Footer functions                      */
