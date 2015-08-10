@@ -24,7 +24,7 @@
 		 * 
 		 * @param WP_Query $_query
 		 */
-		function __construct( $_query = null ){
+		public function init( $_query = null ){
 			
 			//default to global if not set
 			if( $_query == null ){
@@ -54,9 +54,9 @@
 		 * 
 		 * @return string (html, echoed)
 		 */
-		public function display(){
+		public function display( $_query = null ){
 
-			echo self::get();
+			echo self::get( $_query );
 
 		}
 
@@ -66,7 +66,9 @@
 		 * 
 		 * @return string ( html )
 		 */
-		public function get(){
+		public function get( $_query = null ){
+
+			$this->init( $_query );
 
 			//we have pages:
 			if( $this->pages > 1 ){
@@ -78,7 +80,7 @@
 
 						if( $i == $this->current ){
 
-							$html .= '<span itemprop="name">'.$current.'</span>';
+							$html .= '<span itemprop="name">'.$this->current.'</span>';
 
 						}else{
 
