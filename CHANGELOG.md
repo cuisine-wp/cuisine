@@ -1,3 +1,10 @@
+### 1.4.9: 2015-08-11
+* Added the Template::section selector
+* Added Date-field support
+* Fixed some big pagination bugs
+* Minor bugfixes
+
+
 ### 1.4.8: 2015-08-06
 * Added Nav active-state setting
 * Added SVG upload support
