@@ -207,23 +207,24 @@ class MetaboxBuilder {
 
 	    $fields = array();
 
+	    
 	    // Loop through the registered fields.
 	    // With sections.
 	    if ( !empty($this->sections ) ) {
 	        
 	        foreach ($this->data['fields'] as $fs){
 
-	            $fields = apply_filters( 'cuisine_before_field_save', $fs );
+	            $fields = $fs;
 	        
 	        }
 
 	    } else {
-	        
+
 	        $fields = $this->data['fields'];
 	    
 	    }
 
-	    $this->register( $postId, $fields );
+	    $this->register( $postId, apply_filters( 'cuisine_before_field_save', $fields, $postId, $this->data ) );
 
 	}
 
