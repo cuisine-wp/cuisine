@@ -109,7 +109,7 @@
 		 * Display the single next / prev buttons
 		 *
 		 * @param string $url
-		 * @return 
+		 * @return string (html, echoed)
 		 */
 		public function single( $url = false ){
 			
