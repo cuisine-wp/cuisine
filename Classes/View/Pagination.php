@@ -104,6 +104,30 @@
 		}
 
 
+
+		/**
+		 * Display the single next / prev buttons
+		 *
+		 * @param string $url
+		 * @return 
+		 */
+		public function single( $url = false ){
+			
+			echo '<div class="single-nav">';
+				
+				previous_post_link( '<div class="link-wrapper prev">%link</div>', '<i class="fa fa-arrow-left"></i>' );
+
+				if( $url )
+					echo '<a class="overview" href="'.$url.'"><i class="fa fa-th"></i></a>';
+
+
+				next_post_link( '<div class="link-wrapper pull-right next">%link</div>', '<i class="fa fa-arrow-right"></i>' );
+
+			echo '</div>';
+	
+		}
+
+
 		public function getLink( $num ){
 
 			$url = Url::current();

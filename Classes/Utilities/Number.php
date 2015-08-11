@@ -39,7 +39,7 @@ class Number {
      */
     public static function isPlural( $number ){
 
-        if( (float) $number > 1 )
+        if( $number > 1 )
             return true;
 
         return false;
