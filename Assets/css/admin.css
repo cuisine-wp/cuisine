@@ -206,6 +206,43 @@
 	margin:0 0 15px 0;
 }
 
+.date-wrapper{
+	position:relative;
+}
+
+.date-wrapper:after{
+	content: "\f508";
+	font-family:'Dashicons';
+	font-size:24px;
+	position:absolute;
+	right:12px;
+	bottom:14px;
+	color:#22A1D0;
+}
+
+.ui-datepicker{
+	padding:10px 15px;
+	background:#fff;
+	box-shadow:0 0 5px rgba(0,0,0,.1);
+	border:1px solid #ccc;
+}
+
+.ui-datepicker-next{
+	float:right;
+}
+
+.ui-datepicker-title{
+	width:100%;
+	text-align:center;
+	font-weight:bold;
+	padding:5px 0 3px 0;
+	border-bottom:1px solid #444;
+
+}
+
+
+
+
 .image-field button{
 	background: #2ea2cc;
 	box-shadow: inset 0 1px 0 rgba( 120, 200, 230, 0.5 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );

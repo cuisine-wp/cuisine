@@ -23,5 +23,33 @@ class DateField extends DefaultField{
     }
 
 
+    /*=============================================================*/
+    /**             RENDERING                                      */
+    /*=============================================================*/
+
+    /**
+     * Handle the field HTML code for metabox output.
+     *
+     * @return string
+     */
+    public function render(){
+
+        $class = 'field-wrapper';
+
+        $class .= ' '.$this->type;
+
+        $class .= ' date-wrapper';
+
+        if( $this->properties['label'] )
+            $class .= ' label-'.$this->properties['label'];
+
+        echo '<div class="'.$class.'">';
+
+            echo $this->getLabel();
+            echo $this->build();
+
+        echo '</div>';
+    }
+
 
 }

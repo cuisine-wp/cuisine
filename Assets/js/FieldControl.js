@@ -1,11 +1,24 @@
 
-	function refreshFields(){
+	//first setups
+	jQuery( document ).ready( function(){
 
+		jQuery( '.datepicker' ).datepicker({
+			firstDay: 1,
+			dateFormat: "dd-mm-yy"
+		});
+
+	});
+
+
+	/**
+	 * Refresh events + model-data for fields
+	 * @return void
+	 */
+	function refreshFields(){
 
 		setEditors();
 
 		setMediaFields();
-
 
 	}
 	

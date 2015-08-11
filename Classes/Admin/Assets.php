@@ -59,8 +59,9 @@
 				wp_enqueue_script( 
 					'cuisine_field_control', 
 					$url.'/js/FieldControl.js',
-					array( 'backbone' )
+					array( 'backbone', 'jquery-ui-datepicker' )
 				);
+
 				
 			});
 		}
