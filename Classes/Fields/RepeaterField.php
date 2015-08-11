@@ -92,6 +92,10 @@ class RepeaterField extends DefaultField{
 
                 $field->properties['defaultValue'] = $val;
 
+                if( !in_array( 'multi', $field->classes ) )
+                    $field->classes[] = 'multi';
+
+
                 $field->setName( $name );
                
                 $field->render();
