@@ -1,3 +1,12 @@
+### 1.5.0: 2015-08-12
+* Added the Date Utility class
+* Added the Number Utility class
+* Added single-post pagination
+* Added a save-field filter
+* Fixes to the repeaterfield when saving with ajax
+* Fixes a routing error in the template engine
+
+
 ### 1.4.9: 2015-08-11
 * Added the Template::section selector
 * Added Date-field support
