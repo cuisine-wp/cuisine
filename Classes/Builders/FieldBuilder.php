@@ -1,5 +1,5 @@
 <?php
-namespace Cuisine\Fields;
+namespace Cuisine\Builders;
 
 /**
  * Field factory.

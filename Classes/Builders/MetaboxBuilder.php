@@ -1,5 +1,5 @@
 <?php
-namespace Cuisine\Metabox;
+namespace Cuisine\Builders;
 
 use Cuisine\Utilities\Session;
 use Cuisine\Utilities\User;
