@@ -133,10 +133,12 @@
 	
 					//default: templates/portfolio.php
 					//second: templates/overview.php
-					$templates = array(
-									$this->folder.$template.'.php',
-									$this->folder.'overview.php'
-					);
+					
+					if( $template )
+						$templates[] = $this->folder.$template.'.php';
+
+					$templates[] = $this->folder.'overview.php';
+
 				}
 	
 			}else if( is_404() ){

@@ -134,7 +134,10 @@ class PostType {
     public function name( $post_type ){
 
     	$post_type = get_post_type_object( $post_type );
-    	return $post_type->labels->name ;
+    	if( is_object( $post_type ) ) 
+    		return $post_type->labels->name;
+
+    	return false;
     }
 
     /**
