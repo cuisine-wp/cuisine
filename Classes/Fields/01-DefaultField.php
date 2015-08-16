@@ -304,6 +304,22 @@ class DefaultField{
     }
 
 
+    /**
+     * Get a field-property
+     * 
+     * @param  string $name
+     * @return mixed (returns false when the property doesn't exist)
+     */
+    public function getProperty( $name ){
+
+        if( isset( $this->properties[ $name ] ) )
+            return $this->properties[ $name ];
+
+        return false;
+    }
+
+
+
 
     /**
      * Get an active / selected state for this field
