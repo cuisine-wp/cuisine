@@ -54,7 +54,13 @@
 			$templates = array();
 			$post_type = get_post_type();
 	
-	
+			//check if a page-template has been set:
+			$themePath = Url::path( 'theme' );
+			$includeSlug = str_replace( $themePath, '', $include );
+			if( is_page_template( $includeSlug ) )
+				return $include;
+
+
 			//check if we have custom template wishes:
 			if( isset( $registered[ $post_type ] ) ){
 	
