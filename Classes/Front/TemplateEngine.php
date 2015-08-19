@@ -5,6 +5,7 @@
 	use Cuisine\Wrappers\StaticInstance;
 	use Cuisine\Wrappers\PostType;
 	use Cuisine\Utilities\Sort;	
+	use Cuisine\Utilities\Url;
 	
 	class TemplateEngine extends StaticInstance{
 	
