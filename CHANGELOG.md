@@ -1,3 +1,10 @@
+### 1.5.1: 2015-08-20
+* Added page-template support to the template-engine
+* Added a fresh-forms wp cli command
+* Added a getProperty method for Fields
+* Added the ability to create SettingsPages 
+* Minor bugfixes
+
 ### 1.5.0: 2015-08-12
 * Added the Date Utility class
 * Added the Number Utility class
