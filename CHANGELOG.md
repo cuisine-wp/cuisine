@@ -5,6 +5,7 @@
 * Added the ability to create SettingsPages 
 * Minor bugfixes
 
+
 ### 1.5.0: 2015-08-12
 * Added the Date Utility class
 * Added the Number Utility class
