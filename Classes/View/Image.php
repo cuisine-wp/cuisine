@@ -2,6 +2,7 @@
 namespace Cuisine\View;
 
 use Cuisine\Utilities\Url;
+use Exception;
 
 class Image {
 
