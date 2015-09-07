@@ -206,6 +206,22 @@
 	margin:0 0 15px 0;
 }
 
+.image-field .remove-img-source{
+	display:block;
+	clear:both;
+	text-align:center;
+	padding-top:10px;
+}
+.image-field #remove-img{
+	color:red;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+.image-field #remove-img:hover{
+	color:#2d2d2d;
+}
+
 .date-wrapper{
 	position:relative;
 }
