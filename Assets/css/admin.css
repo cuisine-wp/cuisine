@@ -25,6 +25,10 @@
 	font-size:16px;
 }
 
+.field-wrapper .input-field.type-select{
+	padding:0;
+}
+
 .field-wrapper iframe{
 	min-height:275px !important;
 }
