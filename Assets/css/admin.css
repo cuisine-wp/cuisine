@@ -25,6 +25,10 @@
 	font-size:16px;
 }
 
+.field-wrapper .input-field.type-select{
+	padding:0;
+}
+
 .field-wrapper iframe{
 	min-height:275px !important;
 }
@@ -204,6 +208,22 @@
 	border:2px solid #fff;
 	box-shadow:0 0 10px rgba(0,0,0,.3);
 	margin:0 0 15px 0;
+}
+
+.image-field .remove-img-source{
+	display:block;
+	clear:both;
+	text-align:center;
+	padding-top:10px;
+}
+.image-field #remove-img{
+	color:red;
+	text-decoration:underline;
+	cursor:pointer;
+}
+
+.image-field #remove-img:hover{
+	color:#2d2d2d;
 }
 
 .date-wrapper{

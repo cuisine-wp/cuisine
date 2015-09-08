@@ -44,7 +44,9 @@ class ImageField extends DefaultField{
 
         		$btnText = ( $org_img ? __( 'Afbeelding aanpassen', 'cuisine' ) : __( 'Selecteer een afbeelding', 'cuisine' ) );
 
+                
         		$html .= '<button id="select-img">'.$btnText.'</button>';
+                $html .= '<span class="remove-img-source"><em>'.__( 'of', 'cuisine' ).'</em> <span id="remove-img">'.__( 'verwijderen', 'cuisine' ).'</span></span>';
 
         	$html .= '</div>';
 

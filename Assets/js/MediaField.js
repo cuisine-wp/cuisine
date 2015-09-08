@@ -222,6 +222,7 @@
 		events: {
 
 			'click #select-img' : 'launchMediaLibrary',
+			'click #remove-img' : 'emptyImage'
 		
 		},
 		 	
@@ -229,6 +230,8 @@
 
 		 	var self = this;
 		 	self.id = self.$el.data('id');
+
+		 	self.toggleRemoveButton();
 
 		},	
 
@@ -269,7 +272,48 @@
 
 				self.$el.find( '#preview' ).attr( 'src', _thumbnail );
 
+				//set the remove-btn
+				self.toggleRemoveButton();
+
 			});
+		},
+
+		/**
+		 * Empty an image:
+		 * 
+		 * @return void
+		 */
+		emptyImage: function(){
+
+			var self = this;
+
+			self.$el.find( '#img-id' ).val( '' );
+			self.$el.find( '#thumb').val( '' );
+			self.$el.find( '#medium').val( '' );
+			self.$el.find( '#large').val( '' );
+			self.$el.find( '#full').val( '' );
+			self.$el.find( '#orientation' ).val( '' );
+			self.$el.find( '#preview' ).attr( 'src', '' );
+
+			//set the remove-btn
+			self.toggleRemoveButton();
+		},
+
+		/**
+		 * [toggleImage description]
+		 * @return {[type]} [description]
+		 */
+		toggleRemoveButton: function(){
+
+			var self = this;
+			var id = self.$el.find('#img-id').val();
+
+			if( id === '' ){
+				self.$el.find('.remove-img-source').hide();
+			}else{
+				self.$el.find('.remove-img-source').show();
+			}
+
 		},
 
 		destroy : function() {
