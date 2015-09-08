@@ -1,3 +1,9 @@
+### 1.5.2: 2015-09-08
+* Padding dropdown error fixed.
+* Removing an image with an image field
+* Removed an Exception error in Image.php
+
+
 ### 1.5.1: 2015-08-20
 * Added page-template support to the template-engine
 * Added a fresh-forms wp cli command
