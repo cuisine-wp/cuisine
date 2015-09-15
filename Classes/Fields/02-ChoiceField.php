@@ -93,12 +93,15 @@ class ChoiceField extends DefaultField{
 	 */
 	public function getSubClass(){
 
-	    $classes = array(
-	                        'subfield',
-	                        'type-'.$this->type,
-	                        $this->getValue()
+	   	$classes = array(
+	    	            'subfield',
+	                    'type-'.$this->type
 	    );
 
+	    $value = $this->getValue();
+	    if( !is_array( $value ) )
+	    	$classes[] = $value;
+	    
 	    $classes = apply_filters( 'cuisine_subfield_classes', $classes );
 	    $output = implode( ' ', $classes );
 
