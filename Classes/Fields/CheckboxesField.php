@@ -38,6 +38,50 @@ class CheckboxesField extends ChoiceField{
     }
 
 
+    /**
+     * Return html for a single choice
+     * 
+     * @param  array/string $choice
+     * @return string HTML
+     */
+    public function buildChoice( $choice ){
+
+        $html = '';
+
+        //set choice variables:
+        $id = 'subfield-'.$this->id.'-'.$choice['id'];
+        $value = $choice['key'];
+        $label = ( isset( $choice['label'] ) ? $choice['label'] : false );
+        $selected = $this->getSelectedType();
+
+        $html = '<span class="subfield-wrapper '.$value.'">';
+
+            $html .= '<input type="'.$this->type.'" ';
+
+            $html .= 'id="'.$id.'" ';
+
+            $html .= 'class="'.$this->getSubClass().'" ';
+
+            $html .= $this->getNameAttr( $value );
+
+            $html .= 'value="'.$value.'" ';
+
+            $html .= $this->getValidation();
+
+            $html .= ( in_array( $value, $this->properties['defaultValue'] ) ? ' '.$selected : '' );
+
+            $html .= '>';
+
+            $html .= '<label for="'.$id.'">';
+                $html .= ( $label ? $label : '' );
+            $html .= '</label>';
+
+        $html .= '</span>';
+
+        return $html;
+
+    }
+
 
 
 }

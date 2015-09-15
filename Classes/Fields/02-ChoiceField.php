@@ -56,7 +56,7 @@ class ChoiceField extends DefaultField{
 	 * 
 	 * @return String
 	 */
-	private function getNameAttr( $val ){
+	public function getNameAttr( $val ){
 
 		switch( $this->type ){
 
@@ -93,15 +93,18 @@ class ChoiceField extends DefaultField{
 	 */
 	public function getSubClass(){
 
-	   	$classes = array(
-	    	            'subfield',
-	                    'type-'.$this->type
+	    $classes = array(
+	                        'subfield',
+	                        'type-'.$this->type
 	    );
 
 	    $value = $this->getValue();
 	    if( !is_array( $value ) )
 	    	$classes[] = $value;
 	    
+	    if( $this->getProperty( 'classes' ) )
+	  		$classes = array_merge( $classes, $this->getProperty( 'classes' ) );
+
 	    $classes = apply_filters( 'cuisine_subfield_classes', $classes );
 	    $output = implode( ' ', $classes );
 
