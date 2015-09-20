@@ -181,7 +181,7 @@ class Scripts {
 
 		foreach( $scripts as $key => $script ){
 
-			if( $script['autoload'] )
+			if( isset( $script['autoload'] ) && $script['autoload'] )
 				$array[] = $key;
 
 		}
