@@ -63,5 +63,12 @@
             
             return true;
 
+        },
+
+        slug: function( _string ){
+
+            var reg = /^[a-z0-9-]+$/;
+            return reg.test( _string );
+
         }
     };
