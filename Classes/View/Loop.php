@@ -221,6 +221,21 @@
 
 
 		/**
+		 * Return the related posts
+		 * 
+		 * @return mixed, returns false if not available
+		 */
+		public static function related(){
+
+			if( function_exists( 'get_related' ) )
+				return get_related();
+
+			return false;
+			
+		}
+		
+
+		/**
 		 * Get the categories of the current post.
 		 *
 		 * @param int $id The post ID.
