@@ -3,7 +3,7 @@
  * Plugin Name: Cuisine
  * Plugin URI: http://chefduweb.nl/cuisine
  * Description: A framework for WordPress developers.
- * Version: 1.5.2
+ * Version: 1.5.3
  * Author: Luc Princen
  * Author URI: http://www.chefduweb.nl/
  * License: GPLv3

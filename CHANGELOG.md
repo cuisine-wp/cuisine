@@ -1,3 +1,13 @@
+### 1.5.3: 2015-10-05
+* Checkboxes choice-fields support added
+* Support for editor-fields in repeater fields added. 
+* Slug validation to the Validate class added.
+* Chef Related template-support added.
+* Field classes bugfix when there's no defaul value.
+* Bugfix in script-autoloaded.
+* Minor bugfixes.
+
+
 ### 1.5.2: 2015-09-08
 * Padding dropdown error fixed.
 * Removing an image with an image field
