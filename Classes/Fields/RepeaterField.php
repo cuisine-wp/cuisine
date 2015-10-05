@@ -58,7 +58,7 @@ class RepeaterField extends DefaultField{
 
             foreach( $values as $id => $value ){
 
-                $this->makeItem( $value, $id );
+                $this->makeItem( $value, $id, false );
                 $i++;
             }
 
@@ -76,7 +76,7 @@ class RepeaterField extends DefaultField{
      * 
      * @return String
      */
-    public function makeItem( $value, $id ){
+    public function makeItem( $value, $id, $doingAjax = true ){
 
         $prefix = $this->name.'['.$id.']';
 
@@ -98,7 +98,14 @@ class RepeaterField extends DefaultField{
 
                 $field->setName( $name );
                
-                $field->render();
+               if( $field->type !== 'editor' || $doingAjax == false ){    
+                    $field->render();
+
+               }else{
+
+                    $field->renderForAjax();
+
+               }
 
                 //change the name right back:
                 $field->setName( $oldName );

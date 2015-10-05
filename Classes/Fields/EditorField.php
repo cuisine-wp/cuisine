@@ -18,6 +18,34 @@ class EditorField extends DefaultField{
 
 
     /**
+     * Handle the field HTML output for ajax:
+     *
+     * @return string
+     */
+    public function renderForAjax(){
+
+        $class = 'field-wrapper';
+        $class .= ' '.$this->type;
+
+        if( $this->properties['label'] )
+            $class .= ' label-'.$this->properties['label'];
+
+        echo '<div class="'.$class.'">';
+
+            echo $this->getLabel();
+
+            echo '<div class="warning">';
+
+                $l = ( $this->label !== '' ? '"'.$this->label.'"' : __( 'dit veld', 'cuisine' ) );
+                echo '<p>'.sprintf( __( 'Klik aub op de "update"-knop om %s weer te geven', 'cuisine' ), $l ).'</p>';
+
+            echo '</div>';
+            
+        echo '</div>';
+    }
+
+
+    /**
      * Build the html
      *
      * @return String;
@@ -30,6 +58,7 @@ class EditorField extends DefaultField{
         ob_start();
             
         echo '<div class="editor-wrapper" data-id="'.$this->id.'" data-name="'.$this->name.'">';
+            
             wp_editor( 
                         $val,
                         $this->id,
@@ -39,14 +68,13 @@ class EditorField extends DefaultField{
                             'quicktags' => false
                         )
             );
+        
         echo '</div>';
 
         return ob_get_clean();
 
         return $val;
     }
-
-
 
 
 }

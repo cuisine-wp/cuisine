@@ -70,6 +70,18 @@
 	float:left;
 }
 
+.repeater-field .repeatable .warning{
+	width:100%;
+	display:block;
+	text-align:center;
+}
+
+.repeater-field .repeatable .warning p{
+	font-size:16px;
+	font-weight:bold;
+	color:#A7000B;
+}
+
 .repeater-field .repeatable .field-wrapper:nth-child( odd ){
 	margin-right:5%;
 }

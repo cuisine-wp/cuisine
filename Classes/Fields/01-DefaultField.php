@@ -175,6 +175,7 @@ class DefaultField{
     public function setName( $name ){
 
         $this->name = $name;
+        $this->id = $this->createId( $name, $this->label, $this->properties );
 
     }
 

@@ -17,7 +17,6 @@
 	function refreshFields(){
 
 		setEditors();
-
 		setMediaFields();
 
 	}
