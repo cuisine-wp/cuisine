@@ -72,17 +72,11 @@ class MetaboxBuilder {
 	 * @param \Cuisine\View\MetaboxView
 	 * @return object
 	 */
-	public function make( $title, $postType, array $options = array(), $view = null ){
+	public function make( $title, $postType, array $options = array() ){
 
 	  	$this->data['title'] = $title;
 	    $this->data['postType'] = $postType;
 	    $this->data['options'] = $this->parseOptions($options);
-
-	    if ( !is_null( $view ) ){
-
-	        $this->view = $view;
-	    
-	    }
 
 	    return $this;
 	}

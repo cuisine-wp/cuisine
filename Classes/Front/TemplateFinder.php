@@ -132,8 +132,17 @@ class TemplateFinder {
 			$located = $this->default;
 
 
-		if( $params != false )
-			$datas = $params;
+		if( $params != false ){
+			
+			if( !is_array( $params ) ){
+				$datas = $params;
+
+			}else{
+				extract( $params );
+
+			}
+
+		}
 
 		include( $located );
 
