@@ -109,13 +109,12 @@ class Scripts {
 		//allow registers to be overwritten:
 		do_action( 'cuisine_js_override' );
 
-		$url = esc_url_raw( Url::theme( 'js' ) );
 		$scripts = $this->get();
 		$autoload = $this->getAutoload();
 
 		$jsVars = array(
 			'siteUrl'	=> esc_url_raw( get_site_url() ),
-			'baseUrl'	=> $url,
+			'baseUrl'	=> get_site_url(),
 			'ajax'		=> admin_url('admin-ajax.php'),
 			'scripts' 	=> $scripts,
 			'load'		=> $autoload
@@ -149,8 +148,9 @@ class Scripts {
 		if( substr( $url, -3 ) === '.js' )
 			$url = substr( $url, 0, -3 );
 
-		//remove protocol
-		$url = str_replace( array( 'http:', 'https:' ), '', $url );
+		//remove the site_url if present, so we don't get into conflict with browsersync:
+		$site_url = trailingslashit( get_site_url() );
+		$url = str_replace( $site_url, '', $url );
 
 		return $url;
 	}
