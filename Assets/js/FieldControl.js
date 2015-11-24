@@ -18,6 +18,7 @@
 
 		setEditors();
 		setMediaFields();
+		setFileFields();
 
 	}
 	
@@ -47,4 +48,14 @@
 	 */
 	function setMediaFields(){
 		cuisineInitMediaFields();
+	}
+
+
+
+	/**
+	 * Re-init file-fields
+	 * 
+	 */
+	function setFileFields(){
+		cuisineInitFileFields();
 	}

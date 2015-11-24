@@ -207,6 +207,22 @@ class FieldBuilder {
 
     }
 
+
+    /**
+     * Return a FileField instance.
+     *
+     * @param string $name The name attribute of the file input.
+     * @param string $label The Labelof the file input.
+     * @param array $extras Extra field properties.
+     * @return \Cuisine\Fields\FileField
+     */
+    public function file( $name, $label = '', array $properties = array() ){
+
+        return $this->make( 'Cuisine\\Fields\\FileField', $name, $label, $properties );
+
+    }
+
+
     /**
      * Define an RepeaterField instance.
      *
@@ -374,6 +390,16 @@ class FieldBuilder {
 
                 'name'      => __( 'Media', 'cuisine' ),
                 'class'     => 'Cuisine\\Fields\\MediaField'
+            ),
+            'image'         => array( 
+
+                'name'      => __( 'Afbeelding', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\ImageField'
+            ),
+            'file'         => array( 
+
+                'name'      => __( 'Bestand', 'cuisine' ),
+                'class'     => 'Cuisine\\Fields\\FileField'
             ),
             'repeater'      => array( 
 
