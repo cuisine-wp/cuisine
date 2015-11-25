@@ -20,7 +20,7 @@
 
     	function forms( $args, $assoc_args ){
 
-    		update_option( 'exisitingForms', array() );
+    		update_option( 'existingForms', array() );
 
     		// Print a success message
     		WP_CLI::success( "All auto-generated forms cleared." );
