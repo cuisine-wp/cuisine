@@ -156,12 +156,22 @@ class DefaultField{
             $this->properties['options'] = false;
 
         if( !isset( $this->properties['class'] ) )
-            $this->properties['class'] = array(
-                                                'field',
-                                                'input-field',
-                                                'field-'.$this->name,
-                                                'type-'.$this->type
-            );
+            $this->properties['class'] = array();
+
+        if( !is_array( $this->properties['class'] ) )
+            $this->properties['class'] = array( $this->properties['class'] );
+
+        if( !isset( $this->properties['classes'] ) )
+            $this->properties['classes'] = array();
+
+
+        //base classes
+        $this->classes = array(
+            'field',
+            'input-field',
+            'field-'.$this->name,
+            'type-'.$this->type
+        );
 
     }
 
@@ -295,9 +305,9 @@ class DefaultField{
      * @return String
      */
     public function getClass(){
-
-        $classes = $this->properties['class'];
-        $classes = array_merge( $classes, $this->classes );
+        
+        $classes = array_merge( $this->properties['class'], $this->classes );
+        $classes = array_merge( $this->properties['classes'], $classes );
         $output = implode( ' ', $classes );
 
         return $output;
