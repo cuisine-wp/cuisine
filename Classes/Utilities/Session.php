@@ -43,4 +43,22 @@ class Session{
 
 	}
 
+
+	/**
+     * Check if there's a crawler:
+     * 
+     * @return boolean 
+     */
+    public static function isCrawler(){
+
+        $user = ( isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : '' );
+        $agents = 'Google|msnbot|Rambler|LinkedIn Bot|Twitterbot|Twitterbot/1.0|facebookexternalhit/1.1|facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)|Yahoo|AbachoBOT|accoona|AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
+            
+        if ( strpos( $agents , $user ) === false )
+            return false;
+
+        return true;
+    }
+
+
 }

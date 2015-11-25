@@ -111,10 +111,12 @@ class Scripts {
 
 		$scripts = $this->get();
 		$autoload = $this->getAutoload();
+		$site_url = get_site_url();
+		$site_url = str_replace( array( 'http://localhost:8888', 'http://localhost' ), '', $site_url );
 
 		$jsVars = array(
 			'siteUrl'	=> esc_url_raw( get_site_url() ),
-			'baseUrl'	=> get_site_url(),
+			'baseUrl'	=> $site_url,
 			'ajax'		=> admin_url('admin-ajax.php'),
 			'scripts' 	=> $scripts,
 			'load'		=> $autoload

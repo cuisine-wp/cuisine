@@ -28,7 +28,7 @@
 			//Add filters for current nav items:
 			add_filter( 'nav_menu_css_class', function( $classes, $item ){
 
-				global $Cuisine;
+				global $Cuisine, $wp_query;
 
 				foreach( $Cuisine->navItems as $name => $args ){
 
@@ -48,6 +48,25 @@
 							if( is_page( $args['query'] ) )
 								$addClass = true;
 			
+						}else if( $args['type'] == 'taxonomy' ){
+
+							//check if the current post has the taxonomy:
+							if( is_single() ){
+
+								$addClass = has_term( $args['value'], $args['query'] );
+
+							}else{
+
+								//check if we're looking at an archived page:
+								if( isset( $wp_query->queried_object->taxonomy ) && $wp_query->queried_object->taxonomy == $args['query'] ){
+									if( $wp_query->queried_object->slug == $args['value'] ){
+
+										$addClass = true;
+									
+									}
+								}
+
+							}
 						}
 			
 			

@@ -29,6 +29,18 @@ class User extends WP_User {
         return $this;
     }
 
+
+    /**
+     * Get the Current User Id
+     * 
+     * @return int
+     */
+    public function getId(){
+
+        return get_current_user_id();
+        
+    }
+
     /**
      * Check if the user can do a defined capability.
      *
