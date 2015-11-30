@@ -1,3 +1,13 @@
+### 1.5.4: 2015-11-25
+* Added the option to pass parameters to templates
+* Browsersync support for requirejs
+* Taxonomy highlighting in the Nav class
+* Session crawler checker added
+* Added a new "File" field-type
+* Bugfix to the field-class system.
+* Minor bugfixes.
+
+
 ### 1.5.3: 2015-10-05
 * Checkboxes choice-fields support added
 * Support for editor-fields in repeater fields added. 
