@@ -45,6 +45,24 @@ class Session{
 
 
 	/**
+	 * Get the post ID based on the WP root query
+	 * Else, default back to self::postId()
+	 * 
+	 * @return mixed
+	 */
+	public static function rootPostId(){
+
+		global $wp_the_query;
+
+		if( isset( $wp_the_query->post->ID ) )
+			return $wp_the_query->post->ID;
+
+		return self::postId();
+		
+	}
+
+
+	/**
      * Check if there's a crawler:
      * 
      * @return boolean 
