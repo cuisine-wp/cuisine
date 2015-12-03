@@ -108,6 +108,12 @@ class User extends WP_User {
 
             break;
 
+            default:
+
+                return get_user_meta( $user->ID, $attribute, true );
+
+            break;
+
         }
 
         return false;
