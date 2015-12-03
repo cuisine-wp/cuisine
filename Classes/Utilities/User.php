@@ -54,6 +54,66 @@ class User extends WP_User {
     
     }
 
+
+    /**
+     * Get an attribute for this user
+     * 
+     * @param  string $attribute name of the attribute
+     * @return mixed (result or false )
+     */
+    public function get( $attribute ){
+
+        $user = wp_get_current_user();
+
+        //no current user set:
+        if( !isset( $user->ID ) || $user->ID == '' )
+            return false;
+
+
+        switch( $attribute ){
+
+            case 'email':
+
+                return $user->user_login;
+
+            break;
+
+            case 'first-name':
+
+                return $user->user_firstname;
+
+            break;
+
+            case 'last-name':
+
+                return $user->user_lastname;
+
+            break;
+
+            case 'username':
+
+                return $user->user_login;
+
+            break;
+
+            case 'ID':
+
+                return $user->ID;
+
+            break;
+
+            case 'display-name':
+
+                return $user->display_name;
+
+            break;
+
+        }
+
+        return false;
+    }
+
+
     /**
      * Update the user properties.
      *
