@@ -69,36 +69,23 @@ class User extends WP_User {
         if( !isset( $user->ID ) || $user->ID == '' )
             return false;
 
-
         switch( $attribute ){
 
             case 'email':
 
-                return $user->user_login;
-
-            break;
-
-            case 'first-name':
-
-                return $user->user_firstname;
-
-            break;
-
-            case 'last-name':
-
-                return $user->user_lastname;
+                return $user->data->user_login;
 
             break;
 
             case 'username':
 
-                return $user->user_login;
+                return $user->data->user_login;
 
             break;
 
             case 'ID':
 
-                return $user->ID;
+                return $user->data->ID;
 
             break;
 
@@ -110,7 +97,7 @@ class User extends WP_User {
 
             default:
 
-                return get_user_meta( $user->ID, $attribute, true );
+                return get_user_meta( $user->data->ID, $attribute, true );
 
             break;
 
