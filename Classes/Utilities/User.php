@@ -108,6 +108,16 @@ class User extends WP_User {
 
 
     /**
+     * Check if the user is logged in
+     * 
+     * @return bool
+     */
+    public function loggedIn(){
+        return is_user_logged_in();
+    }
+
+
+    /**
      * Update the user properties.
      *
      * @param array $userdata
