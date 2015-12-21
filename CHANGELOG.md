@@ -1,3 +1,12 @@
+### 1.5.5: 2015-12-21
+* Date-picker support to the datefield added
+* Added a RootPostId function to the session class, to get the post ID from $wp_the_query
+* Adds easy access to User attributes
+* Lots of other little improvements to the User class
+* Script::analytics now works with the modern ga notation
+* Minor bugfixes.
+
+
 ### 1.5.4: 2015-11-25
 * Added the option to pass parameters to templates
 * Browsersync support for requirejs
