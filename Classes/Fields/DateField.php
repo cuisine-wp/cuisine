@@ -69,22 +69,5 @@ class DateField extends DefaultField{
     }
 
 
-    /**
-     * Create the class for the html output
-     * 
-     * @return String
-     */
-    public function getClass(){
-        
-        $classes = array_merge( $this->properties['class'], $this->classes );
-        $classes = array_merge( $this->properties['classes'], $classes );
-        $classes[] = 'datepicker';
-        $output = implode( ' ', $classes );
-
-        return $output;
-
-    }
-
-
 
 }
