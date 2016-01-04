@@ -13,11 +13,21 @@ class Sort{
 	 * @return array
 	 */
 	public static function byField( $data, $field, $order = null ){
+
+		$key = array_keys( $data );
+		$key = $key[0];
+		$notationStart = "['";
+		$notationEnd = "']";
+
+		if( is_object( $data[$key] ) ){
+			$notationStart = '->';
+			$notationEnd = '';
+		}
 	
 		if( $order == null || $order == 'ASC' ){
-	  		$code = "return strnatcmp(\$a['$field'], \$b['$field']);";
+	  		$code = "return strnatcmp(\$a".$notationStart.$field.$notationEnd.", \$b".$notationStart.$field.$notationEnd.");";
 	  	}else if( $order == 'DESC' ){
-	  		$code = "return strnatcmp(\$b['$field'], \$a['$field']);";
+	  		$code = "return strnatcmp(\$b".$notationStart.$field.$notationEnd.", \$a".$notationStart.$field.$notationEnd.");";
 		}
 	
 		uasort( $data, create_function( '$a,$b', $code ) );
