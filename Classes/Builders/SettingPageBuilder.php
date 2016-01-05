@@ -153,9 +153,10 @@ class SettingsPageBuilder {
 
 	    }else{
 
-	    	$parent = $this->data['options']['parent'];
-	    	$parentSlug = 'edit.php?post_type='.$parent;
+	    	$parentSlug = $this->data['options']['parent'];
 
+	    	if( substr( $parentSlug, -4 ) !== '.php' )
+	    		$parentSlug = 'edit.php?post_type='.$parentSlug;
 
 	    	add_submenu_page( 
 	    		$parentSlug, 
