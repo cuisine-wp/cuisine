@@ -74,7 +74,7 @@ class Date {
 			    if( $diff < 120 ) return __( '1 minuut geleden', 'cuisine' );
 			    if( $diff < 3600 ) return floor( $diff / 60 ) . __( ' minuten geleden' );
 			    if( $diff < 7200 ) return __( '1 uur geleden', 'cuisine' );
-			    if( $diff < 86400 ) return floor( $diff / 3600 ) . __( ' uren geleden', 'cuisine' );
+			    if( $diff < 86400 ) return floor( $diff / 3600 ) . __( ' uur geleden', 'cuisine' );
 			
 			}
 
@@ -92,7 +92,7 @@ class Date {
             	if( $diff < 120 ) { return __( 'over een minuutje', 'cuisine' ); }
             	if( $diff < 3600 ) { return __( 'over ', 'cuisine' ) . floor( $diff / 60 ) . __( ' minuten', 'cuisine' ); }
             	if( $diff < 7200 ) { return __( 'over een uur', 'cuisine' ); }
-            	if( $diff < 86400 ) { return __( 'over ', 'cuisine' ) . floor( $diff / 3600 ) . __( ' uren', 'cuisine' ); }
+            	if( $diff < 86400 ) { return __( 'over ', 'cuisine' ) . floor( $diff / 3600 ) . __( ' uur', 'cuisine' ); }
         	}
 
         	if( $day_diff == 1 ) { return __( 'Morgen', 'cuisine' ); }
