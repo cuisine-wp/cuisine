@@ -54,7 +54,7 @@ class Date {
 	* @param  String time / data
 	* @return  String relative time
 	*/
-	function relative( $ts ) {
+	public static function relative( $ts ) {
 
 		if( !ctype_digit( $ts ) ){
 			$ts = strtotime($ts);
@@ -101,6 +101,7 @@ class Date {
         	if( ceil($day_diff / 7 ) < 4 ) { return __( 'over ', 'cuisine' ) . ceil($day_diff / 7) . __( ' weken', 'cuisine' ); }
         	if( date('n', $ts) == date('n') + 1 ) { return __( 'volgende maand', 'cuisine' ); }
         	return self::get( $ts, 'F Y' );
+	
 		}
 	}
 
