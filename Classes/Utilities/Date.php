@@ -49,70 +49,59 @@ class Date {
 	*	Create a relative time:
 	*	
 	* @access public
+	* @author github.com/mattytemple
+	* 
 	* @param  String time / data
 	* @return  String relative time
 	*/
-	function relative($date) {
+	function relative( $ts ) {
 
-		$diff = time() - strtotime( $date );
-		if ( $diff<60){
-			if( Number::isPlural( $diff ) ){
-				return $diff .' '. __('seconden geleden', 'cuisine');
-			}else{
-				return $diff .' '. __('seconde geleden', 'cuisine');
-			}
-		}
+		if( !ctype_digit( $ts ) ){
+			$ts = strtotime($ts);
+    	}
+
+		$diff = time() - $ts;
+		if( $diff == 0 ) {
 		
-		$diff = round( $diff/60 );
+			return 'now';
 		
-		if ( $diff<60 ){
-			if( Number::isPlural( $diff ) ){
-				return $diff .' '. __('minuten geleden', 'cuisine');
-			}else{
-				return $diff .' '. __('minuut geleden', 'cuisine');
+		} elseif( $diff > 0 ){
+			$day_diff = floor($diff / 86400);
+
+			if($day_diff == 0) {
+			
+			    if( $diff < 60 ) return __( 'zojuist', 'cuisine' );
+			    if( $diff < 120 ) return __( '1 minuut geleden', 'cuisine' );
+			    if( $diff < 3600 ) return floor( $diff / 60 ) . __( ' minuten geleden' );
+			    if( $diff < 7200 ) return __( '1 uur geleden', 'cuisine' );
+			    if( $diff < 86400 ) return floor( $diff / 3600 ) . __( ' uren geleden', 'cuisine' );
+			
 			}
+
+			if( $day_diff == 1 ) { return __( 'Gisteren', 'cuisine' ); }
+			if( $day_diff < 7 ) { return $day_diff . __( ' dagen geleden', 'cuisine' ); }
+			if( $day_diff < 31 ) { return ceil($day_diff / 7) . __( ' weken geleden', 'cuisine' ); }
+			if( $day_diff < 60 ) { return __( 'vorige maand', 'cuisine' ); }
+			return self::get( $ts, 'F Y' );
+
+		} else {
+        
+        	$diff = abs( $diff );
+        	$day_diff = floor( $diff / 86400 );
+        	if($day_diff == 0) {
+            	if( $diff < 120 ) { return __( 'over een minuutje', 'cuisine' ); }
+            	if( $diff < 3600 ) { return __( 'over ', 'cuisine' ) . floor( $diff / 60 ) . __( ' minuten', 'cuisine' ); }
+            	if( $diff < 7200 ) { return __( 'over een uur', 'cuisine' ); }
+            	if( $diff < 86400 ) { return __( 'over ', 'cuisine' ) . floor( $diff / 3600 ) . __( ' uren', 'cuisine' ); }
+        	}
+
+        	if( $day_diff == 1 ) { return __( 'Morgen', 'cuisine' ); }
+        	if( $day_diff < 4 ) { return self::get( $ts, 'l' ); }
+        	if( $day_diff < 7 + (7 - date( 'w' ) ) ) { return __( 'volgende week', 'cuisine' ); }
+        	if( ceil($day_diff / 7 ) < 4 ) { return __( 'over ', 'cuisine' ) . ceil($day_diff / 7) . __( ' weken', 'cuisine' ); }
+        	if( date('n', $ts) == date('n') + 1 ) { return __( 'volgende maand', 'cuisine' ); }
+        	return self::get( $ts, 'F Y' );
 		}
-		
-		$diff = round( $diff/60 );
-
-		if ( $diff<24 ){
-			if( Number::isPlural( $diff ) ){
-				return $diff .' '. __('uren geleden', 'cuisine');
-			}else{
-				return $diff .' '. __('uur geleden', 'cuisine');
-			}
-		}
-	
-		$diff = round( $diff/24 );
-
-		if ( $diff<7 ){
-			if( Number::isPlural( $diff ) ){
-				return $diff .' '. __('dagen geleden', 'cuisine');
-			}else{
-				return $diff .' '. __('dag geleden', 'cuisine');
-			}
-		}
-		
-		$diff = round( $diff/7 );
-
-		if ( $diff<4 ){
-			if( Number::isPlural( $diff ) ){
-				return $diff .' '. __('weken geleden', 'cuisine');
-			}else{
-				return $diff .' '. __('week geleden', 'cuisine');
-			}
-		}
-
-		$diff = round( $diff/30 );
-
-		if ( $diff<4 ){
-			if( Number::isPlural( $diff ) ){
-				return $diff .' '. __('maanden geleden', 'cuisine');
-			}else{
-				return $diff .' '. __('maand geleden', 'cuisine');
-			}
-		}
-
 	}
 
 
