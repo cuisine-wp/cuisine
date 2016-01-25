@@ -1,3 +1,13 @@
+### 1.5.6: 2015-12-21
+
+* Fontawesome updated to 4.5
+* Custom submenu pages support added for the SettingsPage class
+* Added support for objects in Sort::byField
+* Refactored Relative dates
+* Bugfix for the datepicker ui
+* Minor bugfixes.
+
+
 ### 1.5.5: 2015-12-21
 * Date-picker support to the datefield added
 * Added a RootPostId function to the session class, to get the post ID from $wp_the_query
