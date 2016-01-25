@@ -19,6 +19,22 @@
 	padding:0 15px 5px 0;
 }
 
+.ui-datepicker-prev{
+	display:block !important;
+	margin-bottom:10px !important;
+	float:left;
+}
+
+.ui-datepicker-next{
+	display:block !important;
+	margin-bottom:10px !important;
+	float:right;
+}
+
+.ui-datepicker-title{
+	padding-top:20px !important;
+}
+
 .field-wrapper .input-field{
 	width:100%;
 	padding:10px;
