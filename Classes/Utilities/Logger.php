@@ -4,6 +4,11 @@ namespace Cuisine\Utilities {
 	use DateTime;
 
 
+	/**
+	 * Logger class, Saves everything to wp_content/logs/chef_cuisine.log
+	 *
+	 * @author @remybakker
+	 */
 	class Logger {
 
 		const FileName = 'chef_cuisine.log';
