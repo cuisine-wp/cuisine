@@ -243,10 +243,18 @@ class MetaboxBuilder {
 	 * @return void
 	 */
 	private function register( $postId, $fields ) {
-	    
+
 	    foreach( $fields as $field ){
 
-	       	$value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
+	    	$key = $field->name;
+
+	    	//change the value for editors, as the $_POST
+	    	//variable for that field is different
+	    	if( $field->type == 'editor' )
+	    		$key = $field->id;
+
+
+			$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
 			update_post_meta( $postId, $field->name, $value );
 	    
 	    }

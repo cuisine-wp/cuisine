@@ -64,7 +64,7 @@ class EditorField extends DefaultField{
                         $this->id,
                         array(
 
-                            'textarea_name' => $this->name,
+                            'textarea_name' => $this->id,
                             'quicktags' => false
                         )
             );

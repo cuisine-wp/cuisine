@@ -21,7 +21,7 @@ namespace Cuisine\Utilities {
 		 */
 		public static function error( $message, $display = false ){
 
-			self::make( $message, 'ERROR:', $logLevel );
+			self::make( $message, 'ERROR:', $display );
 		}
 
 		/**
