@@ -20,8 +20,9 @@ namespace Cuisine\Utilities {
 		 * @param  string $message 
 		 */
 		public static function error( $message, $display = false ){
+			
+				self::make( $message, 'ERROR:', $display );
 
-			self::make( $message, 'ERROR:', $display );
 		}
 
 		/**
@@ -31,7 +32,9 @@ namespace Cuisine\Utilities {
 		 */
 		public static function message( $message, $display = false ){
 
-			self::make( $message, 'MESSAGE:', $display );
+			if ( defined('CUISINE_LOG_MESSAGES') && CUISINE_LOG_MESSAGES )
+				self::make( $message, 'MESSAGE:', $display );
+			
 		}
 
 		/**
