@@ -85,7 +85,8 @@ class DefaultField{
             $class .= ' label-'.$this->properties['label'];
 
         if( $this->properties['wrapper-class'] && is_array( $this->properties['wrapper-class'] ) )
-            $class .= implode( ' ', $this->properties['wrapper-class'] )
+            $class .= implode( ' ', $this->properties['wrapper-class'] );
+        
 
         echo '<div class="'.$class.'">';
 
