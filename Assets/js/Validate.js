@@ -31,7 +31,62 @@
     		if( isNaN( _string ) )
     			return false;
 
+            return true;
     	},
+
+
+        equalHigherZero: function( _string ){
+
+            if( Validate.number( _string ) ){
+
+                if( _string >= 0 )
+                    return true;
+
+            }
+
+            return false;
+        },
+
+        equalLowerZero: function( _string ){
+
+            if( Validate.number( _string ) ){
+
+                if( _string <= 0 )
+                    return true;
+
+            }
+
+            return false;
+
+        },
+
+
+        higherZero: function( _string ){
+
+            if( Validate.number( _string ) ){
+
+                if( _string > 0 )
+                    return true;
+
+            }
+
+            return false;
+
+        },
+
+
+        lowerZero: function( _string ){
+
+            if( Validate.number( _string ) ){
+
+                if( _string < 0 )
+                    return true;
+
+            }
+
+            return false;
+
+        },
 
     	has_number: function( _string ){
 
