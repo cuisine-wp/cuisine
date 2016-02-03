@@ -44,6 +44,7 @@ class RepeaterField extends DefaultField{
     }
 
 
+
     /**
      * Build the html
      *
@@ -55,6 +56,8 @@ class RepeaterField extends DefaultField{
 
         $i = 0;
         if( !empty( $values ) ){
+
+            $values = array_values( $values );
 
             foreach( $values as $id => $value ){
 
@@ -182,6 +185,62 @@ class RepeaterField extends DefaultField{
 
     }
 
+    /**
+     * Returns an array with all repeated layouts, including post values
+     * 
+     * @return array
+     */
+    public function getFieldValues(){
+
+        $fieldLayouts = array();
+        $this->fields = $this->properties['fields'];
+
+        //check if this is a post-value:
+        if( isset( $_POST[ $this->name ] ) ){
+            
+            $fieldLayouts = $_POST[ $this->name ];
+
+            //store the editor-field-name as we'll be changing it later, to get the right id
+            $_fieldName = ''; 
+
+            //for each repeater layout:
+            foreach( $fieldLayouts as $key => $entry ){
+
+                $fieldLayouts[ $key ] = array();
+                $entryKeys = array_keys( $entry );
+
+                //loop through the fields, find the right values
+                foreach( $this->fields as $field ){
+                        
+                    //set the default value:
+                    $value = $field->getDefault();
+
+                    //editors use there IDs to POST, so they are the exception:
+                    if( $field->type !== 'editor' && isset( $entry[ $field->name ] ) ){
+                        
+                        $value = $entry[$field->name];
+
+                    }else if( $field->type == 'editor' ){
+
+                        //the editor name needs to be set correctly, to get the right ID:
+                        $name = $this->name.'['.$key.']['.$field->name.']';
+                        $id = $field->createId( $name, $field->label, $field->properties );
+
+                        if( isset( $_POST[ $id ] ) )
+                            $value = $_POST[ $id ];
+
+                    }
+
+                    //set the value to the right key:
+                    $fieldLayouts[ $key ][ $field->name ] = $value;
+
+                }
+            }
+        }
+
+        return $fieldLayouts;
+    }
+
 
     /**
      * Get sanitized values for this field
@@ -202,6 +261,10 @@ class RepeaterField extends DefaultField{
 
         if( $this->properties['defaultValue'] && !$val )
             $val = $this->getDefault();
+
+        if( is_array( $val ) )
+            $val = array_values( $val );
+
 
         return $val;
 

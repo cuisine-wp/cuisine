@@ -77,4 +77,24 @@ class EditorField extends DefaultField{
     }
 
 
+    /**
+     * Create a unique ID for this field:
+     * 
+     * @param  string $name  
+     * @param  string $label 
+     * @param  Array $array 
+     * @return
+     */
+    public function createId( $name, $label, $array ){
+
+        unset( $array['value'] );
+        unset( $array['defaultValue'] );
+        unset( $array['placeholder'] );
+
+
+        $string = $name . $label . serialize( $array );
+        return md5( $string );
+
+    }
+
 }
