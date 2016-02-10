@@ -61,15 +61,20 @@
 
 				$class = ( $class ? $class.' ' : '' ) . $name;
 
+				//create the nav wrap:
+				$wrap = '<nav id="%1$s" class="%2$s" ';
+				$wrap .= 'itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" role="navigation">';
+				$wrap .= '<ul>%3$s</ul></nav>';
+
 				$args = array( 
 					'theme_location' => $name,
-					'items_wrap' => '<nav id="%1$s" class="%2$s"><ul>%3$s</ul></nav>',
+					'items_wrap' => $wrap,
 					'depth' => $depth,
 					'menu_class' => $class,
 					'container' => false
 				);
 
-				wp_nav_menu( $args );	
+				wp_nav_menu( $args );
 			}
 
 		}

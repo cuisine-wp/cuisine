@@ -75,6 +75,7 @@ class SettingsPageBuilder {
 	  	$this->data['form-title'] = $this->getOptionName();
 	    $this->data['slug'] = $slug;
 	    $this->data['options'] = $this->parseOptions($options);
+	    $this->capability = $this->data['options']['capability'];
 
 	    if ( !is_null( $view ) )
 	        $this->view = $view;
@@ -142,12 +143,14 @@ class SettingsPageBuilder {
 
 	    if( $this->data['options']['parent'] === false ){
 
+
+
 	    	add_options_page( 
-	    		$page_title, 
-	    		$menu_title, 
-	    		$capability, 
-	    		$menu_slug, 
-	    		$function
+	    		$this->data['title'], 
+	    		$this->data['options']['menu_title'], 
+	    		$this->capability, 
+	    		$this->data['slug'], 
+	    		$this->data['render']
 	    	);
 
 
@@ -327,14 +330,6 @@ class SettingsPageBuilder {
 
 	    }
 	}
-
-
-
-
-
-
-
-
 
 }
 
