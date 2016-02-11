@@ -18,23 +18,28 @@ define([
                 var pid = $(this).data('postid');
                 var obj = $(this);
                 
-                var data = {
-                    action: 'socialShare',
-                    post_id: pid,
-                    type: type,
-                };
+                if( obj.data('href') !== undefined ){
+                    window.open( obj.data('href'), '_blank', 'width=626,height=300' );
+                }
+
+                if( pid !== undefined ){
+
+                    var data = {
+                        action: 'socialShare',
+                        post_id: pid,
+                        type: type,
+                    };
+
                 
-                window.open( obj.data('href'), '_blank', 'width=626,height=300' );
+                    //post with ajax:
+                    $.post( Cuisine.ajax, data, function(response) {
 
-                //post with ajax:
-                $.post( Cuisine.ajax, data, function(response) {
+                        if(response != 0 && response != ''){
+                            obj.find('p').html( count + 1 );
+                        }
 
-                    if(response != 0 && response != ''){
-                        obj.find('p').html( count + 1 );
-                    }
-
-                });
-
+                    });
+                }
             }
         });
 
