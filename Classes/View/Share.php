@@ -35,7 +35,7 @@
 		 * 
 		 * @var string
 		 */
-		private $title;
+		public $title;
 
 
 
@@ -44,7 +44,7 @@
 		 *
 		 * @var string
 		 */
-		private $link;
+		public $link;
 
 
 
