@@ -1,3 +1,13 @@
+### 1.5.7: 2016-02-12
+
+* Added a Logger
+* Update to RepeaterFields: they can now provide a cut-and-dry array of field-values on saving.
+* Big (breaking) fixes to Editor field handling
+* Field engine update (classes & validation)
+* Bugfix for the SettingsPageBuilder when no parent was set.
+* Minor bugfixes.
+
+
 ### 1.5.6: 2015-12-21
 
 * Fontawesome updated to 4.5
