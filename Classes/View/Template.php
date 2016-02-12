@@ -121,7 +121,7 @@
 		public static function section( $name ){
 
 			if( function_exists( 'get_section_template' ) )
-				echo get_section_template( $name );
+				return get_section_template( $name );
 
 		}
 
