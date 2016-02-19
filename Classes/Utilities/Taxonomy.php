@@ -126,6 +126,22 @@ class Taxonomy {
 
 
 	/**
+	 * Return the taxonomies's name (not slug)
+	 * 
+	 * @param  string $taxonomy
+	 * @return string Plural label of this Taxonomy
+	 */
+	public function name( $taxonomy ){
+
+		$taxonomy = get_taxonomy( $taxonomy );
+		if( is_object( $taxonomy ) ) 
+			return $taxonomy->labels->name;
+
+		return false;
+	}
+
+
+	/**
 	 * Get the public taxonomies
 	 * 
 	 * @return array
