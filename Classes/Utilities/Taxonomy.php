@@ -124,4 +124,25 @@ class Taxonomy {
 	    return $defaults;
 	}
 
+
+	/**
+	 * Get the public taxonomies
+	 * 
+	 * @return array
+	 */
+	public static function get(){
+
+		$taxonomies = get_taxonomies();
+
+		$array = array();
+		$hidden = array( 'link_category', 'nav_menu' );
+		foreach( $taxonomies as $tax ){
+			if( !in_array( $tax, $hidden ) )
+				$array[] = $tax;
+		}
+
+		return $array;
+
+	}
+
 }
