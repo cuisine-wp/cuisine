@@ -14,6 +14,10 @@ class Sort{
 	 */
 	public static function byField( $data, $field, $order = null ){
 
+		//return false if the data is empty, or not of the valid type:
+		if( empty( $data ) || ( !is_array( $data ) && !is_object( $data ) ) )
+			return false;
+
 		$key = array_keys( $data );
 		$key = $key[0];
 		$notationStart = "['";
