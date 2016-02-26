@@ -2,8 +2,7 @@
 namespace Cuisine\Builders;
 
 use Cuisine\Utilities\Session;
-use Cuisine\Utilities\User;
-use Cuisine\Utilities\Validator as Validator;
+use Cuisine\Wrappers\User;
 
 class MetaboxBuilder {
 
@@ -13,7 +12,7 @@ class MetaboxBuilder {
 	 *
 	 * @var Array
 	 */
-	public $data;
+	protected $data;
 
 
 	/**
@@ -21,7 +20,7 @@ class MetaboxBuilder {
 	 *
 	 * @var \Cuisine\Utilities\User
 	 */
-	private $user;
+	protected $user;
 
 
 	/**
@@ -29,7 +28,7 @@ class MetaboxBuilder {
 	 *
 	 * @var html
 	 */
-	private $view;
+	protected $view;
 
 
 	/**
@@ -37,14 +36,14 @@ class MetaboxBuilder {
 	 *
 	 * @var bool
 	 */
-	public $check = false;
+	protected $check = false;
 
 	/**
 	 * The capability to check.
 	 *
 	 * @var string
 	 */
-	private $capability;
+	protected $capability;
 
 
 
@@ -133,7 +132,7 @@ class MetaboxBuilder {
 	 */
 	public function display(){
 
-	    if( $this->check && !$this->user->can( $this->capability ) ) return;
+	    if( $this->check && !User::can( $this->capability ) ) return;
 
 	    $id = md5( $this->data['title']);
 
@@ -242,7 +241,7 @@ class MetaboxBuilder {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function register( $postId, $fields ) {
+	protected function register( $postId, $fields ) {
 
 	    foreach( $fields as $field ){
 
@@ -266,7 +265,7 @@ class MetaboxBuilder {
 	 * @param array $options The metabox options.
 	 * @return array
 	 */
-	private function parseOptions(array $options) {
+	protected function parseOptions(array $options) {
 
 	    return wp_parse_args($options, array(
 	        'context'   => 'normal',
@@ -282,7 +281,7 @@ class MetaboxBuilder {
 	 * @param array $fields
 	 * @return array
 	 */
-	private function getSections(array $fields) {
+	protected function getSections(array $fields) {
 
 	    $sections = array();
 
@@ -305,7 +304,7 @@ class MetaboxBuilder {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function setDefaultValue( \WP_Post $post, array $fields ) {
+	protected function setDefaultValue( \WP_Post $post, array $fields ) {
 	    
 	    foreach ( $fields as $field ){
 
