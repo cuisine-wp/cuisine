@@ -13,7 +13,7 @@ class MetaboxBuilder {
 	 *
 	 * @var Array
 	 */
-	private $data;
+	public $data;
 
 
 	/**
@@ -37,7 +37,7 @@ class MetaboxBuilder {
 	 *
 	 * @var bool
 	 */
-	private $check = false;
+	public $check = false;
 
 	/**
 	 * The capability to check.
