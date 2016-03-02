@@ -1,3 +1,13 @@
+### 1.5.8: 2016-03-02
+
+* Updated the Taxonomy utility to coincide with PostType.
+* Sorting bug fixed
+* MetaboxBuilder more extendable
+* Bugfixes to Field-controller in JS
+* Minor bugfixes.
+
+
+
 ### 1.5.7: 2016-02-12
 
 * Added a Logger
