@@ -20,6 +20,7 @@
 		setMediaFields();
 		setFileFields();
 
+
 	}
 	
 
@@ -31,12 +32,17 @@
 		jQuery( '.editor-wrapper' ).each( function( item ){
 
 			var _id = jQuery( this ).data( 'id' );
-			tinymce.execCommand('mceRemoveEditor', true, _id);
-			tinymce.execCommand( 'mceAddEditor', false, _id );
 
-			var init = tinymce.extend( {}, tinyMCEPreInit.mceInit[ _id ] );
-			try { tinymce.init( init ); } catch(e){ console.log( e );}
+			tinyMCE.execCommand( 'mceRemoveEditor', true, _id);	
+			tinyMCE.execCommand( 'mceAddEditor', false, _id );
 
+			var _settings =  tinyMCEPreInit.mceInit[ 'defaultEditor' ];
+			if(  typeof( tinyMCEPreInit.mceInit[ _id ] ) != 'undefined' )
+				_settings = tinyMCEPreInit.mceInit[ _id ];
+
+			var init = tinyMCE.extend( {}, _settings );
+			tinyMCE.init( init );
+			
 		});
 	}
 
