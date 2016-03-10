@@ -53,6 +53,7 @@ class CheckboxesField extends ChoiceField{
         $value = $choice['key'];
         $label = ( isset( $choice['label'] ) ? $choice['label'] : false );
         $selected = $this->getSelectedType();
+        $defaultValues = $this->properties['defaultValue'];
 
         $html = '<span class="subfield-wrapper '.$value.'">';
 
@@ -68,7 +69,9 @@ class CheckboxesField extends ChoiceField{
 
             $html .= $this->getValidation();
 
-            $html .= ( in_array( $value, $this->properties['defaultValue'] ) ? ' '.$selected : '' );
+           if( is_array( $defaultValues ) )
+                $html .= ( in_array( $value, $defaultValues ) ? ' '.$selected : '' );
+            
 
             $html .= '>';
 
