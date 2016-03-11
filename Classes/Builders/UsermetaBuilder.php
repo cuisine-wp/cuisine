@@ -4,7 +4,7 @@ namespace Cuisine\Builders;
 use Cuisine\Utilities\Session;
 use Cuisine\Wrappers\User;
 
-class MetaboxBuilder {
+class UsermetaBuilder {
 
 	
 	/**
@@ -48,7 +48,7 @@ class MetaboxBuilder {
 
 
 	/**
-	 * Build a metabox instance.
+	 * Build a User-metabox instance.
 	 *
 	 * @param \Cuisine\Validation\Validation $validator
 	 * @param \Cuisine\User\User $user
@@ -58,7 +58,8 @@ class MetaboxBuilder {
 		//$this->user = $user;
 		$this->data = array();
 
-		add_action( 'save_post', array( &$this, 'save' ) );
+		add_action( 'personal_options_update', array( &$this, 'save' ) );
+		add_action( 'edit_user_profile_update', array( &$this, 'save' ) );
 	}
 
 
@@ -71,10 +72,9 @@ class MetaboxBuilder {
 	 * @param \Cuisine\View\MetaboxView
 	 * @return object
 	 */
-	public function make( $title, $postType, array $options = array() ){
+	public function make( $title, array $options = array() ){
 
 	  	$this->data['title'] = $title;
-	    $this->data['postType'] = $postType;
 	    $this->data['options'] = $this->parseOptions($options);
 
 	    return $this;
@@ -84,7 +84,7 @@ class MetaboxBuilder {
 	 * Build the set metabox.
 	 *
 	 * @param array $fields A list of fields to display.
-	 * @return \Cuisine\Metabox\MetaboxBuilder
+	 * @return \Cuisine\Metabox\UsermetaBuilder
 	 */
 	public function set( $contents = array() ){
 
@@ -96,7 +96,7 @@ class MetaboxBuilder {
 	    	$this->sections = array();
 
 		    $this->data['fields'] = $contents;
-		    $this->data['render'] = array( &$this, 'render' );
+		    $this->data['render'] = 'self';
 		
 		//else it contains a view:
 		}else{
@@ -105,23 +105,11 @@ class MetaboxBuilder {
 			$this->data['render'] = $contents;
 
 		}
-	   	
-	   	add_action( 'add_meta_boxes', array( &$this, 'display' ) );
+
+		add_action( 'show_user_profile', array( &$this, 'display' ) );
+		add_action( 'edit_user_profile', array( &$this, 'display' ) );
 
 	    return $this;
-	}
-
-
-	/**
-	 * Restrict access to a specific user capability.
-	 *
-	 * @param string $capability
-	 * @return void
-	 */
-	public function can($capability){
-	    $this->capability = $capability;
-	    $this->check = true;
-	
 	}
 
 
@@ -131,14 +119,15 @@ class MetaboxBuilder {
 	 * @param array $fields
 	 * @return array $fields
 	 */
-	public function populateFields( $fields ){
+	public function setFields( $fields ){
 
-		$post_id = Session::postId();
+		global $current_user;
+		$user_id = ( isset( $_GET['user_id'] ) ? $_GET['user_id'] : $current_user->ID );
 
 		$i = 0;
 		foreach( $fields as $field ){
 
-			$meta = get_post_meta( $post_id, $field->name, true );
+			$meta = get_user_meta( $user_id, $field->name, true );
 			if( $meta )
 				$fields[ $i ]->properties['defaultValue'] = $meta;
 
@@ -146,6 +135,19 @@ class MetaboxBuilder {
 		}
 
 		return $fields;
+	}
+
+
+	/**
+	 * Restrict access to a specific user capability.
+	 *
+	 * @param string $capability
+	 * @return void
+	 */ 
+	public function can($capability){
+	    $this->capability = $capability;
+	    $this->check = true;
+	
 	}
 
 
@@ -158,27 +160,37 @@ class MetaboxBuilder {
 
 	    if( $this->check && !User::can( $this->capability ) ) return;
 
-	    $id = md5( $this->data['title']);
+	    if( $this->data['render'] == 'self' ){
+	    	
+	    	$this->render();
 
-	    // Fields are passed to the metabox $args parameter.
-	    add_meta_box( $id, $this->data['title'], $this->data['render'], $this->data['postType'], $this->data['options']['context'], $this->data['options']['priority'], $this->data['fields'] );
+	    }else{
+
+	    	//call the supplied function:
+	    	call_user_func_array( $this->data['render'] , $this->data['options'] );
+	    }
+
 	}
 
 
 	/**
-	 * Call by "add_meta_box", build the HTML code.
+	 * Call by "display", build the HTML code.
 	 *
-	 * @param \WP_Post $post The WP_Post object.
 	 * @param array $datas The metabox $args and associated fields.
 	 * @throws MetaboxException
 	 * @return void
 	 */
-	public function render( $post  ) {
+	public function render() {
 	   
 	    // Add nonce fields
 	    wp_nonce_field( Session::nonceAction, Session::nonceName );
 
-	    $fields = $this->populateFields( $this->data['fields'] );
+	    echo '<div class="user-meta-box">';
+
+	    if( $this->data['title'] != '' )
+	   		echo '<h3>'.$this->data['title'].'</h3>';
+
+	   	$fields = $this->setFields( $this->data['fields'] );
 	    foreach( $fields as $field ){
 
 	    	$field->render();
@@ -200,6 +212,8 @@ class MetaboxBuilder {
 
 	    	}
 	    }
+
+	    echo '</div>';
 	}
 
 
@@ -209,22 +223,16 @@ class MetaboxBuilder {
 	 * @param int $postId The post ID value.
 	 * @return void
 	 */
-	public function save( $postId ){
-
-	    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+	public function save( $userId ){
 
 	    $nonceName = (isset($_POST[Session::nonceName])) ? $_POST[Session::nonceName] : Session::nonceName;
 	    if (!wp_verify_nonce($nonceName, Session::nonceAction)) return;
 
 	    // Check user capability.
-	    if ( $this->check && $this->data['postType'] === $_POST['post_type'] ){
+		if ( !User::can( 'edit_user', $userId ) ) return;
 
-	        if ( !$this->user->can( $this->capability ) ) return;
-
-	    }
 
 	    $fields = array();
-
 	    
 	    // Loop through the registered fields.
 	    // With sections.
@@ -242,31 +250,18 @@ class MetaboxBuilder {
 	    
 	    }
 
-	    $this->register( $postId, apply_filters( 'cuisine_before_field_save', $fields, $postId, $this->data ) );
+	    $this->register( $userId, apply_filters( 'cuisine_before_user_field_save', $fields, $userId, $this->data ) );
 
-	}
-
-	/**
-	 * Register validation rules for the custom fields.
-	 *
-	 * @param array $rules A list of field names and their associated validation rule.
-	 * @return \Cuisine\Metabox\MetaboxBuilder
-	 */
-	public function validate(array $rules = array()) {
-
-	    $this->data['rules'] = $rules;
-
-	    return $this;
 	}
 
 	/**
 	 * Register the metabox and its fields into the DB.
 	 *
-	 * @param int $postId
+	 * @param int $userId
 	 * @param array $fields
 	 * @return void
 	 */
-	protected function register( $postId, $fields ) {
+	protected function register( $userId, $fields ) {
 
 	    foreach( $fields as $field ){
 
@@ -279,7 +274,7 @@ class MetaboxBuilder {
 
 
 			$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
-			update_post_meta( $postId, $field->name, $value );
+			update_user_meta( $userId, $field->name, $value );
 	    
 	    }
 	}

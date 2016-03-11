@@ -233,10 +233,6 @@ class DefaultField{
         global $post;
         $value = $val = false;
 
-        if( isset( $post ) )
-            $value = get_post_meta( $post->ID, $this->name, true );
-
-
         if( $value && !$val )
             $val = $value;
 
