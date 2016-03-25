@@ -184,7 +184,7 @@
 
 			$this->setType( 'twitter' );
 
-			$this->url = 'https://www.twitter.com/home?status=';
+			$this->url = 'https://www.twitter.com/intent/tweet?text=';
 			$this->url .= $this->title.' - '.$this->link;
 
 			return $this->render();
