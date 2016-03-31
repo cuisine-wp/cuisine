@@ -18,7 +18,7 @@
 * Minor bugfixes.
 
 
-### 1.5.6: 2015-12-21
+### 1.5.6: 2016-01-25
 
 * Fontawesome updated to 4.5
 * Custom submenu pages support added for the SettingsPage class
