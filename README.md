@@ -167,7 +167,7 @@ Sass::register( 'template', $url.'_template', false );
 ```
 
 ###Further Documentation
-Our full documentation will be online very soon.
+Our full documentation is a work in progress, [but can be found here](http://docs.chefduweb.nl)
 
 
 ## Contributing
