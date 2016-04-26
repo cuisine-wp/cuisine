@@ -20,6 +20,7 @@
 		setMediaFields();
 		setFileFields();
 
+		jQuery( document ).trigger( 'refreshFields' );
 
 	}
 	
