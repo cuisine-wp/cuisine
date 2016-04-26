@@ -1,3 +1,14 @@
+### 1.5.8: 2016-04-26
+
+* Updated the Twitter share-url
+* Support for international zipcode validation
+* Admin-fields now trigger a "refreshField"-event
+* Readme & changelog fixes
+* Fields don't check post_meta anymore
+* Minor bugfixes
+
+
+
 ### 1.5.8: 2016-03-02
 
 * Updated the Taxonomy utility to coincide with PostType.
