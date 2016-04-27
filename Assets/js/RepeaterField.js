@@ -32,11 +32,9 @@
 
  			var target = jQuery( e.target ).parent().parent();
  			var self = this;
- 			var template = 	_.template( 
- 								jQuery( '#'+self.$el.data( 'template' ) ).html(),
- 								{ highest_id: self.highestId }
- 							);
 
+ 			var _temp = _.template( jQuery( '#'+self.$el.data( 'template' ) ).html() );
+ 			var template = _temp({ highest_id: self.highestId });
 
  			target.after( template );
 
