@@ -16,6 +16,32 @@ class CheckboxesField extends ChoiceField{
     }
 
 
+    
+    /**
+     * Handle the field HTML code for metabox output.
+     *
+     * @return string
+     */
+    public function render(){
+
+        $class = 'field-wrapper';
+
+        $class .= ' checkboxes';
+
+        if( $this->properties['label'] )
+            $class .= ' label-'.$this->properties['label'];
+
+        if( $this->properties['wrapper-class'] && is_array( $this->properties['wrapper-class'] ) )
+            $class .= ' '.implode( ' ', $this->properties['wrapper-class'] );
+
+
+        echo '<div class="'.$class.'">';
+
+            echo $this->getLabel();
+            echo $this->build();
+
+        echo '</div>';
+    }
 
     /**
      * Build the html
