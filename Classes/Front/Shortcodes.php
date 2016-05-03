@@ -51,6 +51,9 @@ class Shortcodes {
 
 		add_shortcode( 'button', array( &$this, 'makeButton' ) );
 		add_shortcode( 'link', array( &$this, 'makeLink' ) );
+
+		add_shortcode( 'telephone', array( &$this, 'phoneNumber' ) );
+		add_shortcode( 'email', array( &$this, 'mailTo' ) );
 	}
 
 
@@ -158,6 +161,44 @@ class Shortcodes {
 				$html .= do_shortcode( $content );
 
 		$html .= '</a>';
+
+		return $html;
+	}
+
+	/**
+	 * Phonenumber shortcode 
+	 * 
+	 * @param  array $atts    [description]
+	 * @param  string $content [description]
+	 * @return [type]          [description]
+	 */
+	public function phoneNumber( $atts, $content = null ){
+
+		$mobilePrefix = ( wp_is_mobile() ) ? 'tel' : 'callto';
+
+		$html = '<span itemscope itemtype="http://schema.org/LocalBusiness"><a itemprop="telephone" class="phone-link" href="'.$mobilePrefix.':'.do_shortcode( $content ).'">';
+
+				$html .= do_shortcode( $content ).'&shy';
+
+		$html .= '</a></span>';
+
+		return $html;
+	}
+
+	/**
+	 * Email shortcode 
+	 * 
+	 * @param  array $atts    [description]
+	 * @param  string $content [description]
+	 * @return [type]          [description]
+	 */
+	public function mailTo( $atts, $content = null ){
+		
+		$html = '<span itemscope itemtype="http://schema.org/LocalBusiness"><a itemprop="email" class="email-link" href="mailto:'.do_shortcode( $content ).'">';
+
+				$html .= do_shortcode( $content ).'&shy';
+
+		$html .= '</a></span>';
 
 		return $html;
 	}

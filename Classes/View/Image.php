@@ -276,4 +276,34 @@ class Image {
 		add_theme_support( 'post-thumbnails' );
 	}
 
+	public static function getImageHTML($postId, $size = 'full') {
+
+		$thumb = wp_get_attachment_image_src( get_post_thumbnail_id($postId), $size );
+		$img_url = $thumb['0']; 
+
+		$thumb_id = get_post_thumbnail_id();
+
+		$thumbnail_src = get_post( $thumb_id );
+
+		$img_caption = '';
+		$img_title =  '';
+		$img_description = '';
+		$img_alt = '';
+
+		if( isset($thumbnail_src) ){
+
+			$img_caption =  $thumbnail_src->post_excerpt;
+			$img_title =  $thumbnail_src->post_title;
+			$img_description = $thumbnail_src->post_content;
+			$img_alt = get_post_meta($thumb_id, '_wp_attachment_image_alt', true);
+
+			if( $img_alt !== '' ){
+				$show_alt = 'alt="'.$img_alt.'"';
+			}
+			return '<img itemprop="image" src="'.$img_url.'" '.$show_alt.' title="'.$img_title.'" />';
+		}
+
+		return get_the_post_thumbnail($postId);
+	}
+
 }
