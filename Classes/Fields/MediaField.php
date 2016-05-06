@@ -28,8 +28,9 @@ class MediaField extends DefaultField{
     public function build(){
 
         $media = $this->getValue();
-
-        $html = '<div class="media-grid" data-highest-id="'.$this->getHighestItemId().'">';
+        $datas = $this->getDatas();
+        
+        $html = '<div class="media-grid" '.$datas.'>';
 
             $html .= '<div class="media-inner">';
             
@@ -108,7 +109,7 @@ class MediaField extends DefaultField{
     public function renderTemplate(){
 
         //make a clonable item, for javascript:
-        $html = '<script type="text/template" id="media_item_template">';
+        $html = '<script type="text/template" id="'.$this->name.'_item_template">';
             $html .= $this->makeItem( array( 
                 'id' => '<%= item_id %>',
                 'preview' => '<%= preview_url %>', 
@@ -120,6 +121,17 @@ class MediaField extends DefaultField{
         return $html;
     }
 
+
+
+    private function getDatas(){
+
+        $datas = '';
+        $datas .= 'data-id="'.$this->id.'" ';
+        $datas .= 'data-name="'.$this->name.'" ';
+        $datas .= 'data-highest-id="'.$this->getHighestItemId().'" ';
+
+        return $datas;
+    }
 
 
     /**

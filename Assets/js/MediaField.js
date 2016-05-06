@@ -11,6 +11,7 @@
 	
 		items: {},
 		id: '',
+		name: '',
 		highestId: '',
 		container: '',
 
@@ -25,6 +26,7 @@
 
  			var self = this;
  			self.id = self.$el.data('id');
+ 			self.name = self.$el.data('name');
  			self.highestId = parseInt( self.$el.data( 'highest-id' ) );
  			
  			self.container = self.$el.find( '.media-inner' );
@@ -161,7 +163,7 @@
                             _preview = attachment.sizes.thumbnail.url;
                     }
 
-                    var htmlTemplate = _.template( jQuery( '#media_item_template').html() );
+                    var htmlTemplate = _.template( jQuery( '#'+self.name+'_item_template').html() );
                     var output = htmlTemplate({
                         item_id: self.getHighestId(),
                         preview_url: _preview,
