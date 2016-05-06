@@ -1,4 +1,15 @@
-### 1.5.8: 2016-04-26
+### 1.6.0: 2016-05-06
+
+* Support for schema.org added
+* Fix for multiple media-fields on a single page
+* Fix for 404-template finding
+* Post type labels updated to coincide with WP 4.5
+* Repeater-field fixes for underscore 1.7
+* Minor bugfixes
+
+
+
+### 1.5.9: 2016-04-26
 
 * Updated the Twitter share-url
 * Support for international zipcode validation
