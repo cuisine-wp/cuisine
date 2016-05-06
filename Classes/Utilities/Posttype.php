@@ -95,19 +95,30 @@ class PostType {
 	private function setDefaultArguments( $plural, $singular ){
 
         $labels = array(
-            'name' => __( $plural, 'cuisine' ),
-            'singular_name' => __( $singular, 'cuisine' ),
-            'add_new' => __( 'Add New', 'cuisine' ),
-            'add_new_item' => __( 'Add New '. $singular, 'cuisine' ),
-            'edit_item' => __( 'Edit '. $singular, 'cuisine' ),
-            'new_item' => __( 'New ' . $singular, 'cuisine' ),
-            'all_items' => __( 'All ' . $plural, 'cuisine' ),
-            'view_item' => __( 'View ' . $singular, 'cuisine' ),
-            'search_items' => __( 'Search ' . $singular, 'cuisine' ),
-            'not_found' =>  __( 'No '. $singular .' found', 'cuisine' ),
-            'not_found_in_trash' => __( 'No '. $singular .' found in Trash', 'cuisine' ),
-            'parent_item_colon' => '',
-            'menu_name' => __( $plural, 'cuisine' )
+            'name' 					=> __( $plural, 'cuisine' ),
+			'singular_name' 		=> __( $singular, 'cuisine' ),
+			'add_new' 				=> __( 'Add New', 'cuisine' ),
+			'add_new_item' 			=> __( 'Add New '. $singular, 'cuisine' ),
+			'edit_item' 			=> __( 'Edit '. $singular, 'cuisine' ),
+			'new_item' 				=> __( 'New ' . $singular, 'cuisine' ),
+			'view_item' 			=> __( 'View ' . $singular, 'cuisine' ),
+			'search_items' 			=> __( 'Search ' . $singular, 'cuisine' ),
+			'not_found' 			=> __( 'No '. $singular .' found', 'cuisine' ),
+			'not_found_in_trash' 	=> __( 'No '. $singular .' found in Trash', 'cuisine' ),
+			'all_items'  			=> __( 'All ' . $plural, 'cuisine' ),
+			'archives' 				=> __( 'Archives', 'cuisine' ),
+			'insert_into_item' 		=> __( 'Insert into '.$singular, 'cuisine' ),
+			'uploaded_to_this_item' => __( 'Upload to '.$singular, 'cuisine' ),
+			'featured_image' 		=> __( 'Featured image', 'cuisine' ),
+			'set_featured_image' 	=> __( 'Set featured image', 'cuisine' ),
+			'remove_featured_image' => __( 'Remove featured image', 'cuisine' ),
+			'use_featured_image' 	=> __( 'Use as featured image', 'cuisine' ),
+			'menu_name' 			=> __( $plural, 'cuisine' ),
+			'filter_items_list' 	=> __( 'Filter '.$plural, 'cuisine' ),
+			'name_admin_bar' 		=> __( $singular, 'cuisine' ),
+			'parent_item_colon' 	=> '',
+			'items_list_navigation' => '',
+			'items_list' 			=> ''
         );
 
         $defaults = array(
