@@ -62,6 +62,15 @@
 				return $include;
 
 
+			//catch 404 errors:
+			if( is_404() ){
+
+				$fourOhFourTemplate = apply_filters( 'cuisine-404-template', 'views/404.php' );
+				return locate_template( array( $fourOhFourTemplate, 'index.php' ) );
+
+			}
+
+
 			//check if we have custom template wishes:
 			if( isset( $registered[ $post_type ] ) ){
 	
