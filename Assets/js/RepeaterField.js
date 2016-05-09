@@ -12,6 +12,7 @@
  		id: '',
  		highestId: '',
  		template: '',
+ 		items: {},
 
 
  		events: {
@@ -24,7 +25,9 @@
 
  		 	var self = this;
  		 	self.highestId = parseInt( self.$el.data( 'highest-id' ) );
-
+ 		 	self.setItemEvents();
+ 		 	self.setItems();
+ 		 	self.setItemPositions();
  		},
 
 
@@ -41,6 +44,9 @@
  			self.highestId += 1;
  			self.$el.attr( 'data-highest-id', self.highestId );
 
+ 			self.setItems();
+ 			self.setItemPositions();
+
  			refreshFields();
 
  		},
@@ -50,8 +56,70 @@
  			var target = jQuery( e.target ).parent().parent();
  			target.remove();
 
+ 			self.setItems();
+ 			self.setItemPositions();
+
  			refreshFields();
 
+ 		},
+
+
+
+ 		/**
+ 		 * Set the items object for this field:
+ 		 *
+ 		 * @return void
+ 		 */
+ 		setItems: function(){
+ 			
+ 			var self = this;
+ 			self.items = self.$el.find( '.repeatable' );
+
+ 		},
+
+ 		/**
+ 		 * Set item positions:
+ 		 *
+ 		 * @return void
+ 		 */
+ 		setItemPositions: function(){
+
+ 			var self = this;
+
+ 			for( var i = 0; i < self.items.length; i++ ){
+
+ 				var item = jQuery( self.items[ i ] );
+
+ 				//set the position:
+ 				item.find( '#position' ).val( i );
+
+ 			}
+
+ 		},
+
+ 		/**
+ 		 * Sets the sorting event for this repeaterfield
+ 		 *
+ 		 * @return void
+ 		 */
+ 		setItemEvents: function(){
+ 			
+ 			var self = this;
+
+ 			self.$el.sortable({
+ 				placeholder: 'repeater-placeholder',
+ 				handle: '.sort-pin',
+ 				update: function (event, ui) {
+
+ 					self.setItems();
+ 					self.setItemPositions();
+
+ 				}
+ 			});
+ 		},
+
+ 		destroy: function(){
+ 			this.undelegateEvents();
  		}
 	
  	});
@@ -64,8 +132,27 @@
 
  	});
 
+
+ 	var _repeaters = [];
+
+
+
  	function cuisineInitRepeaterFields(){
+
+
+ 		if( _repeaters.length > 0 ){
+
+ 			for( var i = 0; _repeaters.length > i; i++ ){
+ 				_repeaters[ i ].destroy();
+
+ 			}
+
+ 		}
+
+ 		_repeaters = [];
+
  		jQuery('.repeater-field' ).each( function( index, obj ){
  			var rf = new RepeaterField( { el: obj } );
+ 			_repeaters.push( rf );
  		});
  	}
