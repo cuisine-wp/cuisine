@@ -34,6 +34,7 @@ class RepeaterField extends DefaultField{
         $datas = $this->buildDatas();
 
         echo '<div class="repeater-field" '.$datas.'>';
+
             echo $this->getLabel();
             $this->build();
 
