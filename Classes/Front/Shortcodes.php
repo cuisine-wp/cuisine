@@ -177,7 +177,7 @@ class Shortcodes {
 		$mobilePrefix = ( wp_is_mobile() ) ? 'tel' : 'callto';
 		$hypens = array(' ', '-');
 
-		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness"> class="phone-link" href="'.$mobilePrefix.':'.substr_replace ( $hypens, '', do_shortcode( $content ) ).'"><span itemprop="telephone">';
+		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness" class="phone-link" href="'.$mobilePrefix.':'.str_replace ( $hypens, '', do_shortcode( $content ) ).'"><span itemprop="telephone">';
 
 				$html .= do_shortcode( $content ).'&shy';
 
@@ -195,7 +195,7 @@ class Shortcodes {
 	 */
 	public function mailTo( $atts, $content = null ){
 		
-		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness"> class="email-link" href="mailto:'.do_shortcode( $content ).'"><span itemprop="email">';
+		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness" class="email-link" href="mailto:'.do_shortcode( $content ).'"><span itemprop="email">';
 
 				$html .= do_shortcode( $content ).'&shy';
 
