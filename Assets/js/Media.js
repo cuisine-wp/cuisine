@@ -19,10 +19,9 @@
 
         //keep the post id variable for later, if we decide to change it:
             
-        var wp_media_post_id;
-        if( typeof( wp.media.model.settings.post ) != 'undefined' ){
+        var wp_media_post_id = '';
+        if( typeof( wp.media.model.settings.post ) != 'undefined' )
             wp_media_post_id = wp.media.model.settings.post.id;
-        }
 
 
         var PostExtras = PostExtras;

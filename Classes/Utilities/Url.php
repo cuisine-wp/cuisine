@@ -197,15 +197,6 @@ class Url {
 		// see http://shiflett.org/blog/2006/mar/server-name-versus-http-host
 		$url .= $_SERVER['HTTP_HOST'];
 
-		$port = $_SERVER['SERVER_PORT'];
-
-		// Is it on a non standard port?
-		if ($is_https && ($port != 443)) {
-		    $url .= ':' . $_SERVER['SERVER_PORT'];
-		} elseif (!$is_https && ($port != 80)) {
-		    $url .= ':' . $_SERVER['SERVER_PORT'];
-		}
-
 		// Get the rest of the URL
 		if (!isset($_SERVER['REQUEST_URI'])) {
 		    // Microsoft IIS doesn't set REQUEST_URI by default
