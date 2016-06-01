@@ -37,7 +37,7 @@ class SelectField extends ChoiceField{
 
             $html .= $this->getValidation();
 
-            if( $this->getProperty( 'multi' ) )
+            if( $this->getProperty( 'multiple' ) )
                 $html .= ' multiple';
 
         $html .= '>';

@@ -195,7 +195,7 @@ class Shortcodes {
 	 */
 	public function mailTo( $atts, $content = null ){
 		
-		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness"> class="email-link" href="mailto:'.do_shortcode( $content ).'"><span itemprop="email">';
+		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness"> class="email-link" href="mailto:'.esc_html( $content ).'"><span itemprop="email">';
 
 				$html .= do_shortcode( $content ).'&shy';
 
