@@ -160,8 +160,23 @@ class MetaboxBuilder {
 
 	    $id = md5( $this->data['title']);
 
-	    // Fields are passed to the metabox $args parameter.
-	    add_meta_box( $id, $this->data['title'], $this->data['render'], $this->data['postType'], $this->data['options']['context'], $this->data['options']['priority'], $this->data['fields'] );
+	    //do multiple add_meta_box calls when we're dealing with an array of post_types
+	    if( !is_array( $this->data['postType'] ) )
+	    	$this->data['postType'] = array( $this->data['postType'] );
+
+		foreach( $this->data['postType'] as $postType ){
+
+			add_meta_box( 
+				$id, 
+				$this->data['title'], 
+				$this->data['render'], 
+				$postType, 
+				$this->data['options']['context'], 
+				$this->data['options']['priority'], 
+				$this->data['fields']
+			);
+		}
+
 	}
 
 
