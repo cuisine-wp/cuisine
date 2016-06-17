@@ -221,7 +221,7 @@ class SettingsPageBuilder {
 
 	    	echo '<div class="button-wrapper">';
 
-	    		echo '<input type="submit" class="button button-primary button-large" value="Opslaan">';
+	    		echo '<input type="submit" class="button button-primary button-large" value="'.__( 'Save settings', 'cuisine' ).'">';
 
 	    	echo '</div>';
 	    	echo '</form>';
