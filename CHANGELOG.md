@@ -1,3 +1,12 @@
+### 1.6.1: 2016-06-27
+
+* Compatibility release for the new Sections & Forms
+* Fixed language issues
+* Fixed a schema.org shortcode bug
+* Minor bugfixes
+
+
+
 ### 1.6.0: 2016-05-06
 
 * Support for schema.org added
