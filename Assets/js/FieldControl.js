@@ -20,6 +20,7 @@
 		setMediaFields();
 		setFileFields();
 
+		//trigger the refresh-fields event for external plugins
 		jQuery( document ).trigger( 'refreshFields' );
 
 	}

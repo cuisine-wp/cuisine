@@ -35,6 +35,7 @@ class RepeaterField extends DefaultField{
 
         echo '<div class="repeater-field" '.$datas.'>';
 
+            echo $this->getLabel();
             $this->build();
 
         echo '</div>';
@@ -90,7 +91,6 @@ class RepeaterField extends DefaultField{
                 $oldName = $field->name;
                 $name = $prefix.'['.$field->name.']';
 
-                    
                 $val = ( isset( $value[$field->name] ) ? $value[$field->name] : '' );
 
                 $field->properties['defaultValue'] = $val;
@@ -99,6 +99,7 @@ class RepeaterField extends DefaultField{
                     $field->classes[] = 'multi';
 
 
+                //change field-name for rendering:
                 $field->setName( $name );
                
                if( $field->type !== 'editor' || $doingAjax == false ){    
@@ -114,9 +115,13 @@ class RepeaterField extends DefaultField{
                 $field->setName( $oldName );
         
             }
+
+            //add position field:
+            echo '<input type="hidden" class="multi" name="'.$prefix.'[position]" id="position"/>';
         
             $this->buildControls();
-        
+
+
             echo '<div class="clearfix"></div>';
         echo '</div>';
 
@@ -169,6 +174,9 @@ class RepeaterField extends DefaultField{
             echo '<div class="min btn"><span class="dashicons dashicons-minus"></span></div>';
 
         echo '</div>';
+
+        echo '<div class="sort-pin"><span class="dashicons dashicons-sort"></span></div>';
+
     }
 
 
