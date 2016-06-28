@@ -12,6 +12,7 @@ Cuisine is a WordPress utilitybelt / framework aimed at making WordPress develop
 | PHP >= 5.4.x    | `php -v`     | [php.net](http://php.net/manual/en/install.php) |
 
 
+---
 
 ## Features
 
@@ -22,10 +23,11 @@ Cuisine is a WordPress utilitybelt / framework aimed at making WordPress develop
 * Cleans up the eventual HTML output 
 * Some handy shortcodes ( buttons, google analytics event links, etc. )
 
+---
 
 ## Installing
 
-Clone the git repo - `git clone https://github.com/chefduweb/cuisine.git` or install with composer:
+Clone the git repo - `git clone https://github.com/cuisine-wp/cuisine.git` or install with composer:
 
 `composer require chefduweb/cuisine`
 
@@ -35,11 +37,30 @@ After you have all the files you need to install cuisine like a regular WordPres
 2. get into the WordPress admin and go to plugins
 3. activate Cuisine.
 
+---
+
 ## Getting Started
 
-Creating plugins and themes with the power of Cuisine is quite easy; you just create regular WordPress themes & plugins. However, if you want to start off with some boilerplate code we recommand [Carte Blanche] (https://github.com/chefduweb/carte-blanche), our WordPress empty-canvas theme and [Crouton](https://github.com/chefduweb/crouton), a scaffolded plugin.
+Creating plugins and themes with the power of Cuisine is quite easy; you just create regular WordPress themes & plugins. However, if you want to start off with some boilerplate code we recommand [Carte Blanche](https://github.com/cuisine-wp/carte-blanche), our WordPress empty-canvas theme and [Crouton](https://github.com/cuisine-wp/crouton), a scaffolded plugin.
 
-Here are some examples:
+---
+
+## Documentation
+
+Full documentation on Cuisine Core, as well as other plugins is available at [docs.get-cuisine.cooking](http://docs.get-cuisine.cooking). Here's a short list of our most important plugins:
+
+- [Cuisine Core documentation](http://docs.get-cuisine.cooking/core)
+- [Cuisine Sections documentation](http://docs.get-cuisine.cooking/sections)
+- [Cuisine Forms documentation](http://docs.get-cuisine.cooking/forms)
+
+
+---
+
+## Quick examples
+
+Here are a few quick examples on how Cuisine will be making your life easier:
+
+---
 
 ### Post Types & Taxonomies
 
@@ -166,17 +187,14 @@ Sass::register( 'template', $url.'_template', false );
 
 ```
 
-###Further Documentation
-Our full documentation is a work in progress, [but can be found here](http://docs.chefduweb.nl)
-
 
 ## Contributing
 
 Everyone is welcome to help [contribute](CONTRIBUTING.md) and improve this project. There are several ways you can contribute:
 
-* Reporting issues (please read [issue guidelines](https://github.com/necolas/issue-guidelines))
+* Reporting issues
 * Suggesting new features
 * Writing or refactoring code
-* Fixing [issues](https://github.com/chefduweb/cuisine/issues)
+* Fixing [issues](https://github.com/cuisine-wp/cuisine/issues)
 
 
