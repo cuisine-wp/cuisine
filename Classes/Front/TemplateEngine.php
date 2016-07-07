@@ -58,9 +58,9 @@
 			//check if a page-template has been set:
 			$themePath = Url::path( 'theme' );
 			$includeSlug = str_replace( $themePath, '', $include );
+			
 			if( is_page_template( $includeSlug ) )
 				return $include;
-
 
 			//catch 404 errors:
 			if( is_404() ){

@@ -125,7 +125,7 @@ class Url {
 
 			case 'theme':
 
-				$path = \trailingslashit( get_template_directory() );
+				$path = \trailingslashit( get_stylesheet_directory() );
 				$path .= $folder;
 				break;
 
