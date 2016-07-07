@@ -23,7 +23,7 @@
 		function __construct(){
 	
 			//set the folder string:
-			$this->folder = apply_filters( 'cuisine_template_location', 'templates/' );
+			$this->folder = apply_filters( 'cuisine_template_location', 'pages/' );
 	
 			//setup the events
 			$this->listen();
@@ -65,7 +65,7 @@
 			//catch 404 errors:
 			if( is_404() ){
 
-				$fourOhFourTemplate = apply_filters( 'cuisine-404-template', 'views/404.php' );
+				$fourOhFourTemplate = apply_filters( 'cuisine-404-template', 'pages/404.php' );
 				return locate_template( array( $fourOhFourTemplate, 'index.php' ) );
 
 			}

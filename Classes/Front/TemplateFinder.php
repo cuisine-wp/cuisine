@@ -64,35 +64,19 @@ class TemplateFinder {
 		return $this;
 	}
 
+
 	/**
-	 * Get a template in the /templates directory
+	 * Get a page template in the /pages directory
 	 * 
 	 * @param  string $filename
 	 * @param  string $default
 	 * @return \Cuisine\Front\TemplateFinder ( chainable )
 	 */
-	public function template( $filename, $default ){
+	public function page( $filename, $defaul ){
 
-		$folder = apply_filters( 'cuisine_theme_templates_folder', 'templates' );
-		$path = trailingslashit( $folder );
+		$folder = apply_filters( 'cuisine_theme_templates_folder', 'pages' ); //backwards compat
+		$folder = apply_filters( 'cuisine_theme_pages_folder', $folder );
 
-		$this->default = $this->sanitizeDefault( $default );
-		$this->overwrite = array( $path.$filename );
-
-		return $this;
-	}
-
-
-	/**
-	 * Get a template in the /views directory
-	 * 
-	 * @param  string $filename
-	 * @param  string $default
-	 * @return \Cuisine\Front\TemplateFinder ( chainable )
-	 */
-	public function view( $filename, $default ){
-
-		$folder = apply_filters( 'cuisine_theme_views_folder', 'views' );
 		$path = trailingslashit( $folder );
 
 		$this->default = $this->sanitizeDefault( $default );
@@ -161,6 +145,46 @@ class TemplateFinder {
 		$located = locate_template( $templates );
 
 		return $located; 
+	}
+
+
+
+	/*******************************************************/
+	/**              Deprecated functions
+	/*******************************************************/
+
+
+	/**
+	 * Get a template in the /templates directory
+	 *
+ 	 * @deprecated since 1.6.2
+	 * 
+	 * @param  string $filename
+	 * @param  string $default
+	 * @return \Cuisine\Front\TemplateFinder ( chainable )
+	 */
+	public function template( $filename, $default ){
+
+		_deprecated_function( 'Template::template', '1.6.2', 'Template::page' );
+		return self::page( $filename, $default );
+		
+	}
+
+
+	/**
+	 * Get a template in the /views directory
+	 *
+	 * @deprecated since 1.6.2
+	 * 
+	 * @param  string $filename
+	 * @param  string $default
+	 * @return \Cuisine\Front\TemplateFinder ( chainable )
+	 */
+	public function view( $filename, $default ){
+
+		_deprecated_function( 'Template::view', '1.6.2', 'Template::element' );
+		return self::element( $filename, $default );
+
 	}
 
 
