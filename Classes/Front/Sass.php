@@ -42,6 +42,22 @@ class Sass {
 
 	}
 
+
+	/**
+	 * Returns a boolean on wether to ignore sass or not
+	 * 
+	 * @return bool
+	 */
+	public function ignore(){
+
+		$ignore = get_option( 'cuisine_ignore_sass', false );
+		$ignore = apply_filters( 'cuisine_ignore_sass', $ignore );
+
+		return $ignore;
+
+	}
+
+
 	/**
 	 * Register a single sass file
 	 * 
@@ -50,6 +66,10 @@ class Sass {
 	 * @return bool succes
 	 */
 	public function register( $script, $rel_path, $force = false ){
+
+		//check if we need to ignore sass, if so, don't do anything
+		if( self::ignore() )
+			return false;
 
 
 		//check to see if it exists:

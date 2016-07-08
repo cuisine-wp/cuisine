@@ -9,12 +9,41 @@
 	
 	
 		function sass( $args, $assoc_args ) {
-        	
-			Sass::resetFiles(); 
-        	update_option( 'registered_sass_files', array() );
 
-        	// Print a success message
-        	WP_CLI::success( "Sass-files refreshed." );
+			$action = 'refresh';
+			if( isset( $assoc_args['ignore'] ) )
+				$action = 'ignore';
+
+			if( isset( $assoc_args['unignore'] ) )
+				$action = 'unignore';
+
+
+			switch( $action ){
+
+        		case 'refresh':
+
+					Sass::resetFiles(); 
+    	    		update_option( 'registered_sass_files', array() );
+	
+        			WP_CLI::success( "Sass-files refreshed." );
+
+
+        		break;
+        		case 'ignore':
+
+        			update_option( 'cuisine_ignore_sass', true );
+
+        			WP_CLI::success( "Cuisine will ignore Sass." );
+
+        		break;
+        		case 'unignore':
+
+        			update_option( 'cuisine_ignore_sass', false );
+
+        			WP_CLI::success( "Cuisine will use Sass." );
+
+        		break;
+        	}
     	}
 
 
