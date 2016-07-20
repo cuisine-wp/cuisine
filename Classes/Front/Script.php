@@ -85,10 +85,10 @@ class Scripts {
 	 * 
 	 * @return string (html, echoed)
 	 */
-	public function set(){
+	public function set( $cacheBust = false ){
 
 		//set the variables first:
-		$this->setVars();
+		$this->setVars( $cacheBust );
 
 		$url = Url::plugin( 'cuisine', true ).'Assets/js';
 		$config = $url.'/Front';
@@ -104,10 +104,13 @@ class Scripts {
 	 *
 	 * @return string (html, echoed)
 	 */
-	private function setVars(){
+	private function setVars( $cacheBust ){
 
 		//allow registers to be overwritten:
 		do_action( 'cuisine_js_override' );
+
+		if( !$cacheBust && defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG )
+			$cacheBust = true;
 
 		$scripts = $this->get();
 		$autoload = $this->getAutoload();
@@ -119,7 +122,8 @@ class Scripts {
 			'baseUrl'	=> $site_url,
 			'ajax'		=> admin_url('admin-ajax.php'),
 			'scripts' 	=> $scripts,
-			'load'		=> $autoload
+			'load'		=> $autoload,
+			'cacheBust'	=> $cacheBust
 		);
 
 		//make it filterable
