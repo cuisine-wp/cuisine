@@ -20,6 +20,13 @@ class Scripts {
 	 */
 	var $jsVars = array();
 
+	/**
+	 * 
+	 * 
+	 * @var array
+	 */
+	var $shims = array();
+
 
 
 	/**
@@ -33,6 +40,8 @@ class Scripts {
 		$this->registered = $Cuisine->scripts;
 
 		$this->jsVars = $Cuisine->jsVars;
+
+		$this->shims = $Cuisine->shims;
 
 	}
 
@@ -76,6 +85,29 @@ class Scripts {
 		$this->jsVars[ $id ] = $array;
 
 		$Cuisine->jsVars = $this->jsVars;
+	}
+
+
+	/**
+	 * Add a shim for Require
+	 * 
+	 * @param  string $id
+	 * @param  array $deps dependency scripts
+	 * @return void
+	 */
+	public function shim( $id, $deps = array(), $exports = '' ){
+
+		global $Cuisine;
+
+		if( $exports == '' )
+			$exports = ucfirst( $id );
+
+		$this->shims[ $id ] = array(
+			'deps' => $deps,
+			'exports' => $exports
+		);
+
+		$Cuisine->shims = $this->shims;
 	}
 
 
@@ -123,6 +155,7 @@ class Scripts {
 			'ajax'		=> admin_url('admin-ajax.php'),
 			'scripts' 	=> $scripts,
 			'load'		=> $autoload,
+			'shims'		=> $this->shims,
 			'cacheBust'	=> $cacheBust
 		);
 
@@ -153,7 +186,7 @@ class Scripts {
 		//remove .js extension for RequireJS
 		if( substr( $url, -3 ) === '.js' )
 			$url = substr( $url, 0, -3 );
-
+ 
 		//remove the site_url if present, so we don't get into conflict with browsersync:
 		$site_url = trailingslashit( get_site_url() );
 		$url = str_replace( $site_url, '', $url );

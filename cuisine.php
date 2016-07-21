@@ -77,6 +77,14 @@ if (!class_exists('Cuisine')) {
 
 
         /**
+         * All registered JS Shims
+         * 
+         * @var array
+         */
+        public $shims = array();
+
+
+        /**
          * All registered Nav Items
          *
          * @var array
