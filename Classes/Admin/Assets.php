@@ -29,7 +29,7 @@
 				
 				global $pagenow;
 
-				if( $pagenow == 'page.php' || $pagenow == 'page-new.php' ){
+				if( $pagenow == 'page.php' || $pagenow == 'page-new.php' || $pagenow == 'user-edit.php' ){
 					wp_enqueue_media();
 				}
 
