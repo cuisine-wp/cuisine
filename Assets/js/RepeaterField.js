@@ -125,12 +125,15 @@
  	});
 
 
-
+ 	//start:
  	jQuery( document ).ready( function(){
-
  		cuisineInitRepeaterFields();
-
  	});
+
+ 	//refresh:
+ 	jQuery( document ).on( 'refreshFields', function(){
+ 		cuisineInitRepeaterFields();
+ 	})
 
 
  	var _repeaters = [];
