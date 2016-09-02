@@ -116,7 +116,7 @@ class Sass {
 		if( $file ){
 
 			//move to the default sass folder
-			$folder = apply_filters( 'cuisine_sass_folder', 'css/sass/plugins/' );
+			$folder = apply_filters( 'cuisine_sass_folder', 'css/sass/vendors/' );
 			$newPath = Url::path( 'theme', $folder, $this->script );
 			$newPath .= '_'.$this->script.'.scss';
 
