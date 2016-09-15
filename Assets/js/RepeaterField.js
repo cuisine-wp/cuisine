@@ -24,7 +24,7 @@
  		initialize: function(){
 
  		 	var self = this;
- 		 	self.highestId = parseInt( self.$el.data( 'highest-id' ) );
+ 		 	self.highestId = parseInt( self.$el.attr( 'data-highest-id' ) );
  		 	self.setItemEvents();
  		 	self.setItems();
  		 	self.setItemPositions();
