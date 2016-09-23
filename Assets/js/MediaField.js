@@ -264,6 +264,7 @@
 				var _large;
 				var _medium;
 				var _thumbnail;
+				var _orientation;
 
 				if (attachment.sizes !== undefined) {
 				  _full = ( attachment.sizes.full !== undefined ? attachment.sizes.full.url : '' );
@@ -284,7 +285,7 @@
 				self.$el.find( '#medium').val( _medium );
 				self.$el.find( '#large').val( _large );
 				self.$el.find( '#full').val( _full );
-				self.$el.find( '#orientation' ).val( attachment.sizes.full.orientation );
+				self.$el.find( '#orientation' ).val( _orientation );
 
 				self.$el.find( '#preview' ).attr( 'src', _thumbnail );
 
