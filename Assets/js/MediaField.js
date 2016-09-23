@@ -260,10 +260,24 @@
 
 			Media.uploader( options, function( attachment, options ){
 						
-				var _full = ( attachment.sizes.full !== undefined ? attachment.sizes.full.url : '' );
-				var _large = ( attachment.sizes.large !== undefined ? attachment.sizes.large.url : '' );
-				var _medium = ( attachment.sizes.medium !== undefined ? attachment.sizes.medium.url : '' );
-				var _thumbnail = ( attachment.sizes.thumbnail !== undefined ? attachment.sizes.thumbnail.url : '' );
+				var _full;
+				var _large;
+				var _medium;
+				var _thumbnail;
+
+				if (attachment.sizes !== undefined) {
+				  _full = ( attachment.sizes.full !== undefined ? attachment.sizes.full.url : '' );
+				  _large = ( attachment.sizes.large !== undefined ? attachment.sizes.large.url : '' );
+				  _medium = ( attachment.sizes.medium !== undefined ? attachment.sizes.medium.url : '' );
+				  _thumbnail = ( attachment.sizes.thumbnail !== undefined ? attachment.sizes.thumbnail.url : '' );
+				  _orientation = ( attachment.sizes.full.orientation !== undefined ? attachment.sizes.full.orientation : '' );
+				} else {
+				  _full = ( attachment.url !== undefined ? attachment.url : '' );
+				  _large = ( attachment.url !== undefined ? attachment.url : '' );
+				  _medium = ( attachment.url !== undefined ? attachment.url : '' );
+				  _thumbnail = ( attachment.url !== undefined ? attachment.url : '' );
+				  _orientation = ''
+				}
 
 				self.$el.find( '#img-id' ).val( attachment.id );
 				self.$el.find( '#thumb').val( _thumbnail );
