@@ -9,7 +9,7 @@
  * License: GPLv3
  * Bitbucket Plugin URI: https://bitbucket.org/chefduweb/cuisine
  * Bitbucket Branch:     master
- * 
+ *
  * @package Cuisine
  * @category Core
  * @author Chef du Web
@@ -27,7 +27,7 @@ defined('DS') ? DS : define('DS', DIRECTORY_SEPARATOR);
 if (!class_exists('Cuisine')) {
 
     class Cuisine {
-    
+
         /**
          * Framework bootstrap instance.
          *
@@ -62,7 +62,7 @@ if (!class_exists('Cuisine')) {
 
         /**
          * All registered scripts
-         * 
+         *
          * @var array
          */
         public $scripts = array();
@@ -78,7 +78,7 @@ if (!class_exists('Cuisine')) {
 
         /**
          * All registered JS Shims
-         * 
+         *
          * @var array
          */
         public $shims = array();
@@ -111,7 +111,7 @@ if (!class_exists('Cuisine')) {
         private function load(){
 
             //auto-loads all .php files in these directories.
-            $includes = array( 
+            $includes = array(
                 'Classes/Wrappers',
                 'Classes/Utilities',
                 'Classes/Admin',
@@ -129,7 +129,7 @@ if (!class_exists('Cuisine')) {
             $includes = apply_filters( 'cuisine_autoload_dirs', $includes );
 
             foreach( $includes as $inc ){
-                
+
                 $root = static::getPluginPath();
                 $files = glob( $root.$inc.'/*.php' );
 
@@ -144,7 +144,7 @@ if (!class_exists('Cuisine')) {
 
             // Set the framework paths and starts the framework.
             add_action('after_setup_theme', array($this, 'bootstrap'));
-           
+
             //cuisine is fully loaded
             do_action( 'cuisine_loaded' );
 
@@ -180,7 +180,7 @@ if (!class_exists('Cuisine')) {
                if ( !isset( $GLOBALS['cuisine_paths'][$name] ) ){
 
                    $GLOBALS['cuisine_paths'][$name] = realpath($path).DS;
-               
+
                }
             }
 
@@ -247,7 +247,7 @@ if (!class_exists('Cuisine')) {
 
 
         public static function getPluginPath(){
-        	return __DIR__.DS;
+            return __DIR__.DS;
         }
 
         /**
@@ -268,7 +268,7 @@ if (!class_exists('Cuisine')) {
  */
 add_action('plugins_loaded', function(){
 
-	$GLOBALS['Cuisine'] = Cuisine::getInstance();
+    $GLOBALS['Cuisine'] = Cuisine::getInstance();
 
 });
 
