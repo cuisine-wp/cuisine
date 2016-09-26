@@ -20,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 // The directory separator.
 defined('DS') ? DS : define('DS', DIRECTORY_SEPARATOR);
 
-require( 'packit/connection.php' );
 
 /**
  * Main class that bootstraps the framework.
@@ -248,7 +247,7 @@ if (!class_exists('Cuisine')) {
 
 
         public static function getPluginPath(){
-        	return __DIR__.DS;
+            return __DIR__.DS;
         }
 
         /**
@@ -269,7 +268,7 @@ if (!class_exists('Cuisine')) {
  */
 add_action('plugins_loaded', function(){
 
-	$GLOBALS['Cuisine'] = Cuisine::getInstance();
+    $GLOBALS['Cuisine'] = Cuisine::getInstance();
 
 });
 

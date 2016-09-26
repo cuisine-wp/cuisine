@@ -65,7 +65,7 @@
 			//catch 404 errors:
 			if( is_404() ){
 
-				$fourOhFourTemplate = apply_filters( 'cuisine-404-template', $this->folder.'404.php' );
+				$fourOhFourTemplate = apply_filters( 'cuisine-404-template', 'pages/404.php' );
 				return locate_template( array( $fourOhFourTemplate, 'index.php' ) );
 
 			}
