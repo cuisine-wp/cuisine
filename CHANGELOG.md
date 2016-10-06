@@ -1,3 +1,16 @@
+### 1.6.2: 2016-10-06
+
+* Major template revision:
+* * Page / Post-type templates now reside in /pages
+* * Views folder is gone
+* Support for ignoring the Cuisine sass pipeline
+* Added cache-busting to Cuisine's require
+* Added shim-support to Cuisine's require
+* Various repeater-field bugfixes
+* Allow SVG uploads in MediaField (thanks to @corjen)
+* Minor bugfixes
+
+
 ### 1.6.1: 2016-06-27
 
 * Compatibility release for the new Sections & Forms
@@ -80,7 +93,7 @@
 
 ### 1.5.3: 2015-10-05
 * Checkboxes choice-fields support added
-* Support for editor-fields in repeater fields added. 
+* Support for editor-fields in repeater fields added.
 * Slug validation to the Validate class added.
 * Chef Related template-support added.
 * Field classes bugfix when there's no defaul value.
@@ -98,7 +111,7 @@
 * Added page-template support to the template-engine
 * Added a fresh-forms wp cli command
 * Added a getProperty method for Fields
-* Added the ability to create SettingsPages 
+* Added the ability to create SettingsPages
 * Minor bugfixes
 
 
