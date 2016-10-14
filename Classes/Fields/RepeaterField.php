@@ -1,12 +1,13 @@
 <?php
 namespace Cuisine\Fields;
 
+use Cuisine\Utilities\Sort;
 
 class RepeaterField extends DefaultField{
 
     /**
      * Array that holds all fields
-     * 
+     *
      * @var array
      */
     var $fields = array();
@@ -41,7 +42,7 @@ class RepeaterField extends DefaultField{
         echo '</div>';
 
         echo $this->renderPrivateTemplate();
-      
+
     }
 
 
@@ -59,6 +60,7 @@ class RepeaterField extends DefaultField{
         if( !empty( $values ) ){
 
             $values = array_values( $values );
+            $values = Sort::byField( $values, 'position', 'ASC' );
 
             foreach( $values as $id => $value ){
 
@@ -71,13 +73,13 @@ class RepeaterField extends DefaultField{
             $prefix = $this->name.'[0]';
             $this->makeItem( $this->fields, '0' );
 
-        }       
+        }
     }
 
 
     /**
      * Get a single repeatable
-     * 
+     *
      * @return String
      */
     public function makeItem( $value, $id, $doingAjax = true ){
@@ -85,9 +87,9 @@ class RepeaterField extends DefaultField{
         $prefix = $this->name.'['.$id.']';
 
         echo '<div class="repeatable">';
-        
+
             foreach( $this->fields as $field ){
-            
+
                 $oldName = $field->name;
                 $name = $prefix.'['.$field->name.']';
 
@@ -101,8 +103,8 @@ class RepeaterField extends DefaultField{
 
                 //change field-name for rendering:
                 $field->setName( $name );
-               
-               if( $field->type !== 'editor' || $doingAjax == false ){    
+
+               if( $field->type !== 'editor' || $doingAjax == false ){
                     $field->render();
 
                }else{
@@ -113,12 +115,18 @@ class RepeaterField extends DefaultField{
 
                 //change the name right back:
                 $field->setName( $oldName );
-        
+
             }
 
+            $v = '';
+            if( isset( $value['position'] ) )
+                $v = 'value="'.$value['position'].'"';
+
             //add position field:
-            echo '<input type="hidden" class="multi" name="'.$prefix.'[position]" id="position"/>';
-        
+            echo '<div class="field-wrapper">';
+                echo '<input type="hidden" '.$v.' class="multi" name="'.$prefix.'[position]" id="position"/>';
+            echo '</div>';
+
             $this->buildControls();
 
 
@@ -129,7 +137,7 @@ class RepeaterField extends DefaultField{
 
     /**
      * Return the template, for Javascript
-     * 
+     *
      * @return String
      */
     public function renderPrivateTemplate(){
@@ -147,7 +155,7 @@ class RepeaterField extends DefaultField{
 
     /**
      * Build the data attributes
-     * 
+     *
      * @return void
      */
     private function buildDatas(){
@@ -163,7 +171,7 @@ class RepeaterField extends DefaultField{
 
     /**
      * Create + and - icons
-     * 
+     *
      * @return string ( html, echoed )
      */
     private function buildControls(){
@@ -183,7 +191,7 @@ class RepeaterField extends DefaultField{
 
     /**
      * Generate a unique template-id
-     * 
+     *
      * @return string
      */
     private function getTemplateName(){
@@ -195,7 +203,7 @@ class RepeaterField extends DefaultField{
 
     /**
      * Returns an array with all repeated layouts, including post values
-     * 
+     *
      * @return array
      */
     public function getFieldValues(){
@@ -205,11 +213,11 @@ class RepeaterField extends DefaultField{
 
         //check if this is a post-value:
         if( isset( $_POST[ $this->name ] ) ){
-            
+
             $fieldLayouts = $_POST[ $this->name ];
 
             //store the editor-field-name as we'll be changing it later, to get the right id
-            $_fieldName = ''; 
+            $_fieldName = '';
 
             //for each repeater layout:
             foreach( $fieldLayouts as $key => $entry ){
@@ -219,13 +227,13 @@ class RepeaterField extends DefaultField{
 
                 //loop through the fields, find the right values
                 foreach( $this->fields as $field ){
-                        
+
                     //set the default value:
                     $value = $field->getDefault();
 
                     //editors use there IDs to POST, so they are the exception:
                     if( $field->type !== 'editor' && isset( $entry[ $field->name ] ) ){
-                        
+
                         $value = $entry[$field->name];
 
                     }else if( $field->type == 'editor' ){
@@ -252,7 +260,7 @@ class RepeaterField extends DefaultField{
 
     /**
      * Get sanitized values for this field
-     * 
+     *
      * @return array
      */
     private function getValues(){
@@ -282,14 +290,14 @@ class RepeaterField extends DefaultField{
 
     /**
      * Get the default value html
-     * 
+     *
      * @return String
      */
     public function getDefault(){
 
         if( $this->properties['defaultValue' ] )
             return $this->properties['defaultValue'];
-    
+
         return false;
 
     }
