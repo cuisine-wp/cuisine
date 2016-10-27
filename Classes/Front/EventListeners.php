@@ -2,8 +2,10 @@
 
 	namespace Cuisine\Front;
 
+	use \Cuisine\Cron\Queue;
 	use \Cuisine\Utilities\Url;
 	use \Cuisine\Wrappers\StaticInstance;
+
 
 	class EventListeners extends StaticInstance{
 
@@ -19,7 +21,7 @@
 
 		/**
 		 * Listen for WordPress Hooks
-		 * 
+		 *
 		 * @return void
 		 */
 		private function listen(){
@@ -33,21 +35,21 @@
 				foreach( $Cuisine->navItems as $name => $args ){
 
 					if( strtolower( $name ) == strtolower( $item->title ) ){
-			
+
 						$addClass = false;
-			
+
 						if( $args['type'] == 'single' || $args['type'] == 'overview' ){
-			
+
 							//check the post-type
 							if( get_post_type() == $args['query'] )
 								$addClass = true;
-			
+
 						}else if( $args['type'] == 'page' && is_page() ){
-			
+
 							//check the page
 							if( is_page( $args['query'] ) )
 								$addClass = true;
-			
+
 						}else if( $args['type'] == 'taxonomy' ){
 
 							//check if the current post has the taxonomy:
@@ -62,18 +64,18 @@
 									if( $wp_query->queried_object->slug == $args['value'] ){
 
 										$addClass = true;
-									
+
 									}
 								}
 
 							}
 						}
-			
-			
+
+
 						//add the class
 						if( $addClass )
 							$classes[] = 'current-menu-item';
-			
+
 					}
 
 				}
@@ -83,6 +85,14 @@
 
 			}, 100, 2 );
 
+			/**
+			 * Expand cron-options:
+			 */
+			add_filter( 'cron_schedules', function(){
+
+				return Queue::getIntervals();
+
+			});
 
 		}
 

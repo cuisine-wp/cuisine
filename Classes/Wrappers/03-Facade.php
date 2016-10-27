@@ -25,7 +25,7 @@ abstract class Wrapper {
      * @return string
      */
     protected static function getFacadeAccessor() {
-        
+
         throw new \RuntimeException('Facade does not implement getFacadeAccessor method.');
     }
 
@@ -67,6 +67,7 @@ abstract class Wrapper {
             'metabox'           => 'Cuisine\Builders\MetaboxBuilder',
             'usermetabox'       => 'Cuisine\Builders\UsermetaBuilder',
             'settingspage'      => 'Cuisine\Builders\SettingsPageBuilder',
+            'settingstab'      => 'Cuisine\Builders\SettingsTabBuilder',
             'posttype'          => 'Cuisine\Utilities\PostType',
             'taxonomy'          => 'Cuisine\Utilities\Taxonomy',
             'user'              => 'Cuisine\Utilities\User',
@@ -74,6 +75,7 @@ abstract class Wrapper {
             'route'             => 'Cuisine\Front\Route',
             'script'            => 'Cuisine\Front\Scripts',
             'sass'              => 'Cuisine\Front\Sass',
+            'schedule'          => 'Cuisine\Cron\Job',
             'template'          => 'Cuisine\Front\TemplateFinder'
         );
 
@@ -124,4 +126,4 @@ abstract class Wrapper {
         return call_user_func_array(array($instance, $method), $args);
     }
 
-} 
+}

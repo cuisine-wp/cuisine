@@ -6,7 +6,7 @@ use Cuisine\Utilities\User;
 
 class SettingsPageBuilder {
 
-	
+
 	/**
 	 * SettingPAge instance data.
 	 *
@@ -46,6 +46,13 @@ class SettingsPageBuilder {
 	private $capability;
 
 
+	/**
+	 * What render type is this settings page?
+	 *
+	 * @var string
+	 */
+	private $renderType;
+
 
 	/**
 	 * Build a settings page instance.
@@ -76,10 +83,11 @@ class SettingsPageBuilder {
 	    $this->data['slug'] = $slug;
 	    $this->data['options'] = $this->parseOptions($options);
 	    $this->capability = $this->data['options']['capability'];
+	    $this->renderType = 'fields';
 
 	    if ( !is_null( $view ) )
 	        $this->view = $view;
-	    
+
 
 	    return $this;
 	}
@@ -93,17 +101,20 @@ class SettingsPageBuilder {
 	 */
 	public function set( $contents = array() ){
 
-
 		//if it's an array, contents contains fields
 	    if( is_array( $contents ) ){
 
-		    $this->data['fields'] = $contents;
+		    if( get_class( $contents[0] ) == 'Cuisine\Builders\SettingsTabBuilder' )
+		    	$this->renderType = 'tabs';
+
+		    $this->data['objects'] = $contents;
 		    $this->data['render'] = array( &$this, 'render' );
-		
+
 		//else it contains a view:
 		}else{
-		
-			$this->data['fields'] = array();
+
+			$this->renderType = 'class';
+			$this->data['objects'] = array();
 			$this->data['render'] = $contents;
 
 		}
@@ -112,7 +123,7 @@ class SettingsPageBuilder {
 			$this->save();
 		}
 
-	   	
+
 	   	add_action( 'admin_menu', array( &$this, 'display' ) );
 
 	    return $this;
@@ -128,7 +139,7 @@ class SettingsPageBuilder {
 	public function can($capability){
 	    $this->capability = $capability;
 	    $this->check = true;
-	
+
 	}
 
 
@@ -143,13 +154,11 @@ class SettingsPageBuilder {
 
 	    if( $this->data['options']['parent'] === false ){
 
-
-
-	    	add_options_page( 
-	    		$this->data['title'], 
-	    		$this->data['options']['menu_title'], 
-	    		$this->capability, 
-	    		$this->data['slug'], 
+	    	add_options_page(
+	    		$this->data['title'],
+	    		$this->data['options']['menu_title'],
+	    		$this->capability,
+	    		$this->data['slug'],
 	    		$this->data['render']
 	    	);
 
@@ -161,8 +170,8 @@ class SettingsPageBuilder {
 	    	if( substr( $parentSlug, -4 ) !== '.php' )
 	    		$parentSlug = 'edit.php?post_type='.$parentSlug;
 
-	    	add_submenu_page( 
-	    		$parentSlug, 
+	    	add_submenu_page(
+	    		$parentSlug,
 	    		$this->data['title'],
 	    		$this->data['options']['menu_title'],
 	    		$this->data['options']['capability'],
@@ -184,7 +193,8 @@ class SettingsPageBuilder {
 	 */
 	public function render() {
 
-		$this->setDefaultValue();
+		if( $this->renderType == 'fields' )
+			$this->setDefaultValue();
 
 		echo '<div class="wrap">';
 
@@ -197,26 +207,33 @@ class SettingsPageBuilder {
 
 	    	// Add nonce fields
 	    	wp_nonce_field( Session::nonceAction, Session::nonceName );
-	
-	    	foreach( $this->data['fields'] as $field ){
-	
-	    		$field->render();
-	
-	    	}
-	
-	
-	    	//render the javascript-templates seperate, to prevent doubles
-	    	$rendered = array();
-	
-	    	foreach( $this->data['fields'] as $field ){
-	
-	    		if( method_exists( $field, 'renderTemplate' ) && !in_array( $field->name, $rendered ) ){
-	
-	    			echo $field->renderTemplate();
-	    			$rendered[] = $field->name;
-	
+
+	    	if( $this->renderType == 'tabs' )
+	    		$this->renderTabTitles();
+
+
+	    	echo '<div class="settings-wrapper">';
+		    	foreach( $this->data['objects'] as $object ){
+		    		$object->render();
 	    		}
-	    	}	
+	    	echo '</div>';
+
+
+	    	if( $this->renderType == 'fields' ){
+
+	    		//render the javascript-templates seperate, to prevent doubles
+	    		$rendered = array();
+
+	    		foreach( $this->data['objects'] as $field ){
+
+	    			if( method_exists( $field, 'renderTemplate' ) && !in_array( $field->name, $rendered ) ){
+
+	    				echo $field->renderTemplate();
+	    				$rendered[] = $field->name;
+
+	    			}
+	    		}
+	    	}
 
 
 	    	echo '<div class="button-wrapper">';
@@ -227,6 +244,25 @@ class SettingsPageBuilder {
 	    	echo '</form>';
 
 	    echo '</div>';
+	}
+
+	/**
+	 * Render the tab titles:
+	 *
+	 * @return string
+	 */
+	public function renderTabTitles(){
+
+		echo '<div class="tab-wrapper">';
+
+			foreach( $this->data['objects'] as $tab ){
+				echo '<span class="tab" data-slug="'.$tab->getSlug().'">';
+					echo $tab->getTitle();
+				echo '</span>';
+			}
+
+		echo '</div>';
+
 	}
 
 
@@ -250,9 +286,21 @@ class SettingsPageBuilder {
 	    $fields = array();
 
 	    // Loop through the registered fields.
-	    $fields = $this->data['fields'];
+	    if( $this->renderType == 'fields' ){
+
+	    	$fields = $this->data['objects'];
+
+	    }else{
+	    	//get all fields in the tabs:
+	    	foreach( $this->data['objects'] as $tab ){
+	    		array_push( $fields, $tab->getFields() );
+	    	}
+	    }
+
+
+
 	    $fields = apply_filters( 'cuisine_before_settings_field_save', $fields, $this );
-	    
+
 	    $this->register( $fields );
 
 	}
@@ -266,14 +314,14 @@ class SettingsPageBuilder {
 	 * @return void
 	 */
 	private function register( $fields ) {
-	    
+
 	    $save = array();
 
 	    foreach( $fields as $field ){
 
 	       	$value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
 	       	$save[ $field->name ] = $value;
-	    
+
 	    }
 
 	    update_option( $this->data['slug'], $save );
@@ -296,13 +344,13 @@ class SettingsPageBuilder {
 	        'capability'	=> 'manage_options'
 
 	    ));
-	
+
 	}
 
 
 	/**
 	 * return the name of these options
-	 * 
+	 *
 	 * @return string
 	 */
 	private function getOptionName(){
@@ -316,11 +364,11 @@ class SettingsPageBuilder {
 	 * @return void
 	 */
 	private function setDefaultValue() {
-	    
+
 		$values = get_option( $this->data['slug'], array() );
 
 
-	    foreach ( $this->data['fields'] as $field ){
+	    foreach ( $this->data['objects'] as $field ){
 
 	        // Check if saved value
 	        if( isset( $values[ $field->name] ) ){
