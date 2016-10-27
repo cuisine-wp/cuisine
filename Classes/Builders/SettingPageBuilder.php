@@ -302,11 +302,9 @@ class SettingsPageBuilder {
 	    }else{
 	    	//get all fields in the tabs:
 	    	foreach( $this->data['objects'] as $tab ){
-	    		array_push( $fields, $tab->getFields() );
+	    		$fields = array_merge( $fields, $tab->getFields() );
 	    	}
 	    }
-
-
 
 	    $fields = apply_filters( 'cuisine_before_settings_field_save', $fields, $this );
 
