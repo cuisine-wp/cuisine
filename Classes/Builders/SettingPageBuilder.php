@@ -212,7 +212,7 @@ class SettingsPageBuilder {
 	    		$this->renderTabTitles();
 
 
-	    	echo '<div class="settings-wrapper">';
+	    	echo '<div class="settings-wrapper type-'.$this->renderType.'">';
 		    	foreach( $this->data['objects'] as $object ){
 		    		$object->render();
 	    		}
@@ -253,13 +253,22 @@ class SettingsPageBuilder {
 	 */
 	public function renderTabTitles(){
 
+		$i = 0;
+
 		echo '<div class="tab-wrapper">';
 
-			foreach( $this->data['objects'] as $tab ){
-				echo '<span class="tab" data-slug="'.$tab->getSlug().'">';
-					echo $tab->getTitle();
-				echo '</span>';
-			}
+		foreach( $this->data['objects'] as $tab ){
+
+			$class = 'tab';
+			if( $i == 0 )
+				$class .= ' current';
+
+			echo '<span class="'.$class.'" data-slug="'.$tab->getSlug().'">';
+				echo $tab->getTitle();
+			echo '</span>';
+
+			$i++;
+		}
 
 		echo '</div>';
 

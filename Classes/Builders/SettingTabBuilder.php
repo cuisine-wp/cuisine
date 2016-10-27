@@ -74,9 +74,7 @@ class SettingsTabBuilder {
 
         $this->setDefaultValue();
 
-        echo '<div class="tab-content '.$this->data['slug'].'">';
-
-            echo '<h2>'.$this->data['title'].'</h2>';
+        echo '<div class="tab-content" id="tab-'.$this->data['slug'].'">';
 
             foreach( $this->data['fields'] as $field ){
 
