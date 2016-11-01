@@ -19,6 +19,19 @@ class PostType {
 	 */
 	private $postType;
 
+    /**
+     * Plural of this post type name
+     *
+     * @var string
+     */
+    public $plural;
+
+    /**
+     * Singular version of this post type name
+     *
+     * @var string
+     */
+    public $singular;
 
 	/**
 	 * Build a custom post type.
@@ -43,8 +56,12 @@ class PostType {
 	public function make( $slug, $plural, $singular ){
 
 	    // Set main properties.
-	    $this->properties['slug'] = $slug;
-	    $this->properties['args'] = $this->setDefaultArguments( $plural, $singular );
+	    $this->plural = $plural;
+        $this->singular = $singular;
+
+        $this->properties['slug'] = $slug;
+	    $this->properties['args'] = $this->setDefaultArguments();
+
 
 	    return $this;
 	}
@@ -59,6 +76,13 @@ class PostType {
 	 * @return \Cuisine\Utilities\PostType
 	 */
 	public function set( array $params = array() ){
+
+        if( isset( $params['labels'] ) ){
+            $params['labels'] = array_merge(
+                $this->getDefaultLabels(),
+                $params['labels']
+            );
+        }
 
 	    // Override custom post type arguments if given.
 	    $this->properties['args'] = array_merge( $this->properties['args'], $params );
@@ -77,8 +101,8 @@ class PostType {
 	 */
 	public function register(){
 
-		$this->postType = register_post_type( 
-			$this->properties['slug'], 
+		$this->postType = register_post_type(
+			$this->properties['slug'],
 			$this->properties['args']
 		);
 
@@ -88,41 +112,14 @@ class PostType {
 	/**
 	 * Set the custom post type default arguments.
 	 *
-	 * @param string $plural The post type plural display name.
-	 * @param string $singular The post type singular display name.
 	 * @return array
 	 */
-	private function setDefaultArguments( $plural, $singular ){
+	private function setDefaultArguments(){
 
-        $labels = array(
-            'name' 					=> __( $plural, 'cuisine' ),
-			'singular_name' 		=> __( $singular, 'cuisine' ),
-			'add_new' 				=> __( 'Add New', 'cuisine' ),
-			'add_new_item' 			=> __( 'Add New '. $singular, 'cuisine' ),
-			'edit_item' 			=> __( 'Edit '. $singular, 'cuisine' ),
-			'new_item' 				=> __( 'New ' . $singular, 'cuisine' ),
-			'view_item' 			=> __( 'View ' . $singular, 'cuisine' ),
-			'search_items' 			=> __( 'Search ' . $singular, 'cuisine' ),
-			'not_found' 			=> __( 'No '. $singular .' found', 'cuisine' ),
-			'not_found_in_trash' 	=> __( 'No '. $singular .' found in Trash', 'cuisine' ),
-			'all_items'  			=> __( 'All ' . $plural, 'cuisine' ),
-			'archives' 				=> __( 'Archives', 'cuisine' ),
-			'insert_into_item' 		=> __( 'Insert into '.$singular, 'cuisine' ),
-			'uploaded_to_this_item' => __( 'Upload to '.$singular, 'cuisine' ),
-			'featured_image' 		=> __( 'Featured image', 'cuisine' ),
-			'set_featured_image' 	=> __( 'Set featured image', 'cuisine' ),
-			'remove_featured_image' => __( 'Remove featured image', 'cuisine' ),
-			'use_featured_image' 	=> __( 'Use as featured image', 'cuisine' ),
-			'menu_name' 			=> __( $plural, 'cuisine' ),
-			'filter_items_list' 	=> __( 'Filter '.$plural, 'cuisine' ),
-			'name_admin_bar' 		=> __( $singular, 'cuisine' ),
-			'parent_item_colon' 	=> '',
-			'items_list_navigation' => '',
-			'items_list' 			=> ''
-        );
+        $labels = $this->getDefaultLabels();
 
         $defaults = array(
-            'label' 		=> __( $plural, 'cuisine' ),
+            'label' 		=> __( $this->plural, 'cuisine' ),
             'labels' 		=> $labels,
             'description'	=> '',
             'public'		=> true,
@@ -135,17 +132,52 @@ class PostType {
         return $defaults;
     }
 
+    /**
+     * Returns an array of default labels
+     *
+     * @return array
+     */
+    public function getDefaultLabels()
+    {
+        return array(
+            'name'                  => __( $this->plural, 'cuisine' ),
+            'singular_name'         => __( $this->singular, 'cuisine' ),
+            'add_new'               => __( 'Add New', 'cuisine' ),
+            'add_new_item'          => __( 'Add New '. $this->singular, 'cuisine' ),
+            'edit_item'             => __( 'Edit '. $this->singular, 'cuisine' ),
+            'new_item'              => __( 'New ' . $this->singular, 'cuisine' ),
+            'view_item'             => __( 'View ' . $this->singular, 'cuisine' ),
+            'search_items'          => __( 'Search ' . $this->singular, 'cuisine' ),
+            'not_found'             => __( 'No '. $this->singular .' found', 'cuisine' ),
+            'not_found_in_trash'    => __( 'No '. $this->singular .' found in Trash', 'cuisine' ),
+            'all_items'             => __( 'All ' . $this->plural, 'cuisine' ),
+            'archives'              => __( 'Archives', 'cuisine' ),
+            'insert_into_item'      => __( 'Insert into '.$this->singular, 'cuisine' ),
+            'uploaded_to_this_item' => __( 'Upload to '.$this->singular, 'cuisine' ),
+            'featured_image'        => __( 'Featured image', 'cuisine' ),
+            'set_featured_image'    => __( 'Set featured image', 'cuisine' ),
+            'remove_featured_image' => __( 'Remove featured image', 'cuisine' ),
+            'use_featured_image'    => __( 'Use as featured image', 'cuisine' ),
+            'menu_name'             => __( $this->plural, 'cuisine' ),
+            'filter_items_list'     => __( 'Filter '.$this->plural, 'cuisine' ),
+            'name_admin_bar'        => __( $this->singular, 'cuisine' ),
+            'parent_item_colon'     => '',
+            'items_list_navigation' => '',
+            'items_list'            => ''
+        );
+    }
+
 
     /**
      * Return the post-type's name (not slug)
-     * 
+     *
      * @param  string $post_type
      * @return string Plural label of this Post Type
      */
     public function name( $post_type ){
 
     	$post_type = get_post_type_object( $post_type );
-    	if( is_object( $post_type ) ) 
+    	if( is_object( $post_type ) )
     		return $post_type->labels->name;
 
     	return false;
@@ -153,20 +185,20 @@ class PostType {
 
     /**
      * Return the default template name for this post-type
-     * 
+     *
      * @param  string $post_type
      * @return string Plural version of this Post Type, sanitized for file-usage.
      */
     public function template( $post_type ){
 
     	return sanitize_title( self::name( $post_type ) );
-    	
+
     }
 
 
     /**
      * Get the public post types
-     * 
+     *
      * @return array
      */
     public static function get(){
