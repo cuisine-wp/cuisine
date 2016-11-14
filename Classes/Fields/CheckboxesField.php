@@ -16,7 +16,7 @@ class CheckboxesField extends ChoiceField{
     }
 
 
-    
+
     /**
      * Handle the field HTML code for metabox output.
      *
@@ -66,7 +66,7 @@ class CheckboxesField extends ChoiceField{
 
     /**
      * Return html for a single choice
-     * 
+     *
      * @param  array/string $choice
      * @return string HTML
      */
@@ -87,7 +87,7 @@ class CheckboxesField extends ChoiceField{
 
             $html .= 'id="'.$id.'" ';
 
-            $html .= 'class="'.$this->getSubClass().'" ';
+            $html .= 'class="'.$this->getSubClass().' multi" ';
 
             $html .= $this->getNameAttr( $value );
 
@@ -97,7 +97,7 @@ class CheckboxesField extends ChoiceField{
 
            if( is_array( $defaultValues ) )
                 $html .= ( in_array( $value, $defaultValues ) ? ' '.$selected : '' );
-            
+
 
             $html .= '>';
 

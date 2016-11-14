@@ -4,11 +4,11 @@ namespace Cuisine\Fields;
 
 class ChoiceField extends DefaultField{
 
-	
+
 
 	/**
 	 * Return html for a single choice
-	 * 
+	 *
 	 * @param  array/string $choice
 	 * @return string HTML
 	 */
@@ -53,7 +53,7 @@ class ChoiceField extends DefaultField{
 
 	/**
 	 * Get the name attribute, based on type
-	 * 
+	 *
 	 * @return String
 	 */
 	public function getNameAttr( $val ){
@@ -88,7 +88,7 @@ class ChoiceField extends DefaultField{
 
 	/**
 	 * Get the class of sub-inputs like radios and checkboxes
-	 * 
+	 *
 	 * @return String;
 	 */
 	public function getSubClass(){
@@ -101,9 +101,19 @@ class ChoiceField extends DefaultField{
 	    $value = $this->getValue();
 	    if( !is_array( $value ) )
 	    	$classes[] = $value;
-	    
+
+	    //multi classes:
 	    if( $this->getProperty( 'classes' ) )
 	  		$classes = array_merge( $classes, $this->getProperty( 'classes' ) );
+
+	  	//add the class property as well:
+	  	if( $this->getProperty( 'class' ) ){
+
+	  		$classes = ( is_array( $this->properties['class'] ) ? $this->properties['class'] : array( $this->properties['class'] ) );
+
+	  		$classes = array_merge( $classes, $this->classes );
+	  	}
+
 
 	    $classes = apply_filters( 'cuisine_subfield_classes', $classes );
 	    $output = implode( ' ', $classes );
@@ -114,7 +124,7 @@ class ChoiceField extends DefaultField{
 
 	/**
 	 * Makes the choices array complete
-	 * 
+	 *
 	 * @param  Array $inputs  all default choices
 	 * @return Array
 	 */
@@ -126,17 +136,17 @@ class ChoiceField extends DefaultField{
 	    //check to see if it's an associative array
 	    if( is_array( $inputs ) ){
 	    	$isIndexed = ( array_values( $inputs ) === $inputs );
-	
+
 	    	foreach( $inputs as $key => $input ){
-	
+
 	    	    $choice = array();
-	
+
 	    	    $choice['id'] = $i;
 	    	    $choice['key'] = ( $isIndexed ? $input : $key );
 	    	    $choice['label'] = $input;
-	    	  
+
 	    	    $choices[] = $choice;
-	
+
 	    	    $i++;
 	    	}
 	    }
