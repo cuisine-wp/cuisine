@@ -1,14 +1,14 @@
 <?php
 
 	namespace Cuisine\Front;
-	
-	use Cuisine\Wrappers\StaticInstance;	
-	
+
+	use Cuisine\Wrappers\StaticInstance;
+
 	class Rewrite extends StaticInstance{
-	
+
 		/**
 		 * Array holding all custom registered routes
-		 * 
+		 *
 		 * @var array
 		 */
 		private $routes;
@@ -21,12 +21,12 @@
 
 			//setup the events
 			$this->listen();
-	
+
 		}
 
 		/**
 		 * Set the events for this request
-		 * 
+		 *
 		 */
 		private function listen(){
 
@@ -34,23 +34,23 @@
 
 				//filter the rewrite rules
 				add_filter( 'rewrite_rules_array', array( &$this, 'setRules'), 100 );
-			
+
 				//filter urls
 				add_filter( 'post_type_link', array( &$this, 'postPermalink' ), 10, 2 );
-	
+
 			});
-	
+
 
 			//flush on shutdown, in admin:
 			if( is_admin() )
 				add_action( 'shutdown', array( &$this, 'flush' ) );
 
 		}
-	
-		
+
+
 		/**
 		 * Setup all custom rewrites via a filter
-		 * 
+		 *
 		 * @return array
 		 */
 		public function setRules( $rules ){
@@ -64,9 +64,9 @@
 			if( !empty( $this->routes ) ){
 
 				$newRules = array();
-			
+
 				foreach( $this->routes as $key => $args ){
-		
+
 
 					//if $args isn't an array, it's a post_type string
 					if( !is_array( $args ) ){
@@ -84,12 +84,12 @@
 					$query = 'index.php?post_type='.$post_type;
 					$newRules[ $url.'/?$' ] = $query;
 					$newRules[ $url.'?([0-9]{1,})/?$'] = $query.'&paged=$mates[1]';
-	
+
 					//set special url for detail-pages:
 					if( $detail ){
 
 						$query .= '&name=$matches[1]';
-						$newRules[ $detail.'/([^/]+)/([^&]+)' ] = $query;
+						$newRules[ $detail.'/([^/]+)' ] = $query;
 
 					}
 				}
@@ -112,14 +112,14 @@
 		 * @return string (url)
 		 */
 		public function postPermalink( $link, $id = 0 ) {
-	
+
 			global $Cuisine;
 
 			//populate the routes array:
 			$this->routes = $Cuisine->routes;
 
 			$post = get_post( $id );
-			
+
 			//check for erros:
 			if ( is_wp_error( $post ) || empty( $post->post_name ) )
 		    	return $link;
@@ -147,8 +147,8 @@
 		    return $link;
 
 		}
-	
-		
+
+
 		/**
 		 * Flush rewrites in the admin, on dev
 		 *
@@ -156,14 +156,14 @@
 		 * @return void
 		 */
 		function flush(){
-			
+
 			global $wp_rewrite;
 			$wp_rewrite->flush_rules();
 
 		}
-	
-	
+
+
 	}
-	
-	
-	\Cuisine\Front\Rewrite::getInstance();	
+
+
+	\Cuisine\Front\Rewrite::getInstance();
