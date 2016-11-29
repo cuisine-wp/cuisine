@@ -1,3 +1,10 @@
+### 1.6.3: 2016-11-29
+
+* Added a WP Cron extension
+* Added the option of showing settings tabs in SettingsPages
+* Fixes RepeaterField issues with positions
+* Minor bugfixes
+
 ### 1.6.2: 2016-10-06
 
 * Major template revision:
