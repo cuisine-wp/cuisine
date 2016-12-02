@@ -105,7 +105,7 @@
          */
         public function eachMinute( $callback )
         {
-            $this->make( 'perMinute', $callback );
+            $this->make( 'perMinute', $callback )->set();
         }
 
 
@@ -117,7 +117,7 @@
          */
         public function eachFifteenMinutes( $callback )
         {
-            $this->make( 'perQuarter', $callback );
+            $this->make( 'perQuarter', $callback )->set();
         }
 
         /**
@@ -128,7 +128,7 @@
          */
         public function eachHour( $callback )
         {
-            $this->make( 'perHour', $callback );
+            $this->make( 'perHour', $callback )->set();
         }
 
         /**
@@ -139,7 +139,7 @@
          */
         public function eachHalfHour( $callback )
         {
-            $this->make( 'perHalfHour', $callback );
+            $this->make( 'perHalfHour', $callback )->set();
         }
 
 
@@ -151,7 +151,7 @@
          */
         public function eachDay()
         {
-            $this->make( 'perDay', $callback );
+            $this->make( 'perDay', $callback )->set();
         }
 
 
@@ -163,7 +163,7 @@
          */
         public function eachWeek()
         {
-            $this->make( 'perWeek', $callback );
+            $this->make( 'perWeek', $callback )->set();
         }
 
     }
