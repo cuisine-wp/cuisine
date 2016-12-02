@@ -81,18 +81,6 @@
         }
 
 
-        /**
-         * Delete
-         *
-         * @param  [type] $id [description]
-         * @return [type]     [description]
-         */
-        public function delete( $id )
-        {
-
-        }
-
-
         /*=============================================================*/
         /**             Wrapper functions                              */
         /*=============================================================*/
