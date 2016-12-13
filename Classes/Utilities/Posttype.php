@@ -119,14 +119,16 @@ class PostType {
         $labels = $this->getDefaultLabels();
 
         $defaults = array(
-            'label' 		=> __( $this->plural, 'cuisine' ),
-            'labels' 		=> $labels,
-            'description'	=> '',
-            'public'		=> true,
-            'menu_position'	=> 40,
-            'has_archive'	=> true,
-            'supports'		=> array( 'title', 'editor', 'thumbnail' )
-
+            'label'                 => __( $this->plural, 'cuisine' ),
+            'labels'                => $labels,
+            'description'           => '',
+            'public'                => true,
+            'menu_position'         => 40,
+            'has_archive'           => true,
+            'show_in_rest'          => true,
+            'rest_base'             => sanitize_title( $this->plural ),
+            'rest_controller_class' => 'WP_REST_Posts_Controller',
+            'supports'              => array( 'title', 'editor', 'thumbnail' )
         );
 
         return $defaults;
