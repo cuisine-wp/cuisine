@@ -129,6 +129,12 @@ class Url {
 				$path .= $folder;
 				break;
 
+			case 'theme-parent':
+
+				$path = \trailingslashit( get_template_directory() );
+				$path .= $folder;
+				break;
+
 			case 'content':
 
 				$path = \trailingslashit( WP_CONTENT_DIR );
