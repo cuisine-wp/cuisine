@@ -326,8 +326,15 @@ class SettingsPageBuilder {
 
 	    foreach( $fields as $field ){
 
-	       	$value = isset( $_POST[ $field->name ] ) ? $_POST[ $field->name ] : '';
-	       	$save[ $field->name ] = $value;
+	    	$key = $field->name;
+
+	    	//change the value for editors, as the $_POST
+	    	//variable for that field is different
+	    	if( $field->type == 'editor' )
+	    		$key = $field->id;
+
+	       	$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
+	       	$save[ $key ] = $value;
 
 	    }
 
@@ -374,12 +381,16 @@ class SettingsPageBuilder {
 
 		$values = get_option( $this->data['slug'], array() );
 
-
 	    foreach ( $this->data['objects'] as $field ){
 
+	    	$key = $field->name;
+
+	    	if( $field->type == 'editor' )
+	    		$key = $field->id;
+
 	        // Check if saved value
-	        if( isset( $values[ $field->name] ) ){
-	        	$value = $values[ $field->name ];
+	        if( isset( $values[ $key ] ) ){
+	        	$value = $values[ $key ];
 	        	$field->properties['defaultValue'] = $value;
 	        }
 
