@@ -67,7 +67,7 @@ abstract class Wrapper {
             'metabox'           => 'Cuisine\Builders\MetaboxBuilder',
             'usermetabox'       => 'Cuisine\Builders\UsermetaBuilder',
             'settingspage'      => 'Cuisine\Builders\SettingsPageBuilder',
-            'settingstab'      => 'Cuisine\Builders\SettingsTabBuilder',
+            'settingstab'       => 'Cuisine\Builders\SettingsTabBuilder',
             'posttype'          => 'Cuisine\Models\PostType',
             'taxonomy'          => 'Cuisine\Models\Taxonomy',
             'user'              => 'Cuisine\Models\User',
