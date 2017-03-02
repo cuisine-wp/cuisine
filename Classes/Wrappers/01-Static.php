@@ -19,7 +19,7 @@
          * @return \Cuisine\Wrappers\StaticInstance
          */
         public static function getInstance(){
-    
+            
             return static::$instance = new static();
 
         }

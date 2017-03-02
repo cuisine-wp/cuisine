@@ -68,14 +68,14 @@ abstract class Wrapper {
             'usermetabox'       => 'Cuisine\Builders\UsermetaBuilder',
             'settingspage'      => 'Cuisine\Builders\SettingsPageBuilder',
             'settingstab'      => 'Cuisine\Builders\SettingsTabBuilder',
-            'posttype'          => 'Cuisine\Utilities\PostType',
-            'taxonomy'          => 'Cuisine\Utilities\Taxonomy',
-            'user'              => 'Cuisine\Utilities\User',
-            'validation'        => 'Cuisine\Utilities\Validator',
+            'posttype'          => 'Cuisine\Content\PostType',
+            'taxonomy'          => 'Cuisine\Content\Taxonomy',
+            'user'              => 'Cuisine\Content\User',
             'route'             => 'Cuisine\Front\Route',
             'script'            => 'Cuisine\Front\Scripts',
             'sass'              => 'Cuisine\Front\Sass',
             'schedule'          => 'Cuisine\Cron\Job',
+            'schema'            => 'Cuisine\Database\Schema',
             'template'          => 'Cuisine\Front\TemplateFinder'
         );
 

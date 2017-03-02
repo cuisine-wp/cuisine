@@ -114,6 +114,7 @@ if (!class_exists('Cuisine')) {
             $includes = array(
                 'Classes/Wrappers',
                 'Classes/Utilities',
+                'Classes/Models',
                 'Classes/Cron',
                 'Classes/Admin',
                 'Classes/Front',
