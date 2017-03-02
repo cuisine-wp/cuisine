@@ -14,8 +14,8 @@ class Queue{
     public static function getIntervals()
     {
 
-        $quarter = 60 * 60 * 15;
-        $hour = 60 * 60 * 60;
+        $quarter = 60 * 15;
+        $hour = 60 * 60;
         $halfHour = $hour / 2;
         $day = $hour * 24;
         $week = $day * 7;

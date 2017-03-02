@@ -50,6 +50,8 @@
             if( $callback !== null )
                 $this->callback = $callback;
 
+            //add the action:
+            add_action( 'cuisine_cron_'.$this->frequency, $this->callback );
 
             $this->start = time();
             $this->id = md5( $this->start.'-'.$this->frequency );
@@ -66,18 +68,36 @@
         public function set()
         {
 
-            if( $this->frequency !== null && $this->callback !== null ){
+            $running = get_option( 'cuisine_running_cronjobs', [] );
+
+
+            if( $this->frequency !== null && !in_array( $this->frequency, $running ) ){
+
+                $running[] = $this->frequency;
+                update_option( 'cuisine_running_cronjobs', $running );
 
                 wp_schedule_event(
                         $this->start,
                         $this->frequency,
-                        $this->callback
+                        'cuisine_cron_'.$this->frequency
                 );
 
                 return true;
             }
 
             return false;
+        }
+
+
+        /**
+         * Delete
+         *
+         * @param  [type] $id [description]
+         * @return [type]     [description]
+         */
+        public function delete( $id )
+        {
+
         }
 
 
