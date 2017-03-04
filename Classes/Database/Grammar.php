@@ -155,6 +155,23 @@
 		}
 
 
+		/**
+		 * Compile an inster command
+		 * 
+		 * @param  Fluent $command
+		 * 
+		 * @return void
+		 */
+		public function compileInsert( Fluent $command )
+		{	
+			$table = $this->getTable(); 
+			$columns = Sort::prependValues( $command->columns, '`' );
+			$columns = Sort::appendValues( $columns, '`' );
+			$columns = implode( ', ', $columns );
+
+			return "INSERT INTO $table ( $columns )";
+		}
+
 
 		/**
 		 * Compile loose columns

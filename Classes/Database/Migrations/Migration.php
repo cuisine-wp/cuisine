@@ -51,7 +51,7 @@ class Migration extends StaticInstance implements MigrationContract{
 	 */
 	public function run( Migrator $migrator ){
 
-		//if( !$this->ran( $migrator ) ){
+		if( !$this->ran( $migrator ) ){
 
 			if( $migrator->direction == 'up' ){
 				
@@ -64,19 +64,27 @@ class Migration extends StaticInstance implements MigrationContract{
 			}
 
 			$this->notify();
-			$this->save();
-		//}
+
+			$this->save( $migrator);
+		}
 	}
 
 
 	/**
 	 * Save this migration
+	 *
+	 * @param Migrator $migrator
 	 * 
 	 * @return void
 	 */
-	protected function save()
+	protected function save( $migrator )
 	{
+		$data = [
+			'name'			=> $this->name,
+			'timestamp' 	=> $migrator->timestamp
+		];
 		
+		Record::insert( 'migrations', $data );
 	}
 
 	/**

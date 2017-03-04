@@ -61,7 +61,7 @@
 		 */
 		public function insert( $table, $data )
 		{
-			return $this->inserOrUpsert( $table, $data );			
+			return $this->insertOrUpsert( $table, $data );			
 		}
 
 
@@ -89,11 +89,21 @@
 		 */
 		public function insertOrUpsert( $table, $data )
 		{
-			$blueprint = Table::getBlueprint( $table );
+			global $wpdb;
 			
-			if( $this->validate( $blueprint, $data ) ){
+			$command = new Fluent([ 'columns' => $data ]);
+			$blueprint = new Blueprint( $table, null );
+			$sql = ( new Grammar( $blueprint, $wpdb ) )->compileInsert( $command );
+			
+			$wpdb->query( $sql );
 
-			}
+				//$blueprint = Table::getBlueprint( $table );
+			
+			//if( $this->validate( $blueprint, $data ) ){
+
+
+
+			//}
 		}
 
 
