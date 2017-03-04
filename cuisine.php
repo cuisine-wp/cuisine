@@ -115,6 +115,7 @@ if (!class_exists('Cuisine')) {
                 'Classes/Wrappers',
                 'Classes/Utilities',
                 'Classes/Database',
+                'Classes/Database/Migrations',
                 'Classes/Models',
                 'Classes/Cron',
                 'Classes/Admin',
@@ -124,9 +125,9 @@ if (!class_exists('Cuisine')) {
                 'Classes/View'
             );
 
-            if ( defined('WP_CLI') && WP_CLI ) {
-                $includes[] = 'Classes/Utilities/Cli';
-            }
+            if ( defined('WP_CLI') && WP_CLI )
+                $includes[] = 'Classes/Cli';
+
 
 
             $includes = apply_filters( 'cuisine_autoload_dirs', $includes );

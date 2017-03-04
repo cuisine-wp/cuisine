@@ -90,7 +90,7 @@
 
 				}
 			}
-
+			cuisine_dump( $statements );
 			return $statements;
 		}
 
@@ -560,6 +560,17 @@
 	        return $this->addColumn( 'time', $column );
 	    }
 
+
+	 	/**
+	     * Create a new timestamp column on the table.
+	     *
+	     * @param  string  $column
+	     * @return \Illuminate\Support\Fluent
+	     */
+	    public function timestamp( $column )
+	    {
+	        return $this->addColumn( 'timestamp', $column );
+	    }
 
 	    /********************************************************/
 	    /****** 	Columns

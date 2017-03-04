@@ -1,11 +1,11 @@
 <?php
 namespace Cuisine\Database\Migrations;
 
-
+use WP_CLI;
 use Cuisine\Wrappers\Record;
+use Cuisine\Wrappers\StaticInstance;
 
-
-class Migration implements MigrationContract{
+class Migration extends StaticInstance implements MigrationContract{
 
 	/**
 	 * Name of this migration
@@ -38,7 +38,6 @@ class Migration implements MigrationContract{
 
 		$this->name = $this->getName();
 		$this->timestamp = $this->getTimestamp();
-
 		add_action( 'run_migrations', array( &$this, 'run' ) );
 	}
 
@@ -52,18 +51,21 @@ class Migration implements MigrationContract{
 	 */
 	public function run( Migrator $migrator ){
 
-		if( !$this->ran( $migrator ) ){
+		//if( !$this->ran( $migrator ) ){
 
 			if( $migrator->direction == 'up' ){
+				
 				$this->up();
 
 			}else{
+
 				$this->down();
 
 			}
 
+			$this->notify();
 			$this->save();
-		}
+		//}
 	}
 
 
@@ -75,6 +77,17 @@ class Migration implements MigrationContract{
 	protected function save()
 	{
 		
+	}
+
+	/**
+	 * Notify WP CLI if the migration went as planned
+	 * 
+	 * @return WP_CLI::success
+	 */
+	public function notify()
+	{
+		if( defined( 'WP_CLI' ) && WP_CLI )
+			WP_CLI::Success( 'Migration '.$this->getName(). ' ran succesfully.' );
 	}
 
 
@@ -95,9 +108,9 @@ class Migration implements MigrationContract{
 	 * 
 	 * @return string | null
 	 */
-	public function getTimestamp( $name )
+	public function getTimestamp()
 	{
-		$migration = Record::table( 'migrations' )->where([ 'name' => $name ])->find();
+		$migration = Record::table( 'migrations' )->where([ 'name' => $this->getName() ])->find();
 
 		if( !is_null( $migration ) )
 			return $migration->timestamp;
@@ -140,7 +153,7 @@ class Migration implements MigrationContract{
 	 */
 	public function down()
 	{
-		return null 
+		return null;
 	}
 
 

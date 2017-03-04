@@ -71,6 +71,7 @@ abstract class Wrapper {
             'posttype'          => 'Cuisine\Models\PostType',
             'taxonomy'          => 'Cuisine\Models\Taxonomy',
             'user'              => 'Cuisine\Models\User',
+            'record'            => 'Cuisine\Database\Record',
             'route'             => 'Cuisine\Front\Route',
             'script'            => 'Cuisine\Front\Scripts',
             'sass'              => 'Cuisine\Front\Sass',

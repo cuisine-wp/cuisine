@@ -97,10 +97,19 @@
 		}
 
 
-		public function drop( $table, $)
+		/**
+		 * Drop a record
+		 * 
+		 * @param  string $table
+		 * @param  int $id
+		 * 
+		 * @return void
+		 */
+		public function drop( $table, $id )
 		{
 				
 		}
+
 
 		/**
 		 * Wrap a string in DB quotes
