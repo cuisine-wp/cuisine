@@ -4,6 +4,7 @@ namespace Cuisine\Database\Migrations;
 use WP_CLI;
 use Cuisine\Wrappers\Record;
 use Cuisine\Wrappers\StaticInstance;
+use Cuisine\Database\Contracts\Migration as MigrationContract;
 
 class Migration extends StaticInstance implements MigrationContract{
 
@@ -84,7 +85,7 @@ class Migration extends StaticInstance implements MigrationContract{
 			'timestamp' 	=> $migrator->timestamp
 		];
 		
-		Record::insert( 'migrations', $data );
+		//Record::insert( 'migrations', $data );
 	}
 
 	/**
@@ -118,7 +119,9 @@ class Migration extends StaticInstance implements MigrationContract{
 	 */
 	public function getTimestamp()
 	{
-		$migration = Record::table( 'migrations' )->where([ 'name' => $this->getName() ])->find();
+		$migration = Record::find( 'migrations' )
+							 ->where([ 'name' => $this->getName() ])
+							 ->first();
 
 		if( !is_null( $migration ) )
 			return $migration->timestamp;

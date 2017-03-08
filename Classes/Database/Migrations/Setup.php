@@ -4,6 +4,7 @@
 
 	use Cuisine\Wrappers\Schema;
 	use Cuisine\Database\Blueprint;
+	use Cuisine\Database\Contracts\Migration as MigrationContract;
 
 	class Setup extends Migration implements MigrationContract{
 
@@ -29,4 +30,4 @@
 
 	}
 
-	\Cuisine\Database\Migrations\Setup::getInstance();
+	//\Cuisine\Database\Migrations\Setup::getInstance();

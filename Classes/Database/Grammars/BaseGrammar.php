@@ -1,19 +1,20 @@
 <?php
 
-	namespace Cuisine\Database;
+	namespace Cuisine\Database\Grammars;
 
 	use Cuisine\Utilities\Fluent;
 	use Cuisine\Utilities\Sort;
+	use Cuisine\Database\BaseInterface;
 
-	class Grammar{
+	class BaseGrammar{
 
 
 		/**
-		 * The blueprint instance of this object
+		 * The database-interface instance of this object
 		 * 
-		 * @var Cuisine\Database\Blueprint;
+		 * @var Cuisine\Database\Contracts\QueryProducer;
 		 */
-		protected $blueprint;
+		protected $interface;
 
 
 		/**
@@ -45,11 +46,12 @@
 		/**
 		 * Constructor for the grammar class
 		 * 
-		 * @param Blueprint $blueprint
+		 * @param QueryProducer $interface
+		 * @param WPDB $connection
 		 */
-		public function __construct( Blueprint $blueprint, $connection )
+		public function __construct( BaseInterface $interface, $connection )
 		{
-			$this->blueprint = $blueprint;	
+			$this->interface = $interface;	
 			$this->connection = $connection;
 		}
 
@@ -59,9 +61,14 @@
 		 * 
 		 * @return string
 		 */
-		public function getTable()
+		public function getTable( $wrap = true )
 		{
-			return $this->wrap( $this->connection->prefix . $this->blueprint->table );
+			$table = $this->connection->prefix . $this->interface->getTable();
+
+			if( $wrap )
+				return $this->wrap( $table );
+
+			return $table;
 		}
 
 		/**
@@ -71,11 +78,31 @@
 		 * 
 		 * @return String
 		 */
-		public function wrap( $string )
+		public function wrap( $string, $wrapper = '`' )
 		{
-			return "`{$string}`";	
+			return "{$wrapper}{$string}{$wrapper}";	
+		}
+
+
+		/**
+		 * Wrap all values in an array
+		 *
+		 * @param $input
+		 * 
+		 * @return array
+		 */
+		public function wrapValues( $input, $wrapper = '`' )
+		{
+			$input = Sort::prependValues( $input, $wrapper );
+			$output = Sort::appendValues( $input, $wrapper );
+			return $output;
 		}
 		
+
+		/*************************************************************/
+		/*******    TABLES
+		/*************************************************************/
+
 
 		/**
 		 * Compile a create table command 
@@ -155,6 +182,10 @@
 		}
 
 
+		/*************************************************************/
+		/*******    RECORDS
+		/*************************************************************/
+
 		/**
 		 * Compile an inster command
 		 * 
@@ -165,11 +196,15 @@
 		public function compileInsert( Fluent $command )
 		{	
 			$table = $this->getTable(); 
-			$columns = Sort::prependValues( $command->columns, '`' );
-			$columns = Sort::appendValues( $columns, '`' );
-			$columns = implode( ', ', $columns );
+			$columns = $command->data;
 
-			return "INSERT INTO $table ( $columns )";
+			$keys = $this->wrapValues( array_keys( $columns ) );
+			$values = $this->wrapValues( array_values( $columns ), "'" );
+
+			$keys = implode( ', ', $keys );
+			$values = implode( ', ', $values );
+
+			return "INSERT INTO $table ( $keys ) VALUES ( $values )";
 		}
 
 
@@ -182,7 +217,7 @@
 		{
 			$columns = [];
 
-			foreach( $this->blueprint->columns as $column ){
+			foreach( $this->interface->getColumns() as $column ){
 
 				$name = $this->wrap( $column->name );
 				$sql = "{$name} {$this->getType( $column )}";
@@ -234,7 +269,7 @@
 
 				case 'boolean':
 				case 'bool':
-					return 'tinyint(1';
+					return 'tinyint(1)';
 					break;
 
 				case 'timestamp':

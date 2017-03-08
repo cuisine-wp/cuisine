@@ -2,108 +2,88 @@
 
 	namespace Cuisine\Database;
 
-	use Cuisine\Wrappers\Schema as Table;
-	use Cuisine\Utilities\Fluent;
-
 	class Record{
 
-		/**
-		 * Table we're manipulating
-		 * 
-		 * @var string
-		 */
-		protected $table;
 
 		/**
-		 * Rudamentary query
+		 * Database connection 
 		 * 
-		 * @var Fluent
+		 * @var WPDB instance
+		 */
+		protected $connection;
+
+
+		/**
+		 * Query we're building
+		 * 
+		 * @var Cuisine\Database\Query
 		 */
 		protected $query;
 
+
 		/**
-		 * Find a record or a bunch of records
-		 * 
-		 * @return Object | null
+		 * Create a new database schema manager
+		 *
+		 * @return  void
 		 */
-		public function table( $table )
+		public function __construct()
 		{
-			$this->table = $this->wrap( $table );
+			global $wpdb;
+			$this->connection = $wpdb;
+		}
+
+
+		/**
+		 * Sets the table
+		 * 
+		 * @param  string $table
+		 * 
+		 * @return Cuisine\Database\Record
+		 */
+		public function table( $table)
+		{
+			$this->query =  $this->createQuery( $table );
 			return $this;
 		}
 
 
-		public function where( $query )
-		{
-			$this->query = new Fluent( $query );
-			return $this;
-		}
-
-		/**
-		 * get the records collected
-		 * 
-		 * @return 
-		 */
-		public function find()
-		{
-			//$query = Sort::appendValues( $this->query, "'" );
-			//$query = implode( "` = '", $query )
-		}
+		/**********************************************/
+		/********  WRITE & DELETE
+		/**********************************************/
 
 
 		/**
-		 * Insert a record into the database
-		 * 
+		 * Insert a record
+		 *
 		 * @param  String $table
 		 * @param  Array $data
 		 * 
-		 * @return Object
+		 * @return void
 		 */
 		public function insert( $table, $data )
 		{
-			return $this->insertOrUpsert( $table, $data );			
+			$query = $this->createQuery( $table );
+			$query->insert( $data );
+
+			return $this->run( $query );	
 		}
 
 
 		/**
-		 * Upsert a record into the database
+		 * Update a record
 		 * 
-		 * @param  String $table
+		 * @param  string $table
+		 * @param  int $id
 		 * @param  Array $data
 		 * 
-		 * @return Object
+		 * @return void
 		 */
-		public function upsert( $table, $data )
+		public function update( $table, $id, $data )
 		{
-			return $this->insertOrUpsert( $table, $data );
-		}
+			$query = $this->createQuery( $table );
+			$query->update( $id, $data );
 
-
-		/**
-		 * Insert or upsert a record into the database
-		 * 
-		 * @param  String $table
-		 * @param  Array $data 
-		 * 
-		 * @return Object
-		 */
-		public function insertOrUpsert( $table, $data )
-		{
-			global $wpdb;
-			
-			$command = new Fluent([ 'columns' => $data ]);
-			$blueprint = new Blueprint( $table, null );
-			$sql = ( new Grammar( $blueprint, $wpdb ) )->compileInsert( $command );
-			
-			$wpdb->query( $sql );
-
-				//$blueprint = Table::getBlueprint( $table );
-			
-			//if( $this->validate( $blueprint, $data ) ){
-
-
-
-			//}
+			$this->run( $query );
 		}
 
 
@@ -115,21 +95,105 @@
 		 * 
 		 * @return void
 		 */
-		public function drop( $table, $id )
+		public function delete( $table, $id )
 		{
-				
+			$query = $this->createQuery( $table );
+			$query->delete( $id );
+
+			$this->run( $query );
+		}
+
+
+		/**********************************************/
+		/********  FIND
+		/**********************************************/
+
+		/**
+		 * Same as static::table
+		 * 
+		 * @param  string $table
+		 * 
+		 * @return Cuisine\Database\Record
+		 */
+		public function find( $table )
+		{
+			return self::table( $table );
 		}
 
 
 		/**
-		 * Wrap a string in DB quotes
+		 * Add where clauses to a query
 		 * 
-		 * @param  String $string
+		 * @param  Array $data
 		 * 
-		 * @return String
+		 * @return Cuisine\Database\Record
 		 */
-		protected function wrap( $string )
+		public function where( Array $data )
 		{
-			return "`{$string}`";
+			$this->query->where( $data );
+			return $this;
 		}
+
+
+		/**
+		 * Retrieve the first result
+		 * 
+		 * @return Object
+		 */
+		public function first()
+		{
+			$results = $this->run( $this->query );
+			
+			if( sizeof( $results ) > 0 ){
+				$results = array_values( $results );
+				return $results[ 0 ];
+			}
+
+			return null;
+		}
+
+
+		/**
+		 * Get the results
+		 * 
+		 * @return Array
+		 */
+		public function results()
+		{
+			$results = $this->run( $this->query );
+
+			if( sizeof( $results ) > 0 )
+				return $results;
+
+			return null;
+		}
+
+
+
+		/**
+	     * Execute the query to run / modify the table.
+	     *
+	     * @param  \Cuisine\Database\Query  $query
+	     * 
+	     * @return void
+	     */
+	    protected function run( Query $query )
+	    {
+	        return $query->run( $this->connection );
+	    }
+
+
+
+		 /**
+	     * Create a new command set with a Closure
+	     *
+	     * @param string $table
+	     *
+	     * @return \Cuisine\Database\Query
+	     */
+	    protected function createQuery( $table )
+	    {
+	    	return new Query( $table );
+	    }
+
 	}

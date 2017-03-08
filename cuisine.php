@@ -114,6 +114,8 @@ if (!class_exists('Cuisine')) {
             $includes = array(
                 'Classes/Wrappers',
                 'Classes/Utilities',
+                'Classes/Database/Contracts',
+                'Classes/Database/Grammars',
                 'Classes/Database',
                 'Classes/Database/Migrations',
                 'Classes/Models',
