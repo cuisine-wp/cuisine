@@ -64,6 +64,33 @@ class Sort{
 		return preg_filter('/$/', $append, $array );
 	}
 
+	/**
+	 * Flatten a multi dimensional array
+	 * 
+	 * @param  Array $array
+	 * 
+	 * @return Array
+	 */
+	public static function flatten( $array )
+	{
+	    $result = array();
+
+	    foreach( $array as $key => $value ) {
+	        
+	        if( is_array( $value ) ) {
+	        	
+	            $result = $result + static::flatten( $value );
+	        
+	        }else{
+	        	
+	            $result[ $key ] = $value;
+	        
+	        }
+	    }
+
+	    return $result;
+	}
+
 
 	/**
 	 * Get the first item in an array

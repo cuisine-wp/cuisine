@@ -39,7 +39,6 @@
 			$this->grammar = new MySql( $this, $connection );
 
 			foreach( $this->toSql( $connection ) as $statement ) {
-				cuisine_dump( $statement );
 				$connection->query( $statement );
 			}
 		}
@@ -71,7 +70,7 @@
 
 				}
 			}
-			cuisine_dump( $statements );
+
 			return $statements;
 		}
 

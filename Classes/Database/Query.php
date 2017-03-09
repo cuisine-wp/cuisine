@@ -88,20 +88,31 @@
 
 
 		/**
-		 * Return records
+		 * Return a find command
 		 * 
-		 * @return [type] [description]
+		 * @return Cuisine\Utilities\Fluent;
 		 */
 		public function find()
 		{
-			
-			return $results;
+			$command = $this->addCommand( 'find' );	
+			return $this;
 		}
 
 		
+		/**
+		 * Add a limit to the eventual query
+		 * 
+		 * @return 
+		 */
+		public function limit( $limit )
+		{
+			$this->clauses[] = [ 'limit' => $limit ];	
+			return $this;
+		}
+
 
 		/**
-		 * Execute the blueprint against the database
+		 * Execute the query against the database
 		 * 
 		 * @param  WPDB $connection
 		 * @return void
@@ -112,10 +123,25 @@
 			$this->grammar = new MySql( $this, $connection );
 
 			foreach( $this->toSql() as $statement ) {
-
-				$connection->query( $statement );
-	
+				$connection->query( $statement );	
 			}
+		}
+
+
+		/**
+		 * Execute a select query against the databse 
+		 * 
+		 * @param  WPDB $connection
+		 * 
+		 * @return array
+		 */
+		public function results( $connection )
+		{
+			$this->grammar = new MySql( $this, $connection );
+			$sql = $this->toSql();
+
+			$results = $connection->get_results( $sql[0] );
+			return $results;
 		}
 
 

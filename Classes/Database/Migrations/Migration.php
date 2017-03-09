@@ -2,6 +2,8 @@
 namespace Cuisine\Database\Migrations;
 
 use WP_CLI;
+use Exception;
+use Cuisine\Utilities\Logger;
 use Cuisine\Wrappers\Record;
 use Cuisine\Wrappers\StaticInstance;
 use Cuisine\Database\Contracts\Migration as MigrationContract;
@@ -57,16 +59,14 @@ class Migration extends StaticInstance implements MigrationContract{
 			if( $migrator->direction == 'up' ){
 				
 				$this->up();
+				$this->save( $migrator);
+				$this->notify();
 
 			}else{
 
 				$this->down();
-
+				$this->notify( 'Migration '.$this->getName(). ' rolled back.' );
 			}
-
-			$this->notify();
-
-			$this->save( $migrator);
 		}
 	}
 
@@ -80,12 +80,8 @@ class Migration extends StaticInstance implements MigrationContract{
 	 */
 	protected function save( $migrator )
 	{
-		$data = [
-			'name'			=> $this->name,
-			'timestamp' 	=> $migrator->timestamp
-		];
-		
-		//Record::insert( 'migrations', $data );
+		$data = [ 'name' => $this->name ];
+		Record::insert( 'migrations', $data );
 	}
 
 	/**
@@ -93,10 +89,13 @@ class Migration extends StaticInstance implements MigrationContract{
 	 * 
 	 * @return WP_CLI::success
 	 */
-	public function notify()
+	public function notify( $msg = null )
 	{
+		if( $msg == null )
+			$msg = 'Migration '.$this->getName(). ' ran succesfully.';
+
 		if( defined( 'WP_CLI' ) && WP_CLI )
-			WP_CLI::Success( 'Migration '.$this->getName(). ' ran succesfully.' );
+			WP_CLI::Success( $msg );
 	}
 
 
@@ -119,12 +118,20 @@ class Migration extends StaticInstance implements MigrationContract{
 	 */
 	public function getTimestamp()
 	{
-		$migration = Record::find( 'migrations' )
+		try{
+
+			$migration = Record::find( 'migrations' )
 							 ->where([ 'name' => $this->getName() ])
 							 ->first();
 
-		if( !is_null( $migration ) )
-			return $migration->timestamp;
+			if( !is_null( $migration ) )
+				return strtotime( $migration->created );
+		
+		}catch( Exception $e ){
+
+			Logger::error( $e->getMessage() );
+		
+		}
 
 		return null;
 	}

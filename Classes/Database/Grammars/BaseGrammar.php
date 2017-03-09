@@ -208,6 +208,17 @@
 		}
 
 
+
+		public function compileFind( Fluent $command )
+		{
+			$table = $this->getTable();
+			$where = $this->getClauses();
+			$limit = $this->getLimit( false );
+	
+			return "SELECT * FROM $table $where $limit";
+		}
+
+
 		/**
 		 * Compile loose columns
 		 * 
@@ -226,6 +237,66 @@
 			}
 			
 			return $columns;
+		}
+
+
+		/**
+		 * Return the clauses of a query
+		 * 
+		 * @return sql
+		 */
+		public function getClauses( $operator = 'AND' )
+		{
+			$clauses = Sort::flatten( $this->interface->clauses );
+			$operator = apply_filters( 'cuisine_database_where_operator', $operator, $this->interface );
+
+			$where = array();
+
+			foreach( $clauses as $key => $value ){
+
+				if( $key != 'limit' )
+					$where[] = $this->wrap( $key ) .' = '.$this->wrap( $value, "'" );
+			}
+
+			//return an empty string if no clauses where found
+			switch( sizeof( $where ) ){
+
+				case 0:
+					return '';
+					break;
+
+				case 1:
+					return ' WHERE '.$where[0];
+					break;
+
+				default:
+
+					$whereString = implode( " {$operator} ", $where );
+					return ' WHERE '.$whereString;
+					break;
+			}
+		}
+
+		/**
+		 * Returns a limit
+		 * 
+		 * @return sql
+		 */
+		public function getLimit( $force = true )
+		{
+			$clauses = Sort::flatten( $this->interface->clauses );
+			$limit = '';
+			$amount = apply_filters( 'cuisine_database_limit', 10, $this->interface );
+
+			foreach( $clauses as $key => $value ){
+				if( $key == 'limit' )
+					return " LIMIT {$value}";
+			}
+
+			if( $force )
+				return " LIMIT {$amount}";
+
+			return '';
 		}
 
 

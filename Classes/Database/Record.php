@@ -109,7 +109,7 @@
 		/**********************************************/
 
 		/**
-		 * Same as static::table
+		 * Find a table
 		 * 
 		 * @param  string $table
 		 * 
@@ -117,12 +117,15 @@
 		 */
 		public function find( $table )
 		{
-			return self::table( $table );
+			$this->query =  $this->createQuery( $table );
+			$this->query->find();
+
+			return $this;
 		}
 
 
 		/**
-		 * Add where clauses to a query
+		 * Add where clauses to a qu$this->query->find();ery
 		 * 
 		 * @param  Array $data
 		 * 
@@ -142,8 +145,9 @@
 		 */
 		public function first()
 		{
-			$results = $this->run( $this->query );
-			
+			$this->query->limit( 1 );
+			$results = $this->results();
+
 			if( sizeof( $results ) > 0 ){
 				$results = array_values( $results );
 				return $results[ 0 ];
@@ -160,7 +164,7 @@
 		 */
 		public function results()
 		{
-			$results = $this->run( $this->query );
+			$results = $this->query->results( $this->connection );
 
 			if( sizeof( $results ) > 0 )
 				return $results;

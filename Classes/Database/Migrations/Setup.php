@@ -30,4 +30,4 @@
 
 	}
 
-	//\Cuisine\Database\Migrations\Setup::getInstance();
+	\Cuisine\Database\Migrations\Setup::getInstance();
