@@ -187,11 +187,11 @@
 		/*************************************************************/
 
 		/**
-		 * Compile an inster command
+		 * Compile an instert command
 		 * 
 		 * @param  Fluent $command
 		 * 
-		 * @return void
+		 * @return string (sql)
 		 */
 		public function compileInsert( Fluent $command )
 		{	
@@ -208,7 +208,57 @@
 		}
 
 
+		/**
+		 * Update a record
+		 * 
+		 * @param  Fluent $command
+		 * 
+		 * @return string (sql)
+		 */
+		public function compileUpdate( Fluent $command )
+		{
+			$table = $this->getTable();
+			$data = $command->data;
+			$where = $this->getClauses();
+			
+			$set = 'SET ';
+			$columns = [];
 
+			foreach( $data as $key => $value ){
+				//$key = $this->Wrap( $key );
+				$value = ( is_null( $value ) ? 'NULL' : $this->wrap( $value, "'" ) );
+				$columns[] = "{$key}={$value}";
+			}
+
+			$set = $set . implode( ', ', $columns );
+
+			return "UPDATE $table $set $where";
+		}
+
+
+		/**
+		 * Compile a delete row action
+		 * 
+		 * @param  Fluent $command
+		 * 
+		 * @return string (sql)
+		 */
+		public function compileDelete( Fluent $command )
+		{
+			$table = $this->getTable();
+			$where = $this->getClauses();
+
+			return "DELETE FROM $table $where";
+		}
+
+
+		/**
+		 * Compile a find action
+		 * 
+		 * @param  Fluent $command
+		 * 
+		 * @return string (Sql)
+		 */
 		public function compileFind( Fluent $command )
 		{
 			$table = $this->getTable();

@@ -108,7 +108,7 @@
 	margin-right:0;
 }
 
-.repeater-field .repeat-controls{
+.repeat-controls{
 	width:82px;
 	position:absolute;
 	left:50%;
@@ -123,11 +123,11 @@
 	display:none;
 }
 
-.repeater-field .repeatable:hover .repeat-controls{
+.repeatable:hover .repeat-controls{
 	display:block;
 }
 
-.repeater-field .repeat-controls .btn{
+.repeat-controls .btn{
 	box-sizing:border-box;
 	width:36px;
 	height:36px;
@@ -141,16 +141,16 @@
 	cursor:pointer;
 }
 
-.repeater-field .repeat-controls .btn.plus{
+.repeat-controls .btn.plus{
 	margin-right:10px;
 }
 
-.repeater-field .repeat-controls .btn:hover{
+.repeat-controls .btn:hover{
 	background:#0091cd;
 	border-color:#0071ad;
 }
 
-.repeater-field .repeat-controls .btn span{
+.repeat-controls .btn span{
 	font-size:22px;
 	padding-left:0;
 	margin-left:0;

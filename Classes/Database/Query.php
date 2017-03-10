@@ -71,7 +71,9 @@
 		 */
 		public function delete( $id )
 		{
-				
+			$this->where([ 'id' => $id ]);
+			$this->addCommand( 'delete' );
+			return $this;
 		}
 
 
