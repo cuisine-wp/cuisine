@@ -174,7 +174,7 @@
 		public function addCommand( $string, $parameters = [] )
 		{
 
-			$this->commands[] = $this->createCommand( $string, $parameters );
+			$this->commands[] = $command = $this->createCommand( $string, $parameters );
 			return $command;
 		}
 

@@ -32,9 +32,13 @@ class RepeaterField extends DefaultField{
 
         $this->fields = $this->properties['fields'];
 
+        $class = 'repeater-field';
         $datas = $this->buildDatas();
 
-        echo '<div class="repeater-field" '.$datas.'>';
+        if( $this->getProperty( 'view' ) )
+            $class .= ' '.$this->getProperty( 'view' );
+
+        echo '<div class="'.$class.'" '.$datas.'>';
 
             echo $this->getLabel();
             $this->build();
@@ -123,10 +127,7 @@ class RepeaterField extends DefaultField{
                 $v = 'value="'.$value['position'].'"';
 
             //add position field:
-            echo '<div class="field-wrapper">';
-                echo '<input type="hidden" '.$v.' class="multi" name="'.$prefix.'[position]" id="position"/>';
-            echo '</div>';
-
+            echo '<input type="hidden" '.$v.' class="multi" name="'.$prefix.'[position]" id="position"/>';
             $this->buildControls();
 
 

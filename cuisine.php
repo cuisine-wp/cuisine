@@ -279,8 +279,23 @@ add_action('plugins_loaded', function(){
 });
 
 
-function cuisine_dump( $arr ){
-    echo '<pre>';
-        print_r( $arr );
-    echo '</pre>';
+/**
+ * Print_R in a <pre> tag
+ */
+if( !function_exists( 'cuisine_dump' ) ){
+    function cuisine_dump( $arr ){
+        echo '<pre>';
+            print_r( $arr );
+        echo '</pre>';
+    }
+}
+
+/**
+ * Print_R in a <pre> tag and die
+ */
+if( !function_exists( 'dd' ) ){
+    function dd( $arr ){
+        cuisine_dump( $arr );
+        die();
+    }
 }
