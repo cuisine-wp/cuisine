@@ -130,6 +130,7 @@ class RepeaterField extends DefaultField{
             echo '<div class="field-wrapper" style="display:none">';    
                 echo '<input type="hidden" '.$v.' class="multi" name="'.$prefix.'[position]" id="position"/>';
             echo '</div>';
+            
             $this->buildControls();
 
 

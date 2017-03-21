@@ -116,12 +116,14 @@
 		 * Return a templated-section
 		 * 
 		 * @param  string $name
+		 * @param  string $path
+		 * 
 		 * @return  string (html, echoed)
 		 */
-		public static function section( $name ){
+		public static function section( $name, $path = null ){
 
 			if( function_exists( 'get_section_template' ) )
-				return get_section_template( $name );
+				return get_section_template( $name, $path );
 
 		}
 
