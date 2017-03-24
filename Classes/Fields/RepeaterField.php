@@ -204,8 +204,8 @@ class RepeaterField extends DefaultField{
             return $_GET['page'].'-'.$this->name;
 
 
-        global $post;
-        return $post->ID.'-'.$this->name;
+        global $post; 
+       return $post->ID.'-'.$this->name;
 
     }
 

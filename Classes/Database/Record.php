@@ -51,6 +51,23 @@
 		/********  WRITE & DELETE
 		/**********************************************/
 
+		/**
+		 * Insert or update a record, based on the passed on data
+		 * 
+		 * @param  String $table 
+		 * @param  Array $data  
+		 * 
+		 * @return void
+		 */
+		public function insertOrUpdate( $table, $data )
+		{
+			if( isset( $data['id'] ) && !is_null( $data['id'] ) && $data['id'] != '' ){
+				unset( $data['id'] );
+				return $this->update( $table, $data['id'], $data );
+			}
+
+			return $this->insert( $table, $data );
+		}
 
 		/**
 		 * Insert a record
