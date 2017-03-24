@@ -200,6 +200,10 @@ class RepeaterField extends DefaultField{
      */
     private function getTemplateName(){
 
+        if( !isset( $_GET['post'] ) && isset( $_GET['page' ] ) )
+            return $_GET['page'].'-'.$this->name;
+
+
         global $post;
         return $post->ID.'-'.$this->name;
 
