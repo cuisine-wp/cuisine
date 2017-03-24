@@ -12,7 +12,7 @@ class SettingsTabBuilder {
      *
      * @var Array
      */
-    private $data;
+    protected $data;
 
 
     /**
@@ -20,7 +20,7 @@ class SettingsTabBuilder {
      *
      * @var \Cuisine\Utilities\User
      */
-    private $user;
+    protected $user;
 
 
     /**
@@ -28,7 +28,7 @@ class SettingsTabBuilder {
      *
      * @var html
      */
-    private $view;
+    protected $view;
 
 
     /**
@@ -135,7 +135,7 @@ class SettingsTabBuilder {
      * @param array $options The settings page options.
      * @return array
      */
-    private function parseOptions(array $options) {
+    protected function parseOptions(array $options) {
 
         return wp_parse_args( $options, array() );
 
@@ -147,7 +147,7 @@ class SettingsTabBuilder {
      *
      * @return string
      */
-    private function getOptionName(){
+    protected function getOptionName(){
         return 'settings-'.sanitize_title( $this->data['title'] );
     }
 
@@ -157,7 +157,7 @@ class SettingsTabBuilder {
      *
      * @return void
      */
-    private function setDefaultValue() {
+    protected function setDefaultValue() {
 
         $settingsPage = $_GET['page'];
         if( isset( $settingsPage ) ){

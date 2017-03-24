@@ -337,14 +337,4 @@ class UsermetaBuilder {
 	    	$field['value'] = '';
 	    }
 	}
-
-
-
-
-
-
-
-
-
 }
-

@@ -13,7 +13,7 @@ class TermmetaBuilder {
 	 *
 	 * @var Array
 	 */
-	private $data;
+	protected $data;
 
 
 	/**
@@ -21,7 +21,7 @@ class TermmetaBuilder {
 	 *
 	 * @var \Cuisine\Utilities\User
 	 */
-	private $user;
+	protected $user;
 
 
 	/**
@@ -29,7 +29,7 @@ class TermmetaBuilder {
 	 *
 	 * @var html
 	 */
-	private $view;
+	protected $view;
 
 
 	/**
@@ -37,14 +37,14 @@ class TermmetaBuilder {
 	 *
 	 * @var bool
 	 */
-	private $check = false;
+	protected $check = false;
 
 	/**
 	 * The capability to check.
 	 *
 	 * @var string
 	 */
-	private $capability;
+	protected $capability;
 
 
 
@@ -242,7 +242,7 @@ class TermmetaBuilder {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function register( $postId, $fields ) {
+	protected function register( $postId, $fields ) {
 	    
 	    foreach( $fields as $field ){
 
@@ -258,7 +258,7 @@ class TermmetaBuilder {
 	 * @param array $options The metabox options.
 	 * @return array
 	 */
-	private function parseOptions(array $options) {
+	protected function parseOptions(array $options) {
 
 	    return wp_parse_args($options, array(
 	        'context'   => 'normal',
@@ -274,7 +274,7 @@ class TermmetaBuilder {
 	 * @param array $fields
 	 * @return array
 	 */
-	private function getSections(array $fields) {
+	protected function getSections(array $fields) {
 
 	    $sections = array();
 
@@ -297,7 +297,7 @@ class TermmetaBuilder {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function setDefaultValue( \WP_Post $post, array $fields ) {
+	protected function setDefaultValue( \WP_Post $post, array $fields ) {
 	    
 	    foreach ( $fields as $field ){
 

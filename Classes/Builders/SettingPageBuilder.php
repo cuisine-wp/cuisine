@@ -12,7 +12,7 @@ class SettingsPageBuilder {
 	 *
 	 * @var Array
 	 */
-	private $data;
+	protected $data;
 
 
 	/**
@@ -20,7 +20,7 @@ class SettingsPageBuilder {
 	 *
 	 * @var \Cuisine\Utilities\User
 	 */
-	private $user;
+	protected $user;
 
 
 	/**
@@ -28,7 +28,7 @@ class SettingsPageBuilder {
 	 *
 	 * @var html
 	 */
-	private $view;
+	protected $view;
 
 
 	/**
@@ -36,14 +36,14 @@ class SettingsPageBuilder {
 	 *
 	 * @var bool
 	 */
-	private $check = false;
+	protected $check = false;
 
 	/**
 	 * The capability to check.
 	 *
 	 * @var string
 	 */
-	private $capability;
+	protected $capability;
 
 
 	/**
@@ -51,7 +51,7 @@ class SettingsPageBuilder {
 	 *
 	 * @var string
 	 */
-	private $renderType;
+	protected $renderType;
 
 
 	/**
@@ -60,7 +60,7 @@ class SettingsPageBuilder {
 	 * @param \Cuisine\Validation\Validation $validator
 	 * @param \Cuisine\User\User $user
 	 */
-	function __construct(){
+	public function __construct(){
 
 		$this->data = array();
 
@@ -320,7 +320,7 @@ class SettingsPageBuilder {
 	 * @param array $fields
 	 * @return void
 	 */
-	private function register( $fields ) {
+	protected function register( $fields ) {
 
 	    $save = array();
 
@@ -349,7 +349,7 @@ class SettingsPageBuilder {
 	 * @param array $options The settings page options.
 	 * @return array
 	 */
-	private function parseOptions(array $options) {
+	protected function parseOptions(array $options) {
 
 	    return wp_parse_args( $options, array(
 
@@ -367,7 +367,7 @@ class SettingsPageBuilder {
 	 *
 	 * @return string
 	 */
-	private function getOptionName(){
+	protected function getOptionName(){
 		return 'settings-'.sanitize_title( $this->data['title'] );
 	}
 
@@ -377,7 +377,7 @@ class SettingsPageBuilder {
 	 *
 	 * @return void
 	 */
-	private function setDefaultValue() {
+	protected function setDefaultValue() {
 
 		$values = get_option( $this->data['slug'], array() );
 
