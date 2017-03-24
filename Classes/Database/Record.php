@@ -2,6 +2,8 @@
 
 	namespace Cuisine\Database;
 
+	use Cuisine\Utilities\Collection;
+
 	class Record{
 
 
@@ -165,10 +167,9 @@
 			$this->query->limit( 1 );
 			$results = $this->results();
 
-			if( sizeof( $results ) > 0 ){
-				$results = array_values( $results );
-				return $results[ 0 ];
-			}
+			if( !$results->empty() )
+				return $results->first();
+			
 
 			return null;
 		}
@@ -182,8 +183,9 @@
 		public function results()
 		{
 			$results = $this->query->results( $this->connection );
+			$results = new Collection( $results );
 
-			if( sizeof( $results ) > 0 )
+			if( !$results->empty() )
 				return $results;
 
 			return null;
