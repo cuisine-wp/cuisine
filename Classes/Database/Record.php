@@ -167,7 +167,7 @@
 			$this->query->limit( 1 );
 			$results = $this->results();
 
-			if( !$results->empty() )
+			if( !is_null( $results ) && !$results->empty() )
 				return $results->first();
 			
 
