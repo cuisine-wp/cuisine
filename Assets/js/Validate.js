@@ -99,7 +99,6 @@
 
             if( typeof( _country ) == 'undefined' ){
 
-                console.log( 'undefined' );
                 if( _string.length > 7 )
                     return false;
     

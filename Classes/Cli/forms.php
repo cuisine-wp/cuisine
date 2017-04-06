@@ -29,5 +29,5 @@
 	}
 
 
-	WP_CLI::add_command( 'cuisine forms', 'Cuisine\Cli\FormCommands' );
+	WP_CLI::add_command( 'forms', 'Cuisine\Cli\FormCommands' );
 

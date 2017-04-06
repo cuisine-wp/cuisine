@@ -64,8 +64,10 @@
 		public function insertOrUpdate( $table, $data )
 		{
 			if( isset( $data['id'] ) && !is_null( $data['id'] ) && $data['id'] != '' ){
+
+				$id = $data['id'];
 				unset( $data['id'] );
-				return $this->update( $table, $data['id'], $data );
+				return $this->update( $table, $id, $data );
 			}
 
 			return $this->insert( $table, $data );
@@ -167,7 +169,7 @@
 			$this->query->limit( 1 );
 			$results = $this->results();
 
-			if( !$results->empty() )
+			if( !is_null( $results ) && !$results->empty() )
 				return $results->first();
 			
 

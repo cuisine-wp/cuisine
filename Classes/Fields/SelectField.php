@@ -69,11 +69,27 @@ class SelectField extends ChoiceField{
 
         $html = '<option value="'.$value.'"';
 
-            $html .= ( $this->getValue() == $value ? ' selected' : '' );
+            $html .= $this->selected( $value );
 
         $html .= '>'.$label.'</option>';
 
         return $html;
+    }
+
+
+    /**
+     * Check if a value is selected
+     * 
+     * @return string
+     */
+    public function selected( $value )
+    {
+        $values = $this->getValue();
+        if( !is_array( $values ) )
+            $values = [ $values ];
+
+        return ( in_array( $value, $values ) ? ' selected' : '' ); 
+
     }
 
 
