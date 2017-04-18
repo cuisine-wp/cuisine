@@ -169,7 +169,7 @@
 			$this->query->limit( 1 );
 			$results = $this->results();
 
-			if( !is_null( $results ) && !$results->empty() )
+			if( !is_null( $results ) && !$results->isEmpty() )
 				return $results->first();
 			
 
@@ -187,7 +187,7 @@
 			$results = $this->query->results( $this->connection );
 			$results = new Collection( $results );
 
-			if( !$results->empty() )
+			if( !$results->isEmpty() )
 				return $results;
 
 			return null;

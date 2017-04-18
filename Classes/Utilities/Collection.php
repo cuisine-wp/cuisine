@@ -98,7 +98,7 @@
 		 * 
 		 * @return bool
 		 */
-		public function empty()
+		public function isEmpty()
 		{
 			return ( empty( $this->items ) );	
 		}
