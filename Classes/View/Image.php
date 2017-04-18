@@ -199,7 +199,7 @@ class Image {
 	 * @param  String $url
 	 * @return String $extension
 	 */
-	private static function getImageExtension( $url ){
+	public static function getImageExtension( $url ){
 
 		$ex = substr( $url, -4 );
 
