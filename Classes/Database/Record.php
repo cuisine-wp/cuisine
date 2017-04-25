@@ -104,7 +104,7 @@
 			$query = $this->createQuery( $table );
 			$query->update( $id, $data );
 
-			$this->run( $query );
+			return $this->run( $query );
 		}
 
 

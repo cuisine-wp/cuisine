@@ -227,7 +227,7 @@
 			foreach( $data as $key => $value ){
 				//$key = $this->Wrap( $key );
 				$value = ( is_null( $value ) ? 'NULL' : $this->wrap( $value, "'" ) );
-				$columns[] = "{$key}={$value}";
+				$columns[] = "{$this->wrap( $key )}={$value}";
 			}
 
 			$set = $set . implode( ', ', $columns );

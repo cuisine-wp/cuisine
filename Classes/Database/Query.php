@@ -123,10 +123,16 @@
 		{
 			//set the grammar
 			$this->grammar = new MySql( $this, $connection );
+			$response = [];
 
 			foreach( $this->toSql() as $statement ) {
-				$connection->query( $statement );	
+				$response[] = $connection->query( $statement );	
 			}
+
+			if( sizeof( $response ) == 1 )
+				return $response[0];
+
+			return $response;
 		}
 
 
