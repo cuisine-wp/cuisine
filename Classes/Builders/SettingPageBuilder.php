@@ -349,7 +349,7 @@ class SettingsPageBuilder {
 	    		$key = $field->id;
 
 	       	$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
-	       	$save[ $key ] = $value;
+	       	$save[ $field->name ] = $value;
 
 	    }
 
@@ -402,8 +402,6 @@ class SettingsPageBuilder {
 
 	    	$key = $field->name;
 
-	    	if( $field->type == 'editor' )
-	    		$key = $field->id;
 
 	        // Check if saved value
 	        if( isset( $values[ $key ] ) ){
