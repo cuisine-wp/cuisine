@@ -257,6 +257,7 @@ class MetaboxBuilder {
 	    
 	    }
 
+
 	    $this->register( $postId, apply_filters( 'cuisine_before_field_save', $fields, $postId, $this->data ) );
 
 	}

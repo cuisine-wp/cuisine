@@ -309,6 +309,12 @@ class DefaultField{
      */
     public function getClass(){
         
+        if( !is_array( $this->properties['class'] ) )
+            $this->properties['class'] = [ $this->properties['class'] ];
+
+        if( !is_array( $this->properties['classes'] ) )
+            $this->properties['classes'] = [ $this->properties['classes'] ];
+
         $classes = array_merge( $this->properties['class'], $this->classes );
         $classes = array_merge( $this->properties['classes'], $classes );
         $output = implode( ' ', $classes );

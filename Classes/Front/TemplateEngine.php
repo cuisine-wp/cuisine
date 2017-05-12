@@ -97,7 +97,7 @@
 
 			//merge the two:
 			$templates = array_merge( $templates, $defaults );
-
+			$templates = apply_filters( 'cuisine_located_templates', $templates );
 
 
 			//Loop through the templates and return it when found:

@@ -186,7 +186,6 @@
 		{
 			$results = $this->query->results( $this->connection );
 			$results = new Collection( $results );
-
 			if( !$results->isEmpty() )
 				return $results;
 
