@@ -123,10 +123,22 @@
 		{
 			//set the grammar
 			$this->grammar = new MySql( $this, $connection );
+			$response = [];
 
-			foreach( $this->toSql() as $statement ) {
-				$connection->query( $statement );	
+			foreach( $this->toSql() as $key => $statement ) {
+				$result = $connection->query( $statement );
+				
+				if( $this->commands[ $key ]->get( 'name' ) == 'insert' )
+					$result = $connection->insert_id;
+
+				$response[] = $result;
 			}
+
+
+			if( sizeof( $response ) == 1 )					
+				return $response[0];
+
+			return $response;
 		}
 
 

@@ -157,7 +157,7 @@
          * @param function $callback
          * @return Cuisine\Cron\Job
          */
-        public function eachDay()
+        public function eachDay( $callback )
         {
             $this->make( 'perDay', $callback )->set();
         }
@@ -169,7 +169,7 @@
          * @param function $callback
          * @return Cuisine\Cron\Job
          */
-        public function eachWeek()
+        public function eachWeek( $callback )
         {
             $this->make( 'perWeek', $callback )->set();
         }

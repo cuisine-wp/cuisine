@@ -246,9 +246,12 @@ class Scripts {
 		 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
 		 ga('create', '".$code."', 'auto');
-		 ga('send', 'pageview');
+		 ga('send', 'pageview');\n";
 
-		</script>";
+		if( apply_filters( 'cuisine_analytics_include_ecommerce', false ) )
+			$string .= "ga('require', 'ecommerce', 'ecommerce.js');\n";
+
+		$string .= "</script>";
 
 		echo preg_replace('/[ \t]+/', ' ', preg_replace('/[\r\n]+/', "\n", $string));
 	}
