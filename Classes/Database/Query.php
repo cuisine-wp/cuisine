@@ -142,7 +142,10 @@
 			$this->grammar = new MySql( $this, $connection );
 			$sql = $this->toSql();
 
+			$connection->hide_errors();
 			$results = $connection->get_results( $sql[0] );
+			$connection->show_errors();
+			
 			return $results;
 		}
 

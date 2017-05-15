@@ -124,6 +124,7 @@ class Migration extends StaticInstance implements MigrationContract{
 							 ->where([ 'name' => $this->getName() ])
 							 ->first();
 
+
 			if( !is_null( $migration ) )
 				return strtotime( $migration->created );
 		
