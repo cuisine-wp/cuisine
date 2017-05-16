@@ -402,7 +402,6 @@ class SettingsPageBuilder {
 
 	    	$key = $field->name;
 
-
 	        // Check if saved value
 	        if( isset( $values[ $key ] ) ){
 	        	$value = $values[ $key ];

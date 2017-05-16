@@ -231,6 +231,10 @@ class MetaboxBuilder {
 	    $nonceName = (isset($_POST[Session::nonceName])) ? $_POST[Session::nonceName] : Session::nonceName;
 	    if (!wp_verify_nonce($nonceName, Session::nonceAction)) return;
 
+	    //check post-types before saving
+	    if( $this->data['postType'] !== $_POST['post_type'] )
+	    	return;
+
 	    // Check user capability.
 	    if ( $this->check && $this->data['postType'] === $_POST['post_type'] ){
 
