@@ -142,6 +142,11 @@ class Url {
 
 				break;
 
+			case 'root':
+
+				$path = \trailingslashit( ABSPATH );
+				$path .= $folder;
+
 			default:
 
 				$path = \trailingslashit( WP_PLUGIN_DIR );
