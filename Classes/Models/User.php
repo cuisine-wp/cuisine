@@ -17,6 +17,18 @@ class User extends WP_User {
         return in_array( $role, $user->roles );
     }
 
+
+    /**
+     * Check if a user has a capability
+     * 
+     * @param  String  $cap 
+     * @return boolean     
+     */
+    public function hasCap( $cap)
+    {
+        return $this->has_cap( $cap );    
+    }
+
     /**
      * Set User role.
      *

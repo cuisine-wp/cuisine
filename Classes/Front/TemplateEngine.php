@@ -49,6 +49,10 @@
 		 */
 		public function findTemplate( $include ){
 
+			//check if we need to use the template engine at all:
+			if( !apply_filters( 'cuisine_use_template_engine', true ) )
+				return $include;
+
 			global $Cuisine, $post;
 
 			$registered = $Cuisine->templates;

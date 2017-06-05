@@ -26,13 +26,7 @@
 
 
 			add_action( 'admin_init', function(){
-
-				global $pagenow;
-
-				if( $pagenow == 'page.php' || $pagenow == 'page-new.php' || $pagenow == 'user-edit.php' ){
-					wp_enqueue_media();
-				}
-
+				wp_enqueue_media();
 			});
 
 			add_action( 'admin_menu', function(){
@@ -64,6 +58,12 @@
 				wp_enqueue_script(
 					'cuisine_repeater_field',
 					$url.'/js/RepeaterField.js',
+					array( 'backbone' )
+				);
+
+				wp_enqueue_script(
+					'cuisine_flex_field',
+					$url.'/js/FlexField.js',
 					array( 'backbone' )
 				);
 

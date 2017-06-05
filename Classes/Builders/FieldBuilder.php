@@ -245,13 +245,13 @@ class FieldBuilder {
      * Define an FlexField instance.
      *
      * @param string $name The name attribute of the infinite inner inputs.
-     * @param array $fields The fields to repeat.
+     * @param array $layouts The fields to repeat.
      * @param array $extras
      * @return \Cuisine\Fields\FlexField
      */
-    public function flex($name, $label = '', array $fields, array $properties = array()){
+    public function flex($name, $label = '', array $layouts, array $properties = array()){
 
-        $extras = compact( 'fields' );
+        $extras = compact( 'layouts' );
 
         $properties = array_merge( $extras, $properties );
 
@@ -277,8 +277,8 @@ class FieldBuilder {
 
         $extras = compact( 'settings' );
         $properties = array_merge( $extras, $properties );
-
         return $this->make( 'Cuisine\\Fields\\EditorField', $name, $label, $properties );
+    
     }
 
 

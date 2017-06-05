@@ -24,6 +24,21 @@
 		 */
 		private function listen(){
 
+			/**
+			 * Add custom user capabilities
+			 */
+			
+			add_action( 'init', function(){
+
+				$roles = [ 'editor' => get_role( 'editor'), 'administrator' => get_role( 'administrator') ];
+				$roles = apply_filters( 'cuisine_field_roles', $roles );
+
+				foreach( $roles as $role ){
+					$role->add_cap( 'edit_fields' );
+				}
+
+			});
+
 		}
 
 

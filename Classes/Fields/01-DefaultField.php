@@ -2,6 +2,7 @@
     
 namespace Cuisine\Fields;
 
+use Cuisine\Wrappers\User;
 
 class DefaultField{
 
@@ -49,6 +50,15 @@ class DefaultField{
 
 
     /**
+     * Array of user roles needed for this field
+     * 
+     * @var array
+     */
+    var $userRoles = array();
+
+
+
+    /**
      * Define a core Field.
      *
      * @param array $properties The text field properties.
@@ -77,16 +87,7 @@ class DefaultField{
      */
     public function render(){
 
-        $class = 'field-wrapper';
-
-        $class .= ' '.$this->type;
-
-        if( $this->properties['label'] )
-            $class .= ' label-'.$this->properties['label'];
-
-        if( $this->properties['wrapper-class'] && is_array( $this->properties['wrapper-class'] ) )
-            $class .= ' '.implode( ' ', $this->properties['wrapper-class'] );
-
+        $class = $this->getWrapperClass();
 
         echo '<div class="'.$class.'">';
 
@@ -171,6 +172,12 @@ class DefaultField{
         if( !isset( $this->properties['wrapper-class'] ) )
             $this->properties['wrapper-class'] = array();
 
+        if( !isset( $this->properties['userRoles' ] ) )
+            $this->properties['userRoles'] = apply_filters( 'cuisine_default_field_user_roles', [ 
+                'editor',
+                'administrator'
+        ]);
+
 
         //base classes
         $this->classes = array(
@@ -179,6 +186,10 @@ class DefaultField{
             'field-'.$this->name,
             'type-'.$this->type
         );
+
+
+        //set user capabilities:
+        $this->userRoles = $this->properties['userRoles'];
 
     }
 
@@ -321,6 +332,44 @@ class DefaultField{
 
         return $output;
 
+    }
+
+
+    /**
+     * Returns the wrapper class
+     * 
+     * @return String
+     */
+    public function getWrapperClass()
+    {
+        $classes = [];
+        $classes[] = 'field-wrapper';
+        $classes[] = $this->type;
+        $rightRole = false;
+
+        //check if thie right user-roles are present:
+        if( !empty( $this->userRoles ) && is_admin() ){
+
+            foreach( $this->userRoles as $role ){
+                if( User::hasRole( $role ) ){
+                    $rightRole = true;
+                    break;
+                }
+            }
+            
+            if( !$rightRole )
+                $classes[] = 'user-no-valid-role';
+        }
+
+
+        if( $this->properties['label'] )
+            $classes[] = ' label-'.sanitize_title( $this->properties['label'] );
+
+        if( $this->properties['wrapper-class'] && is_array( $this->properties['wrapper-class'] ) )
+            $classes = array_merge( $classes, $this->properties['wrapper-class'] );
+
+        $output = implode( ' ', $classes );
+        return $output;
     }
 
 

@@ -7,6 +7,11 @@
 	margin-bottom:30px;
 }
 
+.field-wrapper.user-no-valid-role{
+	display: none;
+	pointer-events: none;
+}
+
 .field-wrapper.label-top label{
 	display:block;
 	width:100%;
@@ -58,6 +63,12 @@
 	width:16px;
 	padding:0;
 	display:inline-block;
+}
+
+.field-wrapper .subfield-wrapper label{
+	display: inline-block !important;
+	padding-right: 30px;
+	width: auto !important;
 }
 
 .repeater-field{
@@ -205,6 +216,14 @@
 	cursor:pointer;
 }
 
+.repeater-field.flex-field .sort-pin{
+	position: relative;
+	top: auto;
+	right: auto;
+	display: inline-block !important;
+	margin-left: 10px;
+}
+
 .repeater-field .sort-pin:hover{
 	background:#0091cd;
 	border-color:#0071ad;
@@ -259,6 +278,73 @@
 	vertical-align: middle;
 	width: 28px;
 	text-align: center;
+}
+
+
+.repeater-field.flex-field .repeatable{
+	padding-top: 5px;
+}
+
+.repeater-field.flex-field .repeatable .field-wrapper:nth-child( odd ){
+	margin-right: 0;
+}
+.repeater-field.flex-field .repeatable .field-wrapper:nth-child( even ){
+	margin-right:5%;
+}
+
+.add-layout-button-wrapper{
+	position: relative;
+}
+
+.add-layout-button-wrapper #add-layout span{
+	line-height: 28px;
+	padding-right: 5px;
+}
+
+.add-layout-button-wrapper .layout-selector{
+    background: rgba(0,0,0,.6);
+    position: absolute;
+    bottom: 100%;
+    border-radius: 3px;
+    padding: 5px 0;
+    display: none;
+}
+
+.add-layout-button-wrapper .layout-selector.active{
+	display: block;
+}
+
+.add-layout-button-wrapper .layout-selector:after{
+	position: absolute;
+	bottom: -12px;
+	width: 0;
+	height: 0;
+	content: '';
+	border: 6px solid rgba(0,0,0,.6);
+	border-color: rgba(0,0,0,.6) transparent transparent transparent;
+	left: 50%;
+	margin-left:-4px;
+}
+
+.add-layout-button-wrapper .layout-selector li{
+	color: white;
+	display: block;
+	padding:5px 20px;
+	cursor: pointer;
+}
+
+.add-layout-button-wrapper .layout-selector li:hover{
+	background:#008ec2;
+}
+
+
+.flex-field .flex-layout h3{
+	padding: 0 0 5px 0;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 15px;
+	font-size: 16px;
+	text-align: center;
+	color: #ccc;
 }
 
 .media-grid{
