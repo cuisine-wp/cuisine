@@ -424,10 +424,17 @@
 .image-field .img-wrapper{
 	width:150px;
 	height:150px;
-	display:inline-block;
+	display:flex;
+	justify-content: center;
+	align-items: center;
 	border:2px solid #fff;
 	box-shadow:0 0 10px rgba(0,0,0,.3);
-	margin:0 0 15px 0;
+	margin:0 auto 15px auto;
+}
+
+.image-field .img-wrapper img{
+	max-width: 90%;
+	height: auto;
 }
 
 .image-field .remove-img-source{

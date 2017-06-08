@@ -1,6 +1,7 @@
 <?php
 namespace Cuisine\Front;
 
+use \Exception;
 use \Cuisine\Utilities\Url;
 use \Cuisine\Utilities\Sort;
 
@@ -40,7 +41,6 @@ class TemplateFinder {
 
 		$this->default = $this->sanitizeDefault( $default );
 		$this->overwrite = array( $filename );
-
 		return $this;
 
 	}
@@ -108,28 +108,35 @@ class TemplateFinder {
 	 */
 	public function display( $params = false ){
 
-		//check if the theme contains overwrites:
-		$located = $this->checkTheme();
+		try{
+			//check if the theme contains overwrites:
+			$located = $this->checkTheme();
 
-		//fall back on own templates:
-		if( !$located )
-			$located = $this->default;
+			//fall back on own templates:
+			if( !$located )
+				$located = $this->default;
 
 
-		if( $params != false ){
-			
-			if( !is_array( $params ) ){
-				$datas = $params;
+			if( $params != false ){
+				
+				if( !is_array( $params ) ){
+					$datas = $params;
 
-			}else{
-				extract( $params );
+				}else{
+					extract( $params );
+
+				}
 
 			}
 
+			if( !file_exists( $located ) )
+				throw new Exception( 'Template file not found: '. $located );
+
+			include( $located );
+		
+		}catch( Exception $e ){
+			echo $e->getMessage();
 		}
-
-		include( $located );
-
 	}
 
 
@@ -139,7 +146,6 @@ class TemplateFinder {
 	 * @return located
 	 */
 	private function checkTheme(){
-
 
 		$templates = Sort::appendValues( $this->overwrite, '.php' );
 		$located = locate_template( $templates );
