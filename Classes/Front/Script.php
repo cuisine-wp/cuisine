@@ -137,7 +137,7 @@ class Scripts {
 	 *
 	 * @return string (html, echoed)
 	 */
-	private function setVars( $cacheBust ){
+	public function setVars( $cacheBust ){
 
 		//allow registers to be overwritten:
 		do_action( 'cuisine_js_override' );
