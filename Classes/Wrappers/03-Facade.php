@@ -65,6 +65,7 @@ abstract class Wrapper {
             'pagination'        => 'Cuisine\View\Pagination',
             'share'             => 'Cuisine\View\Share',
             'metabox'           => 'Cuisine\Builders\MetaboxBuilder',
+            'attachment-metabox'=> 'Cuisine\Builders\AttachmentMetaBuilder',
             'usermetabox'       => 'Cuisine\Builders\UsermetaBuilder',
             'settingspage'      => 'Cuisine\Builders\SettingsPageBuilder',
             'settingstab'       => 'Cuisine\Builders\SettingsTabBuilder',

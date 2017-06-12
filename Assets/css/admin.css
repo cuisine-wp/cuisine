@@ -71,6 +71,10 @@
 	width: auto !important;
 }
 
+.compat-attachment-fields .field-wrapper > label{
+	display: none;
+}
+
 .repeater-field{
 	background:#fff;
 	padding:15px;
