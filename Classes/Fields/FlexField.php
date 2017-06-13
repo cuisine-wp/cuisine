@@ -257,6 +257,7 @@ class FlexField extends DefaultField{
         //check if this is a post-value:
         if( isset( $_POST[ $this->name ] ) ){
 
+
             $fieldLayouts = $_POST[ $this->name ];
 
             //store the editor-field-name as we'll be changing it later, to get the right id
@@ -269,7 +270,7 @@ class FlexField extends DefaultField{
                 $entryKeys = array_keys( $entry );
 
                 //loop through the fields, find the right values
-                foreach( $this->layouts as $field ){
+                foreach( $this->layouts[ $entry['layout'] ]['fields'] as $field ){
 
                     //set the default value:
                     $value = $field->getDefault();
@@ -292,8 +293,10 @@ class FlexField extends DefaultField{
 
                     //set the value to the right key:
                     $fieldLayouts[ $key ][ $field->name ] = $value;
-
                 }
+
+                $fieldLayouts[ $key ]['position'] = $entry['position'];
+                $fieldLayouts[ $key ]['layout'] = $entry['layout'];
             }
         }
 

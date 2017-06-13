@@ -108,14 +108,14 @@ class RepeaterField extends DefaultField{
                 //change field-name for rendering:
                 $field->setName( $name );
 
-               if( $field->type !== 'editor' || $doingAjax == false ){
+                if( $field->type !== 'editor' || $doingAjax == false ){
                     $field->render();
 
-               }else{
+                }else{
 
                     $field->renderForAjax();
 
-               }
+                }
 
                 //change the name right back:
                 $field->setName( $oldName );

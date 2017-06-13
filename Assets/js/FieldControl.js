@@ -7,6 +7,8 @@
 			dateFormat: "dd-mm-yy"
 		});
 
+		setEditors();
+
 	});
 
 
@@ -34,16 +36,22 @@
 		jQuery( '.editor-wrapper' ).each( function( item ){
 
 			var _id = jQuery( this ).data( 'id' );
-
 			tinyMCE.execCommand( 'mceRemoveEditor', true, _id);	
-			tinyMCE.execCommand( 'mceAddEditor', false, _id );
 
 			var _settings =  tinyMCEPreInit.mceInit[ 'defaultEditor' ];
 			if(  typeof( tinyMCEPreInit.mceInit[ _id ] ) != 'undefined' )
 				_settings = tinyMCEPreInit.mceInit[ _id ];
+			
 
-			var init = tinyMCE.extend( {}, _settings );
-			tinyMCE.init( init );
+			if( typeof( wp.editor ) == 'undefined' ){
+				var init = tinyMCE.extend( {}, _settings );
+				tinyMCE.init( init );
+				tinyMCE.execCommand( 'mceAddEditor', false, _id );
+			}else{
+				//wp.editor.remove( _id );
+				wp.editor.initialize( _id, { tinymce: _settings, quicktags: false });
+			}
+
 			
 		});
 	}

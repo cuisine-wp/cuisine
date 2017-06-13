@@ -303,6 +303,10 @@ class MetaboxBuilder {
 
 
 			$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
+
+			if( $field->type == 'repeater' || $field->type == 'flex' )
+	       		$value = $field->getFieldValues();
+
 			update_post_meta( $postId, $field->name, $value );
 	    
 	    }
