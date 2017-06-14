@@ -349,12 +349,15 @@ class SettingsPageBuilder {
 	    		$key = $field->id;
 
 	       	$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
+
+	       	if( $field->type == 'repeater' || $field->type == 'flex' )
+	       		$value = $field->getFieldValues();
+
 	       	$save[ $field->name ] = $value;
 
 	    }
 
 	    update_option( $this->data['slug'], $save );
-
 	}
 
 

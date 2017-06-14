@@ -181,7 +181,6 @@ class AttachmentMetaBuilder {
 		}
 
 		return $post;
-
 	}
 
 	/**

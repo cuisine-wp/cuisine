@@ -28,6 +28,7 @@
 			//include the media js in section templates:
 			add_action( 'admin_enqueue_scripts', function(){
 				wp_enqueue_media();
+				wp_enqueue_editor();
 			});
 
 
