@@ -180,6 +180,8 @@ class AttachmentMetaBuilder {
 
 		}
 
+		return $post;
+
 	}
 
 	/**
