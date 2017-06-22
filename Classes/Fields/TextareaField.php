@@ -36,6 +36,13 @@ class TextareaField extends DefaultField{
 
             $html .= $this->getValidation();
 
+            if( $this->getProperty( 'rows' ) )
+                $html .= ' rows="'.$this->getProperty( 'rows' ).'" ';
+
+            if( $this->getProperty( 'cols' ) )
+                $html .= ' cols="'.$this->getProperty( 'cols' ).'" ';
+
+
         $html .= '>';
 
             $val = $this->getValue();
