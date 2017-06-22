@@ -72,7 +72,6 @@ class DefaultField{
         $this->properties = $props;
         $this->fieldType();
         $this->setDefaults();
-
     }
 
 
@@ -379,12 +378,12 @@ class DefaultField{
      * @param  string $name
      * @return mixed (returns false when the property doesn't exist)
      */
-    public function getProperty( $name ){
+    public function getProperty( $name, $default = false ){
 
         if( isset( $this->properties[ $name ] ) )
             return $this->properties[ $name ];
 
-        return false;
+        return $default;
     }
 
 

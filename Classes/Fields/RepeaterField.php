@@ -259,6 +259,8 @@ class RepeaterField extends DefaultField{
                     $fieldLayouts[ $key ][ $field->name ] = $value;
 
                 }
+           
+                $fieldLayouts[ $key ]['position'] = $entry['position'];
             }
         }
 

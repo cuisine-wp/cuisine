@@ -58,19 +58,29 @@ class ChoiceField extends DefaultField{
 	 */
 	public function getNameAttr( $val ){
 
+		$name = $this->getName();
 		switch( $this->type ){
 
 			case 'checkbox' :
-				return 'name="'.$this->name.'['.$val.']" ';
+				return 'name="'.$name.'['.$val.']" data-name="'.$this->name.'['.$val.']" ';
 				break;
 
 			case 'radio' :
-				return 'name="'.$this->name.'" ';
+				return 'name="'.$name.'" data-name="'.$this->name.'" ';
 
 		}
 
 	}
 
+	/**
+	 * Get the fields name
+	 * 
+	 * @return String
+	 */
+	public function getName()
+	{
+		return $this->getProperty( 'subname', $this->name );	
+	}
 
 
 	/**
@@ -95,6 +105,7 @@ class ChoiceField extends DefaultField{
 
 	    $classes = array(
 	                        'subfield',
+	                        'data-name',
 	                        'type-'.$this->type
 	    );
 
