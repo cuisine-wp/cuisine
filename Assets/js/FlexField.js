@@ -50,8 +50,6 @@
 
  			self.$el.find('.layout-selector').removeClass( 'active' );
 
- 			console.log( self.maxItems + ' -- '+ self.items.length );
-
  			if( self.maxItems == -1 || self.maxItems >= ( self.items.length + 1 ) ){
 
 	 			var _templateName = self.$el.data( 'template' )+'-'+layout;
@@ -74,6 +72,7 @@
 
  		removeItem: function( e ){
 
+ 			var self = this;
  			var target = jQuery( e.target ).parent().parent();
  			target.remove();
 

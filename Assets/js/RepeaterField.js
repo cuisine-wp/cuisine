@@ -53,6 +53,7 @@
 
  		removeItem: function( e ){
 
+ 			var self = this;
  			var target = jQuery( e.target ).parent().parent();
  			target.remove();
 

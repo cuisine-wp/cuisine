@@ -34,7 +34,6 @@
 			
 			}
 
-
 			$this->query = $_query;
 
 			$this->amount = $_query->query_vars['posts_per_page'];

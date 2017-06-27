@@ -22,7 +22,7 @@ class ChoiceField extends DefaultField{
 	    $label = ( isset( $choice['label'] ) ? $choice['label'] : false );
 	    $selected = $this->getSelectedType();
 
-	    $html = '<span class="subfield-wrapper '.$value.'">';
+	    $html = '<span class="subfield-wrapper val'.$value.'">';
 
 	        $html .= '<input type="'.$this->type.'" ';
 

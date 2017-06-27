@@ -57,5 +57,28 @@ class TextareaField extends DefaultField{
 
 
 
+    /**
+     * Get the value of this field:
+     * 
+     * @return String
+     */
+    public function getValue(){
+
+        global $post;
+        $value = $val = false;
+
+        if( $value && !$val )
+            $val = $value;
+
+        if( $this->properties['defaultValue'] && !$val )
+            $val = $this->getDefault();
+
+
+        if( $this->getProperty('stripSlashes') == true )
+            $val = stripcslashes( $val );
+
+        return $val;
+    }
+
 
 }

@@ -597,5 +597,10 @@
 .settings-wrapper + .button-wrapper{
 	text-align: right;
 	padding-right: 30px;
+	margin-top: -50px;
+}
+
+.settings-wrapper .chosen-single, .settings-wrapper .chosen-drop, .settings-wrapper .chosen-container{
+	width: 100% !important;
 }
 
