@@ -1,3 +1,14 @@
+### 3.0.0: 2017-07-14
+
+* Compatibility with Sections & Forms 3.0
+* Database migrations added
+* Cron job api added
+* Adds a flex field
+* Repeater field fixes
+* Settingspages can now have editors
+* Create top-level admin menus
+* A lot of minor bugfixes
+
 ### 1.6.3: 2016-11-29
 
 * Added a WP Cron extension
