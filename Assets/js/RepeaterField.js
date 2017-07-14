@@ -156,7 +156,9 @@
  		_repeaters = [];
 
  		jQuery('.repeater-field' ).each( function( index, obj ){
- 			var rf = new RepeaterField( { el: obj } );
- 			_repeaters.push( rf );
+ 			if( $( obj ).hasClass( 'flex-field' ) == false ){
+ 				var rf = new RepeaterField( { el: obj } );
+ 				_repeaters.push( rf );
+ 			}
  		});
  	}

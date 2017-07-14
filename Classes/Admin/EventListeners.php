@@ -33,7 +33,8 @@
 				$roles = [ 'editor' => get_role( 'editor'), 'administrator' => get_role( 'administrator') ];
 				$roles = apply_filters( 'cuisine_field_roles', $roles );
 
-				foreach( $roles as $role ){
+				foreach( $roles as $key => $role ){
+
 					$role->add_cap( 'edit_fields' );
 				}
 
