@@ -34,8 +34,8 @@
 				$roles = apply_filters( 'cuisine_field_roles', $roles );
 
 				foreach( $roles as $key => $role ){
-
-					$role->add_cap( 'edit_fields' );
+					if( !is_null( $role ) )
+						$role->add_cap( 'edit_fields' );
 				}
 
 			});
