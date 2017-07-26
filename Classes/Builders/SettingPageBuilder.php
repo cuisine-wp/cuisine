@@ -357,7 +357,12 @@ class SettingsPageBuilder {
 
 	    }
 
+	    $save = apply_filters( 'cuisine_settings_page_data_to_save', $save, $this );
+	    do_action( 'cuisine_before_settings_page_update', $this );
+
 	    update_option( $this->data['slug'], $save );
+
+	    do_action( 'cuisine_after_settings_page_update', $this );
 	}
 
 
@@ -414,5 +419,45 @@ class SettingsPageBuilder {
 	    }
 	}
 
+
+	/**
+	 * Get this settingspage url
+	 * 
+	 * @return String
+	 */
+	public function getUrl()
+	{
+		switch( $this->data['options']['parent'] ){
+
+			case false:
+				return admin_url( $this->getSlug().'.php' );
+				break;
+			case 'options':
+				return admin_url( 'options-general.php?page='.$this->getSlug() );
+				break;
+
+			default:
+				
+				$parentSlug = $this->data['options']['parent'];
+
+	    		if( substr( $parentSlug, -4 ) !== '.php' )
+	    			$parentSlug = 'edit.php?post_type='.$parentSlug;
+
+	    		$url = add_query_arg( 'page', $this->getSlug(), $parentSlug );
+				return admin_url( $url );
+				break;
+
+		}
+	}
+
+	/**
+	 * Returns this settings page's slug
+	 * 
+	 * @return String
+	 */
+	public function getSlug()
+	{
+		return $this->data['slug'];
+	}
 }
 
