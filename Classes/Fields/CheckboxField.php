@@ -60,6 +60,8 @@ class CheckboxField extends DefaultField{
             if( $this->getValue() == 'true' || $this->getValue() == '1' )
                 $html .= ' checked';
 
+            $html .= ' '.$this->getValidation();
+
         $html .= '/>';
 
         $html .= '<label for="'.$this->id.'">'.$this->label.'</label>';
