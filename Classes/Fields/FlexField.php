@@ -251,9 +251,10 @@ class FlexField extends DefaultField{
      */
     public function getFieldValues(){
 
-        $fieldLayouts = array();
+        $layouts = array();
         $this->layouts = $this->properties['layouts'];
 
+        
         //check if this is a post-value:
         if( isset( $_POST[ $this->name ] ) ){
 
@@ -266,7 +267,7 @@ class FlexField extends DefaultField{
             //for each repeater layout:
             foreach( $fieldLayouts as $key => $entry ){
 
-                $fieldLayouts[ $key ] = array();
+                $layouts[ $key ] = array();
                 $entryKeys = array_keys( $entry );
 
                 //loop through the fields, find the right values
@@ -292,15 +293,19 @@ class FlexField extends DefaultField{
                     }
 
                     //set the value to the right key:
-                    $fieldLayouts[ $key ][ $field->name ] = $value;
+                    if( is_string( $value ) )
+                        $value = stripcslashes( $value );
+
+                    $layouts[ $key ][ $field->name ] = $value;
                 }
 
-                $fieldLayouts[ $key ]['position'] = $entry['position'];
-                $fieldLayouts[ $key ]['layout'] = $entry['layout'];
+                $layouts[ $key ]['position'] = $entry['position'];
+                $layouts[ $key ]['layout'] = $entry['layout'];
             }
         }
 
-        return $fieldLayouts;
+
+        return $layouts;
     }
 
 

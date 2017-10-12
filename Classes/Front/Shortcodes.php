@@ -174,7 +174,7 @@ class Shortcodes {
 	 */
 	public function phoneNumber( $atts, $content = null ){
 
-		$mobilePrefix = ( wp_is_mobile() ) ? 'tel' : 'callto';
+		$mobilePrefix = 'tel';
 		$hypens = array(' ', '-');
 
 		$html = '<a itemscope itemtype="http://schema.org/LocalBusiness" class="phone-link" href="'.$mobilePrefix.':'.str_replace ( $hypens, '', do_shortcode( $content ) ).'"><span itemprop="telephone">';

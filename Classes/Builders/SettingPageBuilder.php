@@ -350,14 +350,15 @@ class SettingsPageBuilder {
 
 	       	$value = isset( $_POST[ $key ] ) ? $_POST[ $key ] : '';
 
-	       	if( $field->type == 'repeater' || $field->type == 'flex' )
-	       		$value = $field->getFieldValues();
+	       	if( $field->type == 'repeater' || $field->type == 'flex' ){
+                $value = $field->getFieldValues();
+            }
 
 	       	$save[ $field->name ] = $value;
 
 	    }
 
-	    $save = apply_filters( 'cuisine_settings_page_data_to_save', $save, $this );
+	    $save = apply_filters( 'cuisine_settings_page_data_to_save', $save, $this, $fields );
 	    do_action( 'cuisine_before_settings_page_update', $this );
 
 	    update_option( $this->data['slug'], $save );
