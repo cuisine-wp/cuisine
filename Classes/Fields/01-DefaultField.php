@@ -249,6 +249,10 @@ class DefaultField{
         if( $this->properties['defaultValue'] && !$val )
             $val = $this->getDefault();
 
+        if( $this->getProperty('stripSlashes') == true )
+            $val = stripcslashes( $val );
+
+
         return $val;
     }
 
