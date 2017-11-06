@@ -280,6 +280,14 @@ add_action('plugins_loaded', function(){
 
 
 /**
+ * Registration & deactivation:
+ */
+register_activation_hook( __FILE__, function(){
+    update_option( 'cuisine_activated', 'cuisine' );
+});
+
+
+/**
  * Print_R in a <pre> tag
  */
 if( !function_exists( 'cuisine_dump' ) ){

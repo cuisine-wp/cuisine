@@ -78,7 +78,8 @@ abstract class Wrapper {
             'sass'              => 'Cuisine\Front\Sass',
             'schedule'          => 'Cuisine\Cron\Job',
             'schema'            => 'Cuisine\Database\Schema',
-            'template'          => 'Cuisine\Front\TemplateFinder'
+            'template'          => 'Cuisine\Front\TemplateFinder',
+            'flash'             => 'Cuisine\Admin\FlashMessages'
         );
 
         return $aliases[ $name ];

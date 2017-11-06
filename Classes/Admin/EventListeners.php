@@ -3,9 +3,16 @@
 	namespace Cuisine\Admin;
 
 	use \Cuisine\Utilities\Url;
-	use \Cuisine\Wrappers\StaticInstance;
+    use \Cuisine\Wrappers\Flash;
+    use \Cuisine\Wrappers\StaticInstance;
 
 	class EventListeners extends StaticInstance{
+
+        /**
+         * Flash messages
+         */
+        protected $flash;
+        
 
 		/**
 		 * Init admin events & vars
@@ -13,8 +20,7 @@
 		function __construct(){
 
 			$this->listen();
-
-
+            $this->flash = new FlashMessages();
 		}
 
 		/**
@@ -38,7 +44,33 @@
 						$role->add_cap( 'edit_fields' );
 				}
 
+            });
+            
+
+            //on init
+			add_action( 'admin_init', function(){
+                //check if cuisine has recently been activated:
+                $activated = get_option( 'cuisine_activated', false );
+                if( $activated )
+                    ( new PluginHandler() )->activate();
+
+                //show notification:
+                if( isset( $_GET['cuisine_installed'] ) )
+                    $this->flash->message( __( 'Cuisine installed successfully.', 'cuisine' ) );
+
+            
+            });
+
+
+            /**
+             * Show flash messages:
+             */
+            add_action( 'admin_notices', function(){
+                $this->flash->display();
 			});
+            
+
+          
 
 		}
 
