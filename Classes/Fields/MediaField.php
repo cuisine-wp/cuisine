@@ -1,8 +1,8 @@
 <?php
 namespace Cuisine\Fields;
 
-
 use Cuisine\Utilities\Sort;
+use Cuisine\Utilities\Url;
 
 class MediaField extends DefaultField{
 
@@ -77,7 +77,8 @@ class MediaField extends DefaultField{
 
             $html .= '<div class="img-wrapper">';
 
-                $html .= '<img src="'.$item['preview'].'"/>';
+                $preview = $this->getPreview( $item );
+                $html .= '<img src="'.$preview.'"/>';
 
             $html .= '</div>';
 
@@ -99,6 +100,19 @@ class MediaField extends DefaultField{
 
         return $html;
 
+    }
+
+    /**
+     * Returns a preview-image:
+     *
+     * @param Array $item
+     * @return void
+     */
+    public function getPreview( $item )
+    {
+        $preview = $item['preview'];
+        $preview = apply_filters( 'chef_media_gallery_preview_url', $preview );
+        return $preview;
     }
 
     /**
