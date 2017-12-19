@@ -56,7 +56,7 @@
 		 */
 		public function all()
 		{
-			return$this->getReturnValue();
+			return $this->getReturnValue();
 		}
 
 
@@ -181,7 +181,11 @@
 		{
 			$result = [];
 			foreach( $this->objects as $key => $object ){
-				$result[ $key ] = ( array ) $object;
+				if( method_exists( $object, 'toArray' ) ){
+                    $result[ $key ] = $object->toArray();
+                }else{
+                    $result[ $key ] = ( array ) $object;
+                }
 			}
 
 			return $result;
