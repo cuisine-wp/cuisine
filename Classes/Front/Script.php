@@ -123,9 +123,9 @@ class Scripts {
 		//set the variables first:
 		$this->setVars( $cacheBust );
 
-		$url = Url::plugin( 'cuisine', true ).'Assets/js';
-		$config = $url.'/Front';
-		$require = $url.'/libs/require.js';
+		$url = Url::plugin( 'cuisine/Assets/js/');
+		$config = $url.'Front';
+		$require = $url.'libs/require.js';
 
 		//load all JS with RequireJS
 		echo '<script data-main="'.$config.'" src="'.$require.'"></script>';

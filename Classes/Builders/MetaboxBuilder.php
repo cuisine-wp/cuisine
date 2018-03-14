@@ -195,9 +195,9 @@ class MetaboxBuilder {
 
 	    $fields = $this->populateFields( $this->data['fields'] );
 	    foreach( $fields as $field ){
-
-	    	$field->render();
-
+            if( method_exists( $field, 'render' ) ){
+	    	    $field->render();
+            }
 	    }
 
 

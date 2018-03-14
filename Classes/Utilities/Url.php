@@ -142,6 +142,13 @@ class Url {
 
 				break;
 
+            case 'uploads':
+
+                $path = \trailingslashit( WP_CONTENT_DIR . DS . 'uploads' );
+                $path .= $folder;
+
+                break;
+
 			case 'root':
 
 				$path = \trailingslashit( ABSPATH );

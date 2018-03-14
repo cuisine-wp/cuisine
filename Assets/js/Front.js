@@ -19,11 +19,9 @@ if( Cuisine.shims.length > 0 ){
 
 //remove caching, if cacheBust is set to true:
 if( Cuisine.cacheBust ){
-
 	requirejs.config({
 		urlArgs: "bust=" + ( new Date() ).getTime()
 	});
-
 }
 
 //autoload everthing

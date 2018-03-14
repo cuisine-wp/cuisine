@@ -19,22 +19,30 @@ class Sort{
 			return false;
 
 		$key = array_keys( $data );
-		$key = $key[0];
-		$notationStart = "['";
-		$notationEnd = "']";
+        $key = $key[0];
+        $object = false;
+    
+        if( is_object( $data[$key] ) ){
+            $object = true;
+		}
+	
+		uasort( $data, function( $a,$b ) use ( $object, $order, $field ){
 
-		if( is_object( $data[$key] ) ){
-			$notationStart = '->';
-			$notationEnd = '';
-		}
-	
-		if( $order == null || $order == 'ASC' ){
-	  		$code = "return strnatcmp(\$a".$notationStart.$field.$notationEnd.", \$b".$notationStart.$field.$notationEnd.");";
-	  	}else if( $order == 'DESC' ){
-	  		$code = "return strnatcmp(\$b".$notationStart.$field.$notationEnd.", \$a".$notationStart.$field.$notationEnd.");";
-		}
-	
-		uasort( $data, create_function( '$a,$b', $code ) );
+            if( $object ){
+                if( $order == null || $order == 'ASC' ){
+        	  	    return strnatcmp( $a->{$field}, $b->{$field} );
+                }else{
+	  		        return strnatcmp( $b->{$field}, $a->{$field} );
+                }
+            }else{
+                if( $order == null || $order == 'ASC' ){
+                    return strnatcmp( $a[$field], $b[$field] );
+                }else{
+                    return strnatcmp( $b[$field], $a[$field] );
+                }
+            }
+        });
+
 		return $data;
 	}
 
