@@ -23,12 +23,7 @@ class CheckboxField extends DefaultField{
      */
     public function render(){
 
-        $class = 'field-wrapper';
-
-        $class .= ' '.$this->type;
-
-        if( $this->properties['label'] )
-            $class .= ' label-'.$this->properties['label'];
+        $class = $this->getWrapperClass();
 
         echo '<div class="'.$class.'">';
 
