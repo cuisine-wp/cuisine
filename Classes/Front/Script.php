@@ -229,7 +229,27 @@ class Scripts {
 
 		return $array;
 
-	}
+    }
+    
+    
+    /**
+     * Toggle a global jQuery
+     *
+     * @return void
+     */
+    public function useGlobaljQuery()
+    {
+        /** overwrite the jQuery url */
+        add_filter( 'cuisine_scripts', function( $scripts ){
+            $scripts['jquery']['url'] = Url::plugin( 'cuisine/Assets/js/jquery-wrapper');
+            return $scripts;
+        }, 1, 500 );
+
+        /** enqueue regular jQuery */
+        add_action('wp_enqueue_scripts', function(){
+            wp_enqueue_script('jquery');
+        });
+    }
 
 
 	/**
