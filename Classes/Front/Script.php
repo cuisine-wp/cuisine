@@ -241,7 +241,7 @@ class Scripts {
     {
         /** overwrite the jQuery url */
         add_filter( 'cuisine_scripts', function( $scripts ){
-            $scripts['jquery']['url'] = Url::plugin( 'cuisine/Assets/js/jquery-wrapper');
+            $scripts['jquery']['url'] = Url::plugin( 'cuisine/Assets/js/libs/jquery-wrapper');
             return $scripts;
         }, 1, 500 );
 
