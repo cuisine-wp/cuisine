@@ -85,8 +85,12 @@ class Image {
 		}
 
 		$src = wp_get_attachment_image_src( $pid, $size );
-		return apply_filters( 'cuisine_image_url', $src[0] );
-	}
+        if( $src !== false ){
+	    	return apply_filters( 'cuisine_image_url', $src[0] );
+	    }
+    
+        return apply_filters( 'cuisine_image_url', '' );
+    }
 
 
 	/*=============================================================*/
