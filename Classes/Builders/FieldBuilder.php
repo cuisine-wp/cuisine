@@ -136,7 +136,7 @@ class FieldBuilder {
      * @param array $extras Extra field properties.
      * @return \Cuisine\Fields\CheckboxesField
      */
-    public function checkboxes($name, $label = '', array $options, array $properties = array()){
+    public function checkboxes($name, $label = '', array $options = array(), array $properties = array()){
 
         $extras = compact( 'options');
 
@@ -153,7 +153,7 @@ class FieldBuilder {
      * @param array $extras Extra field properties.
      * @return \Cuisine\Fields\RadioField
      */
-    public function radio($name, $label = '', array $options, array $properties = array()){
+    public function radio($name, $label = '', array $options = array(), array $properties = array()){
 
         $extras = compact( 'options' );
 
@@ -171,7 +171,7 @@ class FieldBuilder {
      * @param array $extras
      * @return \Cuisine\Fields\SelectField
      */
-    public function select( $name, $label = '', array $options, array $properties = array() ){
+    public function select( $name, $label = '', array $options = array(), array $properties = array() ){
 
         $extras = compact( 'options' );
         
@@ -231,7 +231,7 @@ class FieldBuilder {
      * @param array $extras
      * @return \Cuisine\Fields\RepeaterField
      */
-    public function repeater($name, $label = '', array $fields, array $properties = array()){
+    public function repeater($name, $label = '', array $fields = array(), array $properties = array()){
 
         $extras = compact( 'fields' );
 
@@ -249,7 +249,7 @@ class FieldBuilder {
      * @param array $extras
      * @return \Cuisine\Fields\FlexField
      */
-    public function flex($name, $label = '', array $layouts, array $properties = array()){
+    public function flex($name, $label = '', array $layouts = array(), array $properties = array()){
 
         $extras = compact( 'layouts' );
 

@@ -113,6 +113,10 @@ class Shortcodes {
 	 */
 	public function makeLink( $atts, $content = null ){
 
+        if( !isset( $attrs['link'] ) ){
+            return '';
+        }
+
 
 		$html = '<a href="'.$atts['link'].'"';
 
