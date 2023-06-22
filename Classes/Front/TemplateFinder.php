@@ -92,6 +92,10 @@ class TemplateFinder {
 	 */
 	private function sanitizeDefault( $default ){
 
+        if( is_null( $default ) ){
+            return null;
+        }
+        
 		if( substr( $default, -4 ) !== '.php' )
 			$default .= '.php';
 
