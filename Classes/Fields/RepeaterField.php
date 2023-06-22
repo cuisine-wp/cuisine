@@ -164,7 +164,12 @@ class RepeaterField extends DefaultField{
      */
     private function buildDatas(){
 
-        $highestId = count( $this->getValues() );
+        $highestId = 0;
+        $value = $this->getValues();
+        if( $value !== false ){
+            $highestId = count( $value );
+        }
+        
         if( $highestId == 0 ) $highestId = 1;
 
         $datas = 'data-highest-id="'.$highestId.'" ';

@@ -60,7 +60,7 @@ class Image {
 	public static function getThumbnailUrl( $size = 'thumbnail', $pid = null ){
 
 		if( $pid == null && !isset( $_GLOBALS['post'] ) ){
-			throw new Exception("You need to specify a post ID or place this function in the Loop.");
+			//throw new Exception("You need to specify a post ID or place this function in the Loop.");
 			return false;
 		}
 
@@ -80,7 +80,7 @@ class Image {
 	public static function getMediaUrl( $pid, $size = 'thumbnail' ){
 
 		if( $pid == null ){
-			throw new Exception("You need to provide a valid post_id");
+			//throw new Exception("You need to provide a valid post_id");
 			return false;
 		}
 
