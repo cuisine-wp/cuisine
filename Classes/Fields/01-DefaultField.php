@@ -88,12 +88,16 @@ class DefaultField{
 
         $class = $this->getWrapperClass();
 
+        do_action( 'before_field_'.$this->name, $this );
+
         echo '<div class="'.$class.'">';
 
             echo $this->getLabel();
             echo $this->build();
 
         echo '</div>';
+
+        do_action( 'after_field_'.$this->name, $this );
     }
 
 

@@ -67,9 +67,11 @@
 
 				$id = $data['id'];
 				unset( $data['id'] );
+                $data = esc_sql( $data );
 				return $this->update( $table, $id, $data );
 			}
 
+            $data = esc_sql( $data );
 			return $this->insert( $table, $data );
 		}
 
@@ -83,6 +85,7 @@
 		 */
 		public function insert( $table, $data )
 		{
+            $data = esc_sql( $data );
 			$query = $this->createQuery( $table );
 			$query->insert( $data );
 
@@ -101,6 +104,7 @@
 		 */
 		public function update( $table, $id, $data )
 		{
+            $data = esc_sql( $data );
 			$query = $this->createQuery( $table );
 			$query->update( $id, $data );
 

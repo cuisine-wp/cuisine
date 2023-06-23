@@ -46,6 +46,17 @@ class Excerpt {
 	}
 
 
+    /**
+     * Get the first paragraph out of some html:
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function intro( $string )
+    {
+        $string = explode( '</p>', $string );
+        return $string[0].'</p>';
+    }
 
 	/**
 	 * Get the content before the --more-- tag

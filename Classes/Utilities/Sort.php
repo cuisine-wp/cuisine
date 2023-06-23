@@ -28,6 +28,10 @@ class Sort{
 	
 		uasort( $data, function( $a,$b ) use ( $object, $order, $field ){
 
+            if( is_bool( $a ) || is_bool( $b ) ){
+                return -1;
+            }
+
             if( $object ){
                 if( $order == null || $order == 'ASC' ){
         	  	    return strnatcmp( $a->{$field}, $b->{$field} );

@@ -117,7 +117,7 @@ class TemplateFinder {
 			$located = $this->checkTheme();
 
 			//fall back on own templates:
-			if( !$located )
+			if( !$located && $this->default != '.php' )
 				$located = $this->default;
 
 
@@ -130,13 +130,21 @@ class TemplateFinder {
 					extract( $params );
 
 				}
-
 			}
 
-			if( !file_exists( $located ) )
-				throw new Exception( 'Template file not found: '. $located );
+       		//if it's not located, stop here:
+            if( !$located ){
+                return;
+            }
 
-			include( $located );
+
+			if( !is_null( $located ) && !file_exists( $located ) ){
+				throw new Exception( 'Template file not found: '. $located );
+            }
+
+            if( !is_null( $located ) ){
+			    include( $located );
+            }
 		
 		}catch( Exception $e ){
 			echo $e->getMessage();
